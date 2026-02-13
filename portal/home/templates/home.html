@@ -1,0 +1,213 @@
+<!doctype html>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+textarea {
+  width: 300px;
+  height: 715px;
+}
+
+</style>
+<script>
+    var connected = false;
+
+    function keypress(event) {
+        const params = {
+            key: event.key,
+            type: event.type,
+        };
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(params),
+            headers: {
+              'Content-Type': 'application/json'
+            },
+        };
+        fetch('{{ url_for('home.key_press') }}', options)
+    }
+
+    document.addEventListener('keyup', (e) => {
+        if (!connected)
+            return;
+        console.log('keyup', e.code)
+        keypress(e)
+    });
+    document.addEventListener('keydown', (e) => {
+        if (!connected)
+            return;
+        console.log('keydown', e.code)
+        keypress(e)
+    });
+
+    function sourceOnChange(selectObject) {
+        const params = {
+            source: selectObject.value,
+        };
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(params),
+            headers: {
+              'Content-Type': 'application/json'
+            },
+        };
+        fetch('{{ url_for('home.change_source') }}', options)
+    }
+
+    function runOnClick() {
+        const params = {
+            debug: document.getElementById('debug').checked,
+            sleep: document.getElementById('sleep').checked,
+            profile: document.getElementById('profile').value,
+            stop_at: document.getElementById('stop_at').value,
+        };
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(params),
+            headers: {
+              'Content-Type': 'application/json'
+            },
+        };
+        fetch('{{ url_for('home.run') }}', options)
+    }
+
+    function stopOnClick() {
+        const options = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+        };
+        fetch('{{ url_for('home.stop') }}', options)
+    }
+
+    function connectOnClick() {
+        const controllerType = document.getElementById('controller_type').value;
+        const params = {
+            endpoint: document.getElementById('controller_endpoint').value,
+            controller_type: controllerType,
+            port: document.getElementById('port').value
+        };
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(params),
+            headers: {
+              'Content-Type': 'application/json'
+            },
+        };
+        fetch('{{ url_for('home.connect_controller') }}', options).then((response) => connected = true)
+    }
+
+    var default_profile = `[
+  {
+    "current_level": 1,
+    "current_win": 0,
+    "target_level": 3,
+    "target_win": 30,
+    "deck": 0
+  },
+  {
+    "current_level": 1,
+    "current_win": 0,
+    "target_level": 3,
+    "target_win": 30,
+    "deck": 0
+  }
+]`;
+    window.onload = function () {
+        document.getElementById('profile').value = default_profile;
+    }
+
+
+</script>
+<body>
+<label>Controller Type:</label>
+<select id="controller_type" onchange="controllerTypeOnChange(this)">
+    <option value="nxbt">Nxbt (Bluetooth)</option>
+    <option value="esp32">ESP32 (Serial)</option>
+</select>
+
+<p></p>
+
+<div id="nxbt_config">
+    <label>Controller Endpoint:</label>
+    <input type="url" id="controller_endpoint" value="http://192.168.50.101:5000/">
+</div>
+
+<div id="esp32_config" style="display: none;">
+    <label>Serial Port:</label>
+    <select id="port">
+        {% for port in ports %}
+        <option value="{{port}}">{{port}}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<button onclick="connectOnClick()">Connect</button>
+
+<script>
+    function controllerTypeOnChange(selectObject) {
+        const controllerType = selectObject.value;
+        const nxbtConfig = document.getElementById('nxbt_config');
+        const esp32Config = document.getElementById('esp32_config');
+        
+        if (controllerType === 'nxbt') {
+            nxbtConfig.style.display = 'block';
+            esp32Config.style.display = 'none';
+        } else if (controllerType === 'esp32') {
+            nxbtConfig.style.display = 'none';
+            esp32Config.style.display = 'block';
+        }
+    }
+</script>
+
+<p></p>
+
+<label>Screen Source: </label>
+<select name="sources" id="sources" onchange="sourceOnChange(this)">
+    {% for source in sources %}
+    <option value="{{source}}">{{source}}</option>
+    {% endfor %}
+</select>
+</body>
+
+<p></p>
+
+<body>
+<div class="display-flex">
+    <img src="{{ url_for('home.video_feed') }}" width="1280" height="720"/>
+    <textarea id="profile"></textarea>
+</div>
+</body>
+
+<p></p>
+
+<label>Stop at:</label>
+<input type="datetime-local" id="stop_at">
+
+<p></p>
+
+<button onclick="runOnClick()">Run</button>
+<button onclick="stopOnClick()">Stop</button>
+<input type="checkbox" value="true" id="sleep">
+<label>Turn off Switch after stop.</label>
+
+<p></p>
+<input type="checkbox" value="true" id="debug">
+<label><a href="{{ url_for('debug.main') }}">Debug</a></label>
+
+<p></p>
+<table>
+    <tr>
+        <th>Keyboard</th>
+        <th>Controller</th>
+    </tr>
+    {% for k, v in keymap.items() %}
+    <tr>
+        <th>{{k}}</th>
+        <th>{{v}}</th>
+    </tr>
+    {% endfor %}
+</table>
