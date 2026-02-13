@@ -100,6 +100,46 @@ textarea {
         fetch('{{ url_for('home.connect_controller') }}', options).then((response) => connected = true)
     }
 
+    function flashOnClick() {
+        const controllerType = document.getElementById('controller_type').value;
+        if (controllerType !== 'esp32') {
+            alert('请先选择 ESP32 控制器类型');
+            return;
+        }
+        
+        if (!confirm('确定要烧录 ESP32 固件吗？这会覆盖当前固件。')) {
+            return;
+        }
+        
+        const statusElement = document.getElementById('flash_status');
+        if (statusElement) {
+            statusElement.textContent = '烧录中...';
+        }
+        
+        const options = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+        };
+        
+        fetch('{{ url_for('home.flash_esp32') }}', options)
+            .then(response => response.text())
+            .then(data => {
+                if (statusElement) {
+                    statusElement.textContent = data;
+                }
+                alert(data);
+            })
+            .catch(error => {
+                console.error('烧录错误:', error);
+                if (statusElement) {
+                    statusElement.textContent = '烧录失败';
+                }
+                alert('烧录失败: ' + error.message);
+            });
+    }
+
     var default_profile = `[
   {
     "current_level": 1,
@@ -143,6 +183,8 @@ textarea {
         <option value="{{port}}">{{port}}</option>
         {% endfor %}
     </select>
+    <button onclick="flashOnClick()">烧录固件</button>
+    <span id="flash_status" style="margin-left: 10px; color: blue;"></span>
 </div>
 
 <button onclick="connectOnClick()">Connect</button>
