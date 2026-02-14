@@ -1,0 +1,536 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+
+    textarea {
+      width: 300px;
+      height: 715px;
+    }
+
+    .controller-section {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .controller-option {
+        margin-bottom: 10px;
+    }
+
+    .status-connected {
+        color: green;
+        font-weight: bold;
+    }
+
+    .status-disconnected {
+        color: red;
+        font-weight: bold;
+    }
+
+    .status-flashing {
+        color: orange;
+        font-weight: bold;
+    }
+
+    .flash-output {
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        padding: 10px;
+        max-height: 200px;
+        overflow-y: auto;
+        font-family: monospace;
+        white-space: pre-wrap;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 20px;
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 10px 0;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background-color: #4CAF50;
+        transition: width 0.3s ease;
+    }
+    </style>
+</head>
+<body>
+    <script>
+        var connected = false;
+        var currentController = 'dummy'; // 'dummy', 'nxbt', 'esp32'
+        var esp32StatusInterval = null;
+        var flashStatusInterval = null;
+
+        function keypress(event) {
+            const params = {
+                key: event.key,
+                type: event.type,
+            };
+            const options = {
+                method: 'POST',
+                body: JSON.stringify(params),
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+            };
+            fetch('{{ url_for('home.key_press') }}', options)
+        }
+
+        document.addEventListener('keyup', (e) => {
+            if (!connected)
+                return;
+            console.log('keyup', e.code)
+            keypress(e)
+        });
+        document.addEventListener('keydown', (e) => {
+            if (!connected)
+                return;
+            console.log('keydown', e.code)
+            keypress(e)
+        });
+
+        function sourceOnChange(selectObject) {
+            const params = {
+                source: selectObject.value,
+            };
+            const options = {
+                method: 'POST',
+                body: JSON.stringify(params),
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+            };
+            fetch('{{ url_for('home.change_source') }}', options)
+        }
+
+        function runOnClick() {
+            const params = {
+                debug: document.getElementById('debug').checked,
+                sleep: document.getElementById('sleep').checked,
+                profile: document.getElementById('profile').value,
+                stop_at: document.getElementById('stop_at').value,
+            };
+            const options = {
+                method: 'POST',
+                body: JSON.stringify(params),
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+            };
+            fetch('{{ url_for('home.run') }}', options)
+        }
+
+        function stopOnClick() {
+            const options = {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+            };
+            fetch('{{ url_for('home.stop') }}', options)
+        }
+
+        // 控制器选择
+        function selectController(type) {
+            currentController = type;
+            
+            // 显示/隐藏相关部分
+            document.getElementById('nxbt-section').style.display = 
+                (type === 'nxbt') ? 'block' : 'none';
+            document.getElementById('esp32-section').style.display = 
+                (type === 'esp32') ? 'block' : 'none';
+            
+            // 更新按钮状态
+            document.querySelectorAll('.controller-option button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // 如果是 ESP32，开始状态轮询
+            if (type === 'esp32') {
+                startEsp32StatusPolling();
+            } else {
+                stopEsp32StatusPolling();
+            }
+        }
+
+        // NXBT 连接
+        function connectNxbtOnClick() {
+            const params = {
+                endpoint: document.getElementById('controller_endpoint').value,
+            };
+            const options = {
+                method: 'POST',
+                body: JSON.stringify(params),
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+            };
+            fetch('{{ url_for('home.connect_controller') }}', options)
+                .then((response) => {
+                    connected = true;
+                    updateConnectionStatus('nxbt', true);
+                })
+                .catch((error) => {
+                    updateConnectionStatus('nxbt', false);
+                });
+        }
+
+        // ESP32 相关函数
+        function refreshEsp32Ports() {
+            fetch('{{ url_for('home.get_esp32_ports') }}')
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('esp32_ports');
+                    select.innerHTML = '';
+                    
+                    if (data.ports && data.ports.length > 0) {
+                        data.ports.forEach(port => {
+                            const option = document.createElement('option');
+                            option.value = port;
+                            option.text = port;
+                            select.appendChild(option);
+                        });
+                    } else {
+                        const option = document.createElement('option');
+                        option.value = '';
+                        option.text = '未找到可用串口';
+                        select.appendChild(option);
+                    }
+                });
+        }
+
+        function connectEsp32() {
+            const port = document.getElementById('esp32_ports').value;
+            if (!port || port === '未找到可用串口') {
+                alert('请选择有效的串口');
+                return;
+            }
+            
+            const params = {
+                port: port,
+            };
+            const options = {
+                method: 'POST',
+                body: JSON.stringify(params),
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+            };
+            
+            fetch('{{ url_for('home.connect_esp32') }}', options)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        connected = true;
+                        updateEsp32Status(data.status, data.message);
+                    } else {
+                        updateEsp32Status('error', data.message);
+                    }
+                });
+        }
+
+        function disconnectEsp32() {
+            fetch('{{ url_for('home.disconnect_esp32') }}', {method: 'POST'})
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        connected = false;
+                        updateEsp32Status(data.status, data.message);
+                    }
+                });
+        }
+
+        function updateEsp32Status(status, message) {
+            const statusElement = document.getElementById('esp32_status');
+            const messageElement = document.getElementById('esp32_status_message');
+            
+            statusElement.textContent = status === 'connected' ? '已连接' : 
+                                      status === 'disconnected' ? '已断开' : 
+                                      status === 'flashing' ? '烧录中' : '错误';
+            
+            statusElement.className = 'status-' + status;
+            messageElement.textContent = message || '';
+            
+            // 更新按钮状态
+            const connectBtn = document.getElementById('esp32_connect_btn');
+            const disconnectBtn = document.getElementById('esp32_disconnect_btn');
+            
+            if (status === 'connected') {
+                connectBtn.disabled = true;
+                disconnectBtn.disabled = false;
+            } else {
+                connectBtn.disabled = false;
+                disconnectBtn.disabled = true;
+            }
+        }
+
+        function startEsp32StatusPolling() {
+            if (esp32StatusInterval) {
+                clearInterval(esp32StatusInterval);
+            }
+            
+            esp32StatusInterval = setInterval(() => {
+                fetch('{{ url_for('home.get_esp32_status') }}')
+                    .then(response => response.json())
+                    .then(data => {
+                        const status = data.connected ? 'connected' : 'disconnected';
+                        const message = data.connected ? 
+                            `已连接到 ${data.port}` : '未连接';
+                        updateEsp32Status(status, message);
+                    });
+            }, 2000); // 每2秒更新一次
+        }
+
+        function stopEsp32StatusPolling() {
+            if (esp32StatusInterval) {
+                clearInterval(esp32StatusInterval);
+                esp32StatusInterval = null;
+            }
+        }
+
+        function updateConnectionStatus(controllerType, isConnected) {
+            const statusElement = document.getElementById('connection_status');
+            if (isConnected) {
+                statusElement.textContent = `${controllerType} 已连接`;
+                statusElement.className = 'status-connected';
+            } else {
+                statusElement.textContent = '未连接';
+                statusElement.className = 'status-disconnected';
+            }
+        }
+
+        // ESP32 烧录功能
+        function flashEsp32() {
+            const port = document.getElementById('esp32_ports').value;
+            if (!port || port === '未找到可用串口') {
+                alert('请选择有效的串口');
+                return;
+            }
+            
+            const firmwarePath = document.getElementById('firmware_path').value;
+            
+            const params = {
+                port: port,
+                firmware_path: firmwarePath
+            };
+            
+            const options = {
+                method: 'POST',
+                body: JSON.stringify(params),
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+            };
+            
+            fetch('{{ url_for('home.flash_esp32') }}', options)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('烧录已开始，请查看烧录输出');
+                        startFlashStatusPolling();
+                        updateEsp32Status('flashing', '烧录中...');
+                    } else {
+                        alert('烧录失败: ' + data.message);
+                    }
+                });
+        }
+
+        function startFlashStatusPolling() {
+            if (flashStatusInterval) {
+                clearInterval(flashStatusInterval);
+            }
+            
+            flashStatusInterval = setInterval(() => {
+                fetch('{{ url_for('home.get_flash_status') }}')
+                    .then(response => response.json())
+                    .then(data => {
+                        const outputElement = document.getElementById('flash_output');
+                        const progressElement = document.getElementById('flash_progress');
+                        const progressFill = document.getElementById('progress_fill');
+                        
+                        outputElement.textContent = data.output;
+                        outputElement.scrollTop = outputElement.scrollHeight;
+                        
+                        progressElement.textContent = `进度: ${data.progress}%`;
+                        progressFill.style.width = `${data.progress}%`;
+                        
+                        if (!data.running) {
+                            clearInterval(flashStatusInterval);
+                            flashStatusInterval = null;
+                            
+                            if (data.success) {
+                                updateEsp32Status('disconnected', '烧录成功！请重新连接');
+                                alert('烧录成功！');
+                            } else {
+                                updateEsp32Status('error', '烧录失败');
+                                alert('烧录失败，请查看输出信息');
+                            }
+                        }
+                    });
+            }, 1000); // 每1秒更新一次
+        }
+
+        function stopFlashStatusPolling() {
+            if (flashStatusInterval) {
+                clearInterval(flashStatusInterval);
+                flashStatusInterval = null;
+            }
+        }
+
+        var default_profile = `[
+  {
+    "current_level": 1,
+    "current_win": 0,
+    "target_level": 3,
+    "target_win": 30,
+    "deck": 0
+  },
+  {
+    "current_level": 1,
+    "current_win": 0,
+    "target_level": 3,
+    "target_win": 30,
+    "deck": 0
+  }
+]`;
+        window.onload = function () {
+            document.getElementById('profile').value = default_profile;
+            // 初始刷新串口列表
+            refreshEsp32Ports();
+        }
+    </script>
+
+    <h1>AutoTableTurf 控制面板</h1>
+    
+    <!-- 控制器选择 -->
+    <div class="controller-section">
+        <h3>选择控制器类型</h3>
+        <div class="controller-option">
+            <button onclick="selectController('dummy')" class="active">虚拟控制器</button>
+            <button onclick="selectController('nxbt')">NXBT (蓝牙)</button>
+            <button onclick="selectController('esp32')">ESP32 (串口)</button>
+        </div>
+        
+        <div id="connection_status" class="status-disconnected">未连接</div>
+    </div>
+
+    <!-- NXBT 控制器部分 -->
+    <div id="nxbt-section" class="controller-section" style="display: none;">
+        <h3>NXBT 蓝牙控制器</h3>
+        <label>Controller Endpoint:</label>
+        <input type="url" id="controller_endpoint" value="http://192.168.50.101:5000/">
+        <button onclick="connectNxbtOnClick()">连接 NXBT</button>
+    </div>
+
+    <!-- ESP32 控制器部分 -->
+    <div id="esp32-section" class="controller-section" style="display: none;">
+        <h3>ESP32 串口控制器</h3>
+        
+        <div>
+            <label>串口选择: </label>
+            <select id="esp32_ports"></select>
+            <button onclick="refreshEsp32Ports()">刷新串口</button>
+        </div>
+        
+        <p></p>
+        
+        <div>
+            <button id="esp32_connect_btn" onclick="connectEsp32()">连接 ESP32</button>
+            <button id="esp32_disconnect_btn" onclick="disconnectEsp32()" disabled>断开连接</button>
+        </div>
+        
+        <p></p>
+        
+        <div>
+            <strong>状态: </strong>
+            <span id="esp32_status" class="status-disconnected">未连接</span>
+            <span id="esp32_status_message"></span>
+        </div>
+        
+        <p></p>
+        
+        <!-- 烧录部分 -->
+        <h4>ESP32 烧录</h4>
+        <div>
+            <label>固件路径: </label>
+            <input type="text" id="firmware_path" placeholder="固件文件路径 (可选)" style="width: 300px;">
+            <button onclick="flashEsp32()">烧录固件</button>
+        </div>
+        
+        <p></p>
+        
+        <div class="progress-bar">
+            <div id="progress_fill" class="progress-fill" style="width: 0%"></div>
+        </div>
+        <div id="flash_progress">进度: 0%</div>
+        
+        <p></p>
+        
+        <div class="flash-output" id="flash_output">
+            烧录输出将显示在这里...
+        </div>
+        
+        <p><small>注意: 烧录前请确保 ESP32 进入下载模式（按住 BOOT 按钮，点击 EN 按钮）</small></p>
+    </div>
+
+    <hr>
+
+    <!-- 原有功能 -->
+    <div>
+        <label>Screen Source: </label>
+        <select name="sources" id="sources" onchange="sourceOnChange(this)">
+            {% for source in sources %}
+            <option value="{{source}}">{{source}}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <p></p>
+
+    <div class="display-flex">
+        <img src="{{ url_for('home.video_feed') }}" width="1280" height="720"/>
+        <textarea id="profile"></textarea>
+    </div>
+
+    <p></p>
+
+    <label>Stop at:</label>
+    <input type="datetime-local" id="stop_at">
+
+    <p></p>
+
+    <button onclick="runOnClick()">Run</button>
+    <button onclick="stopOnClick()">Stop</button>
+    <input type="checkbox" value="true" id="sleep">
+    <label>Turn off Switch after stop.</label>
+
+    <p></p>
+    <input type="checkbox" value="true" id="debug">
+    <label><a href="{{ url_for('debug.main') }}">Debug</a></label>
+
+    <p></p>
+    <table>
+        <tr>
+            <th>Keyboard</th>
+            <th>Controller</th>
+        </tr>
+        {% for k, v in keymap.items() %}
+        <tr>
+            <th>{{k}}</th>
+            <th>{{v}}</th>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
