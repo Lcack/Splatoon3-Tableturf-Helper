@@ -42,13 +42,22 @@ Autotableturf 是一个自动化玩 Splatoon 3 Tableturf Battle 的游戏助手�
 - 实现克制NPC推荐系统
 - 根据NPC AI类型自适应调整策略
 
-### 4. 检测模块增强（JSON数据验证）
-**目标**: 集成JSON数据到图像检测中，提高识别准确性
+### 4. 检测模块重构与增强（JSON数据验证）
+**目标**: 重构检测模块，集成JSON数据验证，提高识别准确性
 **完成工作**:
-- 创建 `EnhancedCardDetector` 类：结合图像识别和JSON数据验证
-- 实现卡牌匹配算法：SP消耗匹配（40%权重）、卡牌大小匹配（30%权重）、图案形状匹配（30%权重）
-- 添加匹配阈值（70%匹配度），低于阈值使用纯图像识别结果
-- 创建 `enhanced_hands()` 函数向后兼容原有接口
+- **重构card检测**: 创建 `enhanced_card.py` 完全替代原 `card.py`
+  - 实现 `EnhancedCardDetector` 类：结合图像识别和JSON数据验证
+  - 卡牌匹配算法：SP消耗(40%) + 卡牌大小(30%) + 图案形状(30%)
+  - 匹配阈值：70%匹配度，低于阈值使用基础检测
+  - **完全上位替代**: `enhanced_card.hands()` 函数完全兼容原接口
+  - **删除原文件**: 移除 `tableturf/manager/detection/card.py`
+
+- **增强stage检测**: 创建 `enhanced_stage.py` 提供JSON验证
+  - 实现 `EnhancedStageDetector` 类：集成场地数据验证
+  - 场地匹配算法：尺寸(40%) + 可涂地比例(30%) + 特殊点数量(30%)
+  - 匹配阈值：60%匹配度
+
+- **更新模块导出**: 修改 `detection/__init__.py` 使用增强版函数
 
 ### 5. 线性学习MCTS AI（无深度学习依赖）
 **目标**: 为MCTS添加学习能力，不依赖PyTorch等深度学习框架
@@ -73,6 +82,12 @@ Autotableturf 是一个自动化玩 Splatoon 3 Tableturf Battle 的游戏助手�
 - 统一模块导入和导出
 - 更新AI模块的 `__all__` 导出列表
 - 清理测试文件，只保留核心代码
+- **文件结构调整**:
+  - 保留 `tableturf/model/card.py` (核心Card类)
+  - 保留 `tableturf/model/card_factory.py` (Card工厂)
+  - 保留 `tableturf/model/stage.py` (核心Stage类)
+  - 保留 `tableturf/model/stage_factory.py` (Stage工厂)
+  - 删除 `tableturf/manager/detection/card.py` (被enhanced_card.py替代)
 
 ### 7. 环境验证
 **完成工作**:
@@ -174,4 +189,48 @@ cards = enhanced_hands(image, data_loader=loader, card_factory=factory)
 ✅ 文档更新完成  
 ✅ GitHub推送完成  
 
-项目已全面升级，具备数据驱动决策、学习能力和增强检测功能。
+## 2026-02-23 文件结构调整总结
+
+### 关键决策和调整
+
+#### 1. **model目录文件必要性分析**
+✅ **确认所有文件必须保留**：
+- `card.py` / `stage.py`：**核心数据模型**，定义游戏对象结构和行为
+- `card_factory.py` / `stage_factory.py`：**工厂模式**，负责从JSON数据创建对象
+- **关系**：Factory依赖Model，这是标准的关注点分离设计
+
+#### 2. **detection目录重构**
+✅ **完成文件优化**：
+- **删除** `tableturf/manager/detection/card.py`：被增强版完全替代
+- **创建** `enhanced_card.py`：**完全上位替代**，提供：
+  - 相同的`hands()`函数接口
+  - 图像识别 + JSON数据验证双保险
+  - 智能降级（JSON不可用时使用基础检测）
+- **创建** `enhanced_stage.py`：提供场地JSON验证（可选增强）
+- **更新** `__init__.py`：导出增强版函数
+
+#### 3. **无重复代码**
+✅ **检查确认**：
+- 生产代码中没有硬编码的Card/Stage创建
+- 测试文件中的硬编码是正常的单元测试需要
+- Factory模式已正确实现，新代码应使用Factory
+
+### 当前项目架构
+
+```
+架构层次：
+1. 数据层 (model/)        : Card/Stage定义 + Factory创建 + JSON数据
+2. 检测层 (detection/)    : 图像识别 + JSON验证（增强版）
+3. AI层 (ai/)            : 多种AI算法 + 学习能力
+4. 管理层 (manager/)      : 游戏流程控制
+```
+
+### 技术优势总结
+
+1. **数据一致性**: Factory类确保JSON到Grid枚举的正确转换
+2. **检测准确性**: 增强版检测提供双保险验证
+3. **学习能力**: 线性学习MCTS无需深度学习依赖
+4. **向后兼容**: 所有新功能与现有代码兼容
+5. **可维护性**: 清晰的架构分层和关注点分离
+
+项目已全面升级，现在具备数据驱动决策、学习能力和增强检测功能！

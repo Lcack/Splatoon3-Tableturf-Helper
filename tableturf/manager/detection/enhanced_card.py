@@ -318,3 +318,81 @@ def enhanced_hands(img: np.ndarray, cursor=None, debug: Optional[Debugger] = Non
     """
     detector = EnhancedCardDetector(data_loader, card_factory)
     return detector.hands(img, cursor, debug)
+
+
+# 完全替代原card.py的hands函数
+def hands(img: np.ndarray, cursor=None, debug: Optional[Debugger] = None) -> List[Card]:
+    """
+    完全替代原card.py的hands函数
+    如果JSON数据可用，使用增强版检测；否则使用基础检测
+    
+    Args:
+        img: 输入图像
+        cursor: 光标位置
+        debug: 调试器
+    
+    Returns:
+        检测到的卡牌列表
+    """
+    try:
+        # 尝试使用增强版检测
+        from tableturf.model import DataLoader, CardFactory
+        loader = DataLoader()
+        factory = CardFactory(loader)
+        return enhanced_hands(img, cursor, debug, loader, factory)
+    except Exception as e:
+        # 如果增强版失败，使用基础检测逻辑
+        logger.warning(f"增强版检测失败，使用基础检测: {e}")
+        return _fallback_hands(img, cursor, debug)
+
+
+def _fallback_hands(img: np.ndarray, cursor=None, debug: Optional[Debugger] = None) -> List[Card]:
+    """
+    基础检测逻辑（从原card.py复制修改）
+    """
+    def __grid_ratios(top_left: np.ndarray, lower_bound, upper_bound) -> float:
+        roi = img[top_left[0]:top_left[0] + HANDS_GRID_ROI_HEIGHT, 
+                  top_left[1]:top_left[1] + HANDS_GRID_ROI_WIDTH]
+        hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
+        mask = cv2.inRange(hsv, lower_bound, upper_bound)
+        return np.sum(mask == 255) / (HANDS_GRID_ROI_WIDTH * HANDS_GRID_ROI_HEIGHT)
+    
+    if cursor is None:
+        cursor = hands_cursor(img, debug)
+    
+    grid_rois = HANDS_GRID_NUMPY_ROI_TOP_LEFTS.copy()
+    cost_rois = HANDS_COST_NUMPY_ROI_TOP_LEFTS.copy()
+    if 0 <= cursor < 4:
+        grid_rois[cursor] = FOCUS_GRID_NUMPY_ROI_TOP_LEFTS[cursor]
+        cost_rois[cursor] = FOCUS_COST_NUMPY_ROI_TOP_LEFTS[cursor]
+    
+    ink_lower_bound, ink_upper_bound = MY_INK_LIGHTER_COLOR_HSV_LOWER_BOUND, MY_INK_LIGHTER_COLOR_HSV_UPPER_BOUND
+    special_lower_bound, special_upper_bound = MY_SPECIAL_LIGHTER_COLOR_HSV_LOWER_BOUND, MY_SPECIAL_LIGHTER_COLOR_HSV_UPPER_BOUND
+    
+    grid_ink_ratios = np.array([__grid_ratios(idx, ink_lower_bound, ink_upper_bound) 
+                               for grid in grid_rois for idx in grid]).reshape(4, 64)
+    grid_special_ratios = np.array([__grid_ratios(idx, special_lower_bound, special_upper_bound) 
+                                   for grid in grid_rois for idx in grid]).reshape(4, 64)
+    dark_grid_ink_ratios = np.array([__grid_ratios(idx, MY_INK_DARKER_COLOR_HSV_LOWER_BOUND, MY_INK_DARKER_COLOR_HSV_UPPER_BOUND) 
+                                    for grid in grid_rois for idx in grid]).reshape(4, 64)
+    dark_grid_special_ratios = np.array([__grid_ratios(idx, MY_SPECIAL_DARKER_COLOR_HSV_LOWER_BOUND, MY_SPECIAL_DARKER_COLOR_HSV_UPPER_BOUND) 
+                                       for grid in grid_rois for idx in grid]).reshape(4, 64)
+    
+    cost_ratios = np.array([__grid_ratios(idx, special_lower_bound, special_upper_bound) 
+                           for grid in cost_rois for idx in grid]).reshape(4, 6)
+    dark_cost_ratios = np.array([__grid_ratios(idx, MY_SPECIAL_DARKER_COLOR_HSV_LOWER_BOUND, MY_SPECIAL_DARKER_COLOR_HSV_UPPER_BOUND) 
+                                for grid in cost_rois for idx in grid]).reshape(4, 6)
+    cost_ratios = np.maximum(cost_ratios, dark_cost_ratios)
+    
+    grids = np.full((4, 64), Grid.Empty.value, dtype=int)
+    grids[grid_ink_ratios > GRID_PIXEL_RATIO] = Grid.MyInk.value
+    grids[grid_special_ratios > GRID_PIXEL_RATIO] = Grid.MySpecial.value
+    grids[dark_grid_ink_ratios > GRID_PIXEL_RATIO] = Grid.MyInk.value
+    grids[dark_grid_special_ratios > GRID_PIXEL_RATIO] = Grid.MySpecial.value
+    costs = np.sum(cost_ratios > GRID_PIXEL_RATIO, axis=1)
+    
+    grids = grids.reshape((4, 8, 8))
+    cards = [Card(grids[i], costs[i]) for i in range(4)]
+    
+    logger.debug(f'detection.hands: return={cards}')
+    return cards
