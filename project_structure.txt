@@ -1,0 +1,184 @@
+# AutoTableTurf 项目结构树状图
+# 生成时间: 2026-02-23 03:10 GMT+8
+
+Autotableturf/
+├── README.md                          # 项目说明文档，介绍自动化占地斗士系统
+├── main.py                            # 主程序入口，命令行界面启动
+├── run_portal.py                      # Web界面启动脚本，启动Flask服务器
+├── run_qt.py                          # Qt桌面界面启动脚本，启动GUI应用
+├── requirements.txt                   # 核心依赖包列表（OpenCV、numpy等）
+├── requirements-qt.txt                # Qt界面依赖包（PyQt5等）
+├── requirements-qt-desktop.txt        # Qt桌面完整依赖包
+├── install_esptool.py                 # ESP32固件安装工具
+├── test_esp32.py                      # ESP32控制器测试脚本
+│
+├── capture/                           # 图像采集模块，负责获取游戏画面
+│   ├── __init__.py                    # 模块导出，提供统一的采集接口
+│   ├── interface.py                   # 采集接口定义，抽象采集卡和文件加载
+│   ├── file_loader.py                 # 文件加载器，测试时从本地文件加载图像
+│   └── video_capture.py               # 视频采集卡接口，从采集卡实时获取画面
+│
+├── controller/                        # 控制器模块，负责控制Switch操作
+│   ├── __init__.py                    # 模块导出，提供多种控制器实现
+│   ├── interface.py                   # 控制器接口定义，统一控制命令格式
+│   ├── dummy.py                       # 虚拟控制器，测试时不实际发送命令
+│   ├── esp32.py                       # ESP32蓝牙控制器，通过ESP32控制Switch
+│   ├── esp32_flasher.py               # ESP32固件刷写工具，更新控制器固件
+│   ├── esp32_input.py                 # ESP32输入处理，解析游戏手柄输入
+│   ├── esp32_serial.py                # ESP32串口通信，与ESP32设备通信
+│   ├── nxbt.py                        # NXBT蓝牙控制器，在Linux上模拟Pro Controller
+│   ├── r3.py                          # R3控制器实现，支持特定硬件
+│   └── nxbt_server/                   # NXBT服务器，提供Web控制界面
+│       ├── README.md                  # NXBT服务器说明文档
+│       ├── app.py                     # Flask Web服务器，提供REST API
+│       ├── requirement.txt            # 服务器依赖包列表
+│       └── nxbt/                      # NXBT库，蓝牙控制核心实现
+│           ├── __init__.py            # NXBT模块初始化
+│           ├── bluez.py               # BlueZ蓝牙接口，Linux蓝牙栈封装
+│           ├── nxbt.py                # 主NXBT类，管理蓝牙连接和输入
+│           ├── logging.py             # 日志配置，控制调试输出
+│           ├── tui.py                 # 终端界面，命令行控制界面
+│           └── controller/            # 控制器实现，处理具体蓝牙协议
+│               ├── __init__.py        # 控制器模块初始化
+│               ├── controller.py      # 控制器基类，定义通用接口
+│               ├── input.py           # 输入处理，解析手柄按键状态
+│               ├── protocol.py        # 蓝牙协议，Switch通信协议实现
+│               ├── server.py          # 服务器实现，处理客户端连接
+│               └── utils.py           # 工具函数，辅助功能
+│
+├── firmware/                          # 固件文件目录，存储控制器固件
+│   └── README.md                      # 固件说明文档，刷写指南
+│
+├── logger/                            # 日志模块，统一日志管理
+│   ├── __init__.py                    # 模块导出，提供日志工具
+│   └── logger.py                      # 日志配置和工具，格式化输出
+│
+├── portal/                            # Web门户界面，基于Flask的Web控制台
+│   ├── __init__.py                    # 模块导出，注册Web路由
+│   ├── debug/                         # 调试界面，实时查看识别结果
+│   │   ├── __init__.py                # 调试模块初始化
+│   │   ├── debug.py                   # 调试页面控制器，显示识别过程
+│   │   ├── debugger.py                # 调试器，保存和显示调试图像
+│   │   └── templates/                 # HTML模板目录
+│   ├── home/                          # 主界面，控制面板
+│   │   ├── __init__.py                # 主页模块初始化
+│   │   ├── home.py                    # 主页控制器，处理用户请求
+│   │   ├── capture.py                 # 图像捕获页面，显示实时画面
+│   │   ├── closer.py                  # 任务关闭器，管理任务生命周期
+│   │   ├── keymap.py                  # 按键映射，自定义控制键位
+│   │   └── templates/                 # HTML模板目录
+│   ├── profiles/                      # 配置文件目录，存储对战配置
+│   │   └── default.json               # 默认对战配置，定义目标等级和卡组
+│   └── util/                          # 工具函数，Web应用辅助
+│       ├── __init__.py                # 工具模块初始化
+│       └── rwlock.py                  # 读写锁实现，线程安全数据访问
+│
+├── qt/                                # Qt桌面界面，本地GUI应用程序
+│   ├── __init__.py                    # Qt模块导出，初始化Qt应用
+│   ├── main.py                        # Qt主程序，启动GUI窗口
+│   ├── debug/                         # 调试窗口，可视化调试工具
+│   │   ├── __init__.py                # 调试模块初始化
+│   │   ├── debug_window.py            # 调试窗口类，显示识别过程
+│   │   └── templates/                 # 模板文件目录
+│   ├── home/                          # 主窗口，完整控制界面
+│   │   ├── __init__.py                # 主窗口模块初始化
+│   │   ├── main_window.py             # 主窗口类，管理所有子窗口
+│   │   ├── control_widget.py          # 控制面板，开始/停止对战
+│   │   ├── controller_widget.py       # 控制器面板，选择控制方式
+│   │   ├── profile_widget.py          # 配置面板，编辑对战配置
+│   │   ├── video_widget.py            # 视频显示面板，实时游戏画面
+│   │   └── templates/                 # 模板文件目录
+│   ├── icons/                         # 图标资源目录，应用程序图标
+│   └── util/                          # Qt工具函数，GUI辅助功能
+│       └── __init__.py                # Qt工具模块初始化
+│
+├── tableturf/                         # 占地斗士核心模块，游戏逻辑实现
+│   ├── __init__.py                    # 核心模块导出，提供游戏接口
+│   ├── ai/                            # AI决策模块，智能对战算法
+│   │   ├── __init__.py                # AI模块导出，提供AI接口
+│   │   ├── interface.py               # AI接口定义，统一决策接口
+│   │   ├── simple.py                  # 简单规则AI，基于启发式规则快速决策
+│   │   └── alpha/                     # Alpha AI，高级搜索算法
+│   │       ├── __init__.py            # Alpha模块初始化
+│   │       ├── alpha.py               # Alpha AI实现，使用Minimax搜索
+│   │       └── util.py                # Alpha工具函数，评估函数等
+│   ├── manager/                       # 游戏管理器，协调所有模块
+│   │   ├── __init__.py                # 管理器模块导出
+│   │   ├── tableturf.py               # 主游戏管理器，控制对战流程
+│   │   ├── data.py                    # 数据模型定义，任务和统计数据结构
+│   │   ├── closer/                    # 任务关闭器，管理任务结束条件
+│   │   │   ├── __init__.py            # 关闭器模块初始化
+│   │   │   ├── interface.py           # 关闭器接口定义，判断任务结束
+│   │   │   ├── stats_closer.py        # 统计关闭器，基于胜场数结束
+│   │   │   └── union_closer.py        # 联合关闭器，组合多个结束条件
+│   │   ├── action/                    # 动作生成器，将AI决策转为控制器指令
+│   │   │   ├── __init__.py            # 动作模块初始化
+│   │   │   ├── util.py                # 动作工具函数，坐标转换等
+│   │   │   ├── card.py                # 卡牌移动动作，生成移动指令序列
+│   │   │   ├── deck.py                # 卡组选择动作，生成选择卡组指令
+│   │   │   ├── giveup.py              # 放弃动作，生成放弃对战指令
+│   │   │   ├── hands.py               # 手牌选择动作，生成选择手牌指令
+│   │   │   ├── redraw.py              # 重抽动作，生成重抽手牌指令
+│   │   │   └── replay.py              # 重播动作，生成重播对战指令
+│   │   └── detection/                 # 图像识别模块，从画面提取游戏状态
+│   │       ├── __init__.py            # 识别模块导出，提供识别函数
+│   │       ├── util.py                # 识别工具函数，坐标转换和ROI计算
+│   │       ├── stage.py               # 场地状态识别，检测7种格子类型
+│   │       ├── deck.py                # 卡组识别，识别15张卡牌图案和费用
+│   │       ├── card.py                # 手牌识别，识别4张手牌状态
+│   │       ├── ui.py                  # UI状态识别，检测光标位置和按钮状态
+│   │       └── debugger/              # 识别调试器，可视化识别过程
+│   │           ├── __init__.py        # 调试器模块初始化
+│   │           ├── interface.py       # 调试器接口定义，统一调试接口
+│   │           └── cv.py              # OpenCV调试器，显示识别区域和结果
+│   └── model/                         # 数据模型，游戏状态数据结构
+│       ├── __init__.py                # 模型模块导出，提供数据类
+│       ├── grid.py                    # 网格类型定义，枚举7种格子状态
+│       ├── card.py                    # 卡牌模型，存储8×8图案和费用
+│       ├── stage.py                   # 场地模型，管理动态网格状态
+│       ├── status.py                  # 游戏状态模型，完整对战状态
+│       └── step.py                    # 行动步骤模型，AI决策结果
+│
+└── tests/                             # 测试套件，单元测试和集成测试
+    ├── __init__.py                    # 测试模块初始化
+    ├── test_capture/                  # 采集测试，验证图像采集功能
+    │   ├── __init__.py                # 采集测试模块初始化
+    │   └── test_video_capture.py      # 视频采集测试，验证采集卡连接
+    ├── test_controller/               # 控制器测试，验证控制功能
+    │   ├── __init__.py                # 控制器测试模块初始化
+    │   ├── test_interface.py          # 控制器接口测试，验证接口一致性
+    │   └── test_nxbt.py               # NXBT测试，验证蓝牙控制功能
+    └── test_tableturf/                # 占地斗士测试，核心功能测试
+        ├── __init__.py                # 占地斗士测试模块初始化
+        ├── test_ai/                   # AI测试，验证决策算法
+        │   ├── __init__.py            # AI测试模块初始化
+        │   └── test_alpha.py          # Alpha AI测试，验证搜索算法
+        ├── test_detection/            # 识别测试，验证图像识别准确性
+        │   ├── __init__.py            # 识别测试模块初始化
+        │   ├── test_card.py           # 卡牌识别测试，验证手牌识别
+        │   ├── test_deck.py           # 卡组识别测试，验证卡组识别
+        │   ├── test_stage.py          # 场地识别测试，验证场地状态识别
+        │   └── test_ui.py             # UI识别测试，验证界面状态识别
+        └── test_model/                # 模型测试，验证数据结构和算法
+            ├── __init__.py            # 模型测试模块初始化
+            ├── test_card.py           # 卡牌模型测试，验证卡牌操作
+            ├── test_stage.py          # 场地模型测试，验证场地操作
+            └── test_status.py         # 状态模型测试，验证状态管理
+
+========================================================================
+项目特点总结：
+1. 完整自动化流程：从图像采集→状态识别→AI决策→控制器执行的完整闭环
+2. 模块化架构：各功能模块通过接口解耦，易于维护和扩展
+3. 多控制器支持：支持ESP32、NXBT、R3等多种控制方式
+4. 双界面系统：提供Web界面和Qt桌面界面，满足不同使用场景
+5. 实时调试能力：可视化识别过程，便于算法优化和问题排查
+6. 完整测试覆盖：包含单元测试和集成测试，保证系统稳定性
+
+========================================================================
+核心工作流程：
+1. 图像采集 (capture/video_capture.py) - 从采集卡获取1920×1080游戏画面
+2. 状态识别 (tableturf/manager/detection/) - 识别场地、手牌、UI状态
+3. AI决策 (tableturf/ai/) - 基于当前状态生成最佳行动
+4. 动作生成 (tableturf/manager/action/) - 将AI决策转换为控制器指令
+5. 控制器执行 (controller/) - 通过蓝牙控制Switch执行操作
+6. 循环反馈 - 重复1-5步直到对战结束
