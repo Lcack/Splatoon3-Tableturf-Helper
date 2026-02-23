@@ -1,3 +1,3 @@
-from tableturf.ai.mcts.fixed_mcts import MCTSAI, EnhancedMCTSAI
+from tableturf.ai.mcts.mcts import MCTSAI, EnhancedMCTSAI
 
 __all__ = ['MCTSAI', 'EnhancedMCTSAI']
