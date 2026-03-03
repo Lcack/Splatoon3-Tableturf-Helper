@@ -1,31 +1,31 @@
-import os
-import unittest
-
-from capture import VideoCapture
-
-
-def ready():
-    VideoCapture(0).capture()
-    return True
-
-
-@unittest.skipIf(not ready(), 'nxbt server not ready')
-class TestCard(unittest.TestCase):
-    def setUp(self) -> None:
-        self.capture = VideoCapture(0)
-
-    def test_width(self):
-        self.assertEqual(self.capture.width, 1920)
-
-    def test_height(self):
-        self.assertEqual(self.capture.height, 1080)
-
-    def test_show(self):
-        self.capture.show()
-
-    def test_save(self):
-        cur = os.path.dirname(os.path.realpath(__file__))
-        root = os.path.join(cur, os.pardir, os.pardir)
-        target = os.path.join(root, 'temp', 'level', '3')
-        print(target)
-        self.capture.save(target)
+import sys                                                                                                                        
+sys.path.insert(0, 'AutoTableTurf 的绝对路径')                                                                                    
+                                                                                                                                     
+from capture.video_capture import VideoCapture                                                                                    
+                                                                                                                                     
+# 测试不同设备索引                                                                                                                
+for device_idx in [0, 1, 2]:                                                                                                      
+    try:                                                                                                                          
+        print(f"\n尝试设备索引 {device_idx}...")                                                                                  
+        cap = VideoCapture(device_idx)                                                                                            
+                                                                                                                                     
+        print(f"  分辨率: {int(cap.width)}x{int(cap.height )}")                                                                   
+                                                                                                                                     
+        # 抓取一帧                                                                                                                
+        frame = cap.capture()                                                                                                     
+        print(f"  帧 shape: {frame.shape}")                                                                                       
+                                                                                                                                     
+        # 保存截图检查                                                                                                            
+        cap.save(f"test_capture_device_{ device_idx}")                                                                            
+        print(f"  ✅ 已保存 test_capture_device_{device_idx} .jpg")                                                               
+                                                                                                                                     
+        # 实时预览（按键退出）                                                                                                    
+        print("  显示实时画面，按任意键退出...")                                                                                  
+        cap.show("Preview")                                                                                                       
+                                                                                                                                     
+        cap.close()                                                                                                               
+        print(f"  ✅ 设备 {device_idx} 可用！")                                                                                   
+        break                                                                                                                     
+                                                                                                                                     
+    except Exception as e:                                                                                                        
+        print(f"  ❌ 设备 {device_idx} 失败: {e}") 
