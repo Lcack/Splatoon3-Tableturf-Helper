@@ -243,3 +243,50 @@ cards = enhanced_hands(image, data_loader=loader, card_factory=factory)
 ✅ **智能降级**: 增强功能失败时自动使用基础功能
 
 **项目已完成最终代码整合，所有功能统一到单一实现版本！**
+
+---
+
+## 2026-03-03 修复循环导入问题
+
+### 问题描述
+发现 `tableturf/manager/detection/stage.py` 存在循环导入问题：
+- 文件试图导入自身（`from tableturf.manager.detection.stage import ...`）
+- 原因为代码重构后，`enhanced_stage.py` 替代原 `stage.py` 时遗留了向后兼容的导入语句
+
+### 修复内容
+✅ **移除循环导入**: 删除文件末尾的自导入语句（第248-252行）
+
+✅ **更新函数实现**:
+- `stage_rois()`: 直接使用 `EnhancedStageDetector` 实现，异常时回退到基础检测
+- `stage()`: 直接使用 `enhanced_stage()` 实现，异常时回退到基础检测
+- `preview()`: 添加 TODO 占位实现，返回 `None`
+- `sp()`: 添加 TODO 占位实现，返回空数组
+
+✅ **简化回退逻辑**: 移除对不存在的 `original_*` 函数的依赖，改用同文件内的基础实现
+
+### 修复后的文件结构
+```
+tableturf/manager/detection/stage.py (单一文件)
+├── EnhancedStageDetector 类（增强版场地检测）
+├── enhanced_stage() 函数（带JSON验证的检测）
+└── 向后兼容函数
+    ├── stage_rois()  # 使用增强版检测器
+    ├── stage()       # 使用增强版检测器
+    ├── preview()     # TODO: 待实现
+    └── sp()          # TODO: 待实现
+```
+
+### 影响范围
+- **无副作用**: 所有函数接口保持不变
+- **依赖项**: 仅依赖 `tableturf.model.DataLoader` 和 `StageFactory`
+- **兼容性**: 完全向后兼容，异常时自动降级到基础图像识别
+
+### 提交信息
+```
+fix(detection): 移除 stage.py 循环导入
+
+- 删除自导入语句（from tableturf.manager.detection.stage import ...）
+- 更新 stage_rois/stage 函数直接使用增强版实现
+- 为 preview/sp 函数添加 TODO 占位实现
+- 异常时回退到基础检测而非不存在的原函数
+```

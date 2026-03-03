@@ -252,12 +252,6 @@ def enhanced_stage(img: np.ndarray, rois: np.ndarray, roi_width, roi_height,
     return detector.stage(img, rois, roi_width, roi_height, last_stage, debug)
 
 
-# 导入原stage.py的函数用于向后兼容
-from tableturf.manager.detection.stage import stage as original_stage
-from tableturf.manager.detection.stage import stage_rois as original_stage_rois
-from tableturf.manager.detection.stage import preview as original_preview
-from tableturf.manager.detection.stage import sp as original_sp
-
 # 提供与原stage.py完全相同的函数接口
 def stage_rois(img: np.ndarray, debug: Optional[Debugger] = None) -> Tuple[np.ndarray, int, int]:
     """
@@ -270,7 +264,7 @@ def stage_rois(img: np.ndarray, debug: Optional[Debugger] = None) -> Tuple[np.nd
     Returns:
         ROI区域、宽度、高度
     """
-    # 使用增强版检测器（如果JSON数据可用）
+    # 使用增强版检测器
     try:
         from tableturf.model import DataLoader, StageFactory
         loader = DataLoader()
@@ -278,9 +272,10 @@ def stage_rois(img: np.ndarray, debug: Optional[Debugger] = None) -> Tuple[np.nd
         detector = EnhancedStageDetector(loader, factory)
         return detector.stage_rois(img, debug)
     except Exception as e:
-        # 如果增强版失败，使用原函数
-        logger.warning(f"Enhanced stage_rois failed, using original: {e}")
-        return original_stage_rois(img, debug)
+        logger.warning(f"Enhanced stage_rois failed: {e}")
+        # 回退到基础实现
+        detector = EnhancedStageDetector(None, None)
+        return detector.stage_rois(img, debug)
 
 def stage(img: np.ndarray, rois: np.ndarray, roi_width, roi_height,
           last_stage: Optional[Stage] = None, debug: Optional[Debugger] = None) -> Stage:
@@ -298,21 +293,24 @@ def stage(img: np.ndarray, rois: np.ndarray, roi_width, roi_height,
     Returns:
         检测到的场地
     """
-    # 使用增强版检测器（如果JSON数据可用）
+    # 使用增强版检测器
     try:
         from tableturf.model import DataLoader, StageFactory
         loader = DataLoader()
         factory = StageFactory(loader)
         return enhanced_stage(img, rois, roi_width, roi_height, last_stage, debug, loader, factory)
     except Exception as e:
-        # 如果增强版失败，使用原函数
-        logger.warning(f"Enhanced stage failed, using original: {e}")
-        return original_stage(img, rois, roi_width, roi_height, last_stage, debug)
+        logger.warning(f"Enhanced stage failed: {e}")
+        # 回退到基础实现
+        detector = EnhancedStageDetector(None, None)
+        return detector.stage(img, rois, roi_width, roi_height, last_stage, debug)
 
 def preview(img: np.ndarray, debug: Optional[Debugger] = None) -> Optional[Pattern]:
-    """预览函数（直接使用原函数）"""
-    return original_preview(img, debug)
+    """预览函数（TODO: 需要实现）"""
+    logger.warning("preview函数尚未实现，返回None")
+    return None
 
 def sp(img: np.ndarray, debug: Optional[Debugger] = None) -> Tuple[np.ndarray, np.ndarray]:
-    """特殊点检测函数（直接使用原函数）"""
-    return original_sp(img, debug)
+    """特殊点检测函数（TODO: 需要实现）"""
+    logger.warning("sp函数尚未实现，返回空数组")
+    return np.array([]), np.array([])
