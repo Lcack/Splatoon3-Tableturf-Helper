@@ -1,7 +1,3 @@
-# Qt 桌面应用依赖
-PySide6>=6.5.0
-numpy>=1.21.0
-
 # 项目原有依赖
 numpy == 1.23.3
 opencv-python == 4.5.5.62
