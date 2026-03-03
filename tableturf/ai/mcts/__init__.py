@@ -1,3 +1,3 @@
-from tableturf.ai.mcts.mcts import MCTSAI, EnhancedMCTSAI
+from tableturf.ai.mcts.mcts import MCTSAI
 
-__all__ = ['MCTSAI', 'EnhancedMCTSAI']
+__all__ = ['MCTSAI']

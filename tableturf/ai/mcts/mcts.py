@@ -475,4 +475,74 @@ class MCTSAI(AI):
                 "wins": self.battle_analysis["wins"],
                 "losses": self.battle_analysis["losses"],
                 "draws": self.battle_analysis["draws"],
-                "win
+                "win_rate": self.battle_analysis["wins"] / max(1, self.battle_analysis["total_battles"]),
+                "avg_turns_per_battle": self.battle_analysis["avg_turns_per_battle"]
+            },
+            "learning_stats": stats,
+            "performance": {
+                "avg_decision_time_ms": avg_decision_time,
+                "recent_decision_times": decision_times[-10:] if len(decision_times) > 10 else decision_times
+            },
+            "feature_importance": {
+                "my_ink_ratio": feature_importance[0] if len(feature_importance) > 0 else 0.0,
+                "his_ink_ratio": feature_importance[1] if len(feature_importance) > 1 else 0.0,
+                "my_sp": feature_importance[2] if len(feature_importance) > 2 else 0.0,
+                "his_sp": feature_importance[3] if len(feature_importance) > 3 else 0.0,
+                "my_special_count": feature_importance[4] if len(feature_importance) > 4 else 0.0,
+                "his_special_count": feature_importance[5] if len(feature_importance) > 5 else 0.0,
+                "round_progress": feature_importance[6] if len(feature_importance) > 6 else 0.0,
+                "hand_avg_size": feature_importance[7] if len(feature_importance) > 7 else 0.0,
+                "legal_action_count": feature_importance[8] if len(feature_importance) > 8 else 0.0,
+                "action_card_size": feature_importance[9] if len(feature_importance) > 9 else 0.0
+            }
+        }
+
+        return report
+
+    def save_model(self):
+        """保存模型和学习数据"""
+        try:
+            # 保存线性学习器状态
+            self.learner.save(self.model_path)
+
+            # 保存对战分析数据
+            analysis_path = self.model_path.replace('.pkl', '_analysis.pkl')
+            analysis_data = {
+                "battle_analysis": self.battle_analysis,
+                "training_data_count": len(self.training_data)
+            }
+            with open(analysis_path, 'wb') as f:
+                pickle.dump(analysis_data, f)
+
+            logger.debug(f"模型和对战数据已保存: {self.model_path}, {analysis_path}")
+        except Exception as e:
+            logger.error(f"保存模型失败: {e}")
+
+    def load_model(self) -> bool:
+        """加载模型和学习数据
+
+        Returns:
+            bool: 加载是否成功
+        """
+        try:
+            # 加载线性学习器状态
+            if not os.path.exists(self.model_path):
+                logger.info(f"模型文件不存在，将使用新模型: {self.model_path}")
+                return False
+
+            success = self.learner.load(self.model_path)
+            if not success:
+                return False
+
+            # 加载对战分析数据
+            analysis_path = self.model_path.replace('.pkl', '_analysis.pkl')
+            if os.path.exists(analysis_path):
+                with open(analysis_path, 'rb') as f:
+                    analysis_data = pickle.load(f)
+                self.battle_analysis = analysis_data.get("battle_analysis", self.battle_analysis)
+                logger.info(f"对战分析数据已加载: {analysis_path}")
+
+            return True
+        except Exception as e:
+            logger.error(f"加载模型失败: {e}")
+            return False

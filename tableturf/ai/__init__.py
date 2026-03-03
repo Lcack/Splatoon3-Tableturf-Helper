@@ -11,10 +11,9 @@ except ImportError:
 
 # 导入MCTS AI
 try:
-    from tableturf.ai.mcts import MCTSAI, EnhancedMCTSAI
-    from tableturf.ai.mcts.learning_mcts_complete import LearningMCTSAI
+    from tableturf.ai.mcts import MCTSAI
 except ImportError:
     # MCTS模块可能不可用
     pass
 
-__all__ = ['AI', 'SimpleAI', 'Alpha', 'EnhancedAlpha', 'MCTSAI', 'EnhancedMCTSAI', 'LearningMCTSAI']
+__all__ = ['AI', 'SimpleAI', 'Alpha', 'EnhancedAlpha', 'MCTSAI']
