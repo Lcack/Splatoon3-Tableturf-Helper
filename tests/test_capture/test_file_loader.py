@@ -17,6 +17,6 @@ for i in range(min(3, len(loader._FileLoader__files))) :
     # 显示图片（检查是否正常）                                                                                                    
     cv2.imshow(f"Frame {i+1}", frame)                                                                                             
     cv2.waitKey(500)  # 显示500ms                                                                                                 
-                                                                                                                                     cv2.destroyAllWindows()                                                                                                           
+    cv2.destroyAllWindows()                                                                                                           
 loader.close()                                                                                                                    
 print("✅ file_loader.py 测试通过") 
