@@ -1,4 +1,4 @@
-# 整体体架构适合分阶段测试：
+# 整体架构：
  ```
    capture → detection → model → ai → controller/manager → ui(qt/portal)
       ↓           ↓          ↓      ↓         ↓                 ↓
@@ -14,8 +14,8 @@
    capture/
    ├── __init__.py         # 不用单独运行，只是导出
    ├── interface.py        # 抽象基类，不用单独运行
-   ├── file_loader.py      # 离线测试用（先测这个）
-   └── video_capture.py    # 需要采集卡（后测这个）
+   ├── file_loader.py      # 离线测试用
+   └── video_capture.py    # 需要采集卡
  ```
  在tests/test_capture下建立了
  ```
@@ -24,7 +24,6 @@
    ├── test_capture_module.py           # 整体模块测试
    ├── test_file_loader.py              # 测试file_loader.py
    ├── test_video_capture.py            # 测试video_capture.py
-   ├── test_video_capture_original.py   # 项目原始自带测试
    └── test_images                      # 储存test_file_loader以及其他地方需要的测试图
  ```
 ### 测试情况
@@ -53,7 +52,7 @@
  - test_hands_detection_redraw - 重抽界面手牌检测
  - test_enhanced_hands_detection - 增强版检测（JSON验证）
  - test_hands_cursor_detection - 手牌光标检测
- - test_enhanced_card_detector_cla ss - EnhancedCardDetector类测试
+ - test_enhanced_card_detector_class - EnhancedCardDetector类测试
 
  test_deck.py - 卡组检测测试
  - test_deck_detection_basic - 基础卡组检测
@@ -112,6 +111,8 @@
  - test_ui.py - UI光标检测可视化（最详细，显示匹配比率）
 
 ### 测试结果
+- test_card.py  
+  占位符
 
 ## 3.model模块
 
