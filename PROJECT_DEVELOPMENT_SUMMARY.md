@@ -3,6 +3,96 @@
 ## 项目概述
 Autotableturf 是一个自动化玩 Splatoon 3 Tableturf Battle 的游戏助手，通过图像识别和蓝牙模拟实现自动对战。
 
+---
+
+## 2026-03-04 测试文档更新与capture模块完善
+
+### 主要更新内容
+
+#### 1. 测试文档系统整理
+**目标**: 建立完整的测试文档体系，分阶段测试各模块
+**完成工作**:
+- 创建 `Test_Document.md`：整体测试架构和分阶段测试方案
+- 整理 `AUTOTABLETURF_QUICK_GUIDE.md`：移动到tests目录，便于查找
+- 建立清晰的测试层次结构：
+  ```
+  capture → detection → model → ai → controller/manager → ui(qt/portal)
+     ↓           ↓          ↓      ↓         ↓                 ↓
+  视频源       图像识别   数据结构  决策算法   流程控制           界面设计
+  ```
+
+#### 2. Capture模块测试完善
+**目标**: 为视频捕获模块建立完整测试体系
+**完成工作**:
+- **新增测试文件**:
+  - `test_capture_module.py`：整体模块测试（8585字节，含完整测试用例）
+  - `test_file_loader.py`：FileLoader离线测试（2865字节）
+  - `test_video_capture.py`：视频捕获测试（4077字节）
+  - `test_video_capture_original.py`：原始项目自带测试保留
+
+- **新增测试图片资源**:
+  - `test_images/battle1.jpg` / `battle2.jpg`：对战画面
+  - `test_images/chooseDeck.jpg`：卡组选择界面
+  - `test_images/chooseDifficulty.jpg`：难度选择
+  - `test_images/chooseNPC.jpg`：NPC选择
+  - `test_images/greeting.jpg`：打招呼界面
+  - `test_images/redraw.jpg`：重抽界面
+  - `test_images/square.jpg`：广场界面
+
+- **测试通过情况**:
+  - ✅ `test_file_loader.py`：测试通过，输出示例：`第 1 帧: shape=(1080, 1920, 3), dtype=uint8`
+  - ✅ 图片资源重命名：中文字符→英文，避免编码问题
+
+#### 3. 项目文件整理
+**完成工作**:
+- 移动 `AUTOTABLETURF_QUICK_GUIDE.md` → `tests/AUTOTABLETURF_QUICK_GUIDE.md`
+- 移动 `test_esp32.py` → `tests/test_controller/test_esp32.py`
+- 删除 `.ipynb_checkpoints` 临时文件
+- 规范化文件名（去除空格）
+
+### 当前测试架构
+```
+tests/
+├── AUTOTABLETURF_QUICK_GUIDE.md    # 快速使用指南（已移动到tests）
+├── Test_Document.md                 # 测试文档（根目录）
+├── test_capture/                    # 捕获模块测试
+│   ├── test_capture_module.py
+│   ├── test_file_loader.py         # ✅ 测试通过
+│   ├── test_video_capture.py
+│   ├── test_video_capture_original.py
+│   └── test_images/                # 测试图片资源
+├── test_controller/                 # 控制器测试
+│   ├── test_esp32.py               # 已移动至此
+│   ├── test_nxbt.py
+│   └── test_interface.py
+└── test_tableturf/                  # 核心逻辑测试
+    ├── test_model/                  # 模型测试
+    ├── test_ai/                     # AI测试
+    └── test_detection/              # 检测测试
+```
+
+---
+
+## 2026-03-03 修复循环导入问题
+
+### 问题描述
+发现 `tableturf/manager/detection/stage.py` 存在循环导入问题：
+- 文件试图导入自身（`from tableturf.manager.detection.stage import ...`）
+- 原因为代码重构后，`enhanced_stage.py` 替代原 `stage.py` 时遗留了向后兼容的导入语句
+
+### 修复内容
+✅ **移除循环导入**: 删除文件末尾的自导入语句（第248-252行）
+
+✅ **更新函数实现**:
+- `stage_rois()`: 直接使用 `EnhancedStageDetector` 实现，异常时回退到基础检测
+- `stage()`: 直接使用 `enhanced_stage()` 实现，异常时回退到基础检测
+- `preview()`: 添加 TODO 占位实现，返回 `None`
+- `sp()`: 添加 TODO 占位实现，返回空数组
+
+✅ **简化回退逻辑**: 移除对不存在的 `original_*` 函数的依赖，改用同文件内的基础实现
+
+---
+
 ## 2026-02-23 主要开发工作
 
 ### 1. JSON 数据模块集成与验证
@@ -45,14 +135,13 @@ Autotableturf 是一个自动化玩 Splatoon 3 Tableturf Battle 的游戏助手�
 ### 4. 检测模块重构与增强（JSON数据验证）
 **目标**: 重构检测模块，集成JSON数据验证，提高识别准确性
 **完成工作**:
-- **重构card检测**: 创建 `enhanced_card.py` 完全替代原 `card.py`
+- **重构card检测**: `tableturf/manager/detection/card.py` 已整合增强版功能
   - 实现 `EnhancedCardDetector` 类：结合图像识别和JSON数据验证
   - 卡牌匹配算法：SP消耗(40%) + 卡牌大小(30%) + 图案形状(30%)
   - 匹配阈值：70%匹配度，低于阈值使用基础检测
-  - **完全上位替代**: `enhanced_card.hands()` 函数完全兼容原接口
-  - **删除原文件**: 移除 `tableturf/manager/detection/card.py`
+  - **完全整合**: `hands()` 函数现在自动使用增强检测，失败时回退到基础检测
 
-- **增强stage检测**: 创建 `enhanced_stage.py` 提供JSON验证
+- **增强stage检测**: `tableturf/manager/detection/stage.py` 已整合增强版功能
   - 实现 `EnhancedStageDetector` 类：集成场地数据验证
   - 场地匹配算法：尺寸(40%) + 可涂地比例(30%) + 特殊点数量(30%)
   - 匹配阈值：60%匹配度
@@ -82,12 +171,14 @@ Autotableturf 是一个自动化玩 Splatoon 3 Tableturf Battle 的游戏助手�
 - 统一模块导入和导出
 - 更新AI模块的 `__all__` 导出列表
 - 清理测试文件，只保留核心代码
-- **文件结构调整**:
+- **文件结构整合**:
+  - `enhanced_card.py` → 整合到 `card.py`
+  - `enhanced_stage.py` → 整合到 `stage.py`
+  - `fixed_mcts.py` / `learning_mcts_complete.py` → 整合到 `mcts.py`
   - 保留 `tableturf/model/card.py` (核心Card类)
   - 保留 `tableturf/model/card_factory.py` (Card工厂)
   - 保留 `tableturf/model/stage.py` (核心Stage类)
   - 保留 `tableturf/model/stage_factory.py` (Stage工厂)
-  - 删除 `tableturf/manager/detection/card.py` (被enhanced_card.py替代)
 
 ### 7. 环境验证
 **完成工作**:
@@ -95,27 +186,7 @@ Autotableturf 是一个自动化玩 Splatoon 3 Tableturf Battle 的游戏助手�
 - 确认所有依赖包已安装：numpy, opencv-python, requests, pyserial, flask等
 - 运行完整测试验证所有新功能
 
-## 新增模块结构
-
-```
-tableturf/
-├── model/
-│   ├── data_loader.py      # JSON数据加载器
-│   ├── card_factory.py     # 卡牌对象工厂（处理数值转换）
-│   ├── stage_factory.py    # 场地对象工厂（处理数值转换）
-│   └── DATA_MODULES_GUIDE.md # 数据模块使用指南
-├── ai/
-│   ├── alpha/
-│   │   ├── enhanced_alpha.py  # 增强版Alpha AI
-│   │   └── Alpha算法分析.md   # Alpha算法文档
-│   └── mcts/
-│       ├── fixed_mcts.py      # 修复后的MCTS实现
-│       ├── learning_mcts_complete.py  # 带线性学习的MCTS
-│       └── tableturf_rule.md  # 游戏规则文档
-├── manager/detection/
-│   ├── enhanced_card.py    # 增强版卡牌检测（JSON验证）
-│   └── __init__.py         # 导出增强版检测函数
-```
+---
 
 ## 可用AI类
 
@@ -138,16 +209,16 @@ from tableturf.ai import EnhancedMCTSAI
 ai = EnhancedMCTSAI(npc_id="MiniGame_Aori", level=1)
 
 # 学习版MCTS AI（推荐）
-from tableturf.ai.mcts.learning_mcts_complete import LearningMCTSAI
-ai = LearningMCTSAI(simulation_limit=200, learning_enabled=True)
+from tableturf.ai.mcts import MCTSAI
+ai = MCTSAI(simulation_limit=200, learning_enabled=True)
 
 # 增强版卡牌检测
-from tableturf.manager.detection import enhanced_hands
+from tableturf.manager.detection import hands
 from tableturf.model import DataLoader, CardFactory
 
 loader = DataLoader()
 factory = CardFactory(loader)
-cards = enhanced_hands(image, data_loader=loader, card_factory=factory)
+cards = hands(image)  # 自动使用JSON验证
 ```
 
 ## 技术要点
@@ -173,13 +244,22 @@ cards = enhanced_hands(image, data_loader=loader, card_factory=factory)
 - **学习可控**: 可启用/禁用学习，调整学习率
 - **内存管理**: 限制训练数据和历史记录大小
 
-## 后续建议
+---
 
-1. **性能优化**: 添加MCTS并行化，缓存优化
-2. **学习增强**: 添加更多特征，优化学习算法
-3. **用户界面**: 在Web界面中添加AI选择和参数调整
-4. **对战分析**: 添加对战记录和策略分析功能
-5. **模型共享**: 创建预训练模型库
+## 当前项目架构
+
+```
+架构层次：
+1. 数据层 (model/)        : Card/Stage定义 + Factory创建 + JSON数据
+2. 检测层 (detection/)    : 图像识别 + JSON验证（增强版已整合到单一文件）
+3. AI层 (ai/)            : 多种AI算法 + 学习能力（MCTS已整合到单一文件）
+4. 管理层 (manager/)      : 游戏流程控制
+5. 捕获层 (capture/)      : 视频源处理（含完整测试）
+6. 控制层 (controller/)   : 蓝牙/串口控制器
+7. 界面层 (qt/portal/)    : Qt桌面 + Web界面
+```
+
+---
 
 ## 环境状态
 ✅ Conda环境配置完成  
@@ -187,106 +267,18 @@ cards = enhanced_hands(image, data_loader=loader, card_factory=factory)
 ✅ 新模块测试通过  
 ✅ 代码清理完成  
 ✅ 文档更新完成  
+✅ Capture模块测试完善  
 ✅ GitHub推送完成  
-
-## 2026-02-23 文件结构调整总结
-
-### 关键决策和调整
-
-#### 1. **model目录文件必要性分析**
-✅ **确认所有文件必须保留**：
-- `card.py` / `stage.py`：**核心数据模型**，定义游戏对象结构和行为
-- `card_factory.py` / `stage_factory.py`：**工厂模式**，负责从JSON数据创建对象
-- **关系**：Factory依赖Model，这是标准的关注点分离设计
-
-#### 2. **detection目录重构**
-✅ **完成文件优化**：
-- **删除** `tableturf/manager/detection/card.py`：被增强版完全替代
-- **创建** `enhanced_card.py`：**完全上位替代**，提供：
-  - 相同的`hands()`函数接口
-  - 图像识别 + JSON数据验证双保险
-  - 智能降级（JSON不可用时使用基础检测）
-- **创建** `enhanced_stage.py`：提供场地JSON验证（可选增强）
-- **更新** `__init__.py`：导出增强版函数
-
-#### 3. **无重复代码**
-✅ **检查确认**：
-- 生产代码中没有硬编码的Card/Stage创建
-- 测试文件中的硬编码是正常的单元测试需要
-- Factory模式已正确实现，新代码应使用Factory
-
-### 当前项目架构
-
-```
-架构层次：
-1. 数据层 (model/)        : Card/Stage定义 + Factory创建 + JSON数据
-2. 检测层 (detection/)    : 图像识别 + JSON验证（增强版）
-3. AI层 (ai/)            : 多种AI算法 + 学习能力
-4. 管理层 (manager/)      : 游戏流程控制
-```
-
-### 技术优势总结
-
-1. **数据一致性**: Factory类确保JSON到Grid枚举的正确转换
-2. **检测准确性**: 增强版检测提供双保险验证
-3. **学习能力**: 线性学习MCTS无需深度学习依赖
-4. **向后兼容**: 所有新功能与现有代码兼容
-5. **可维护性**: 清晰的架构分层和关注点分离
-
-项目已全面升级，现在具备数据驱动决策、学习能力和增强检测功能！
-## 2026-02-23 最终代码整合完成
-
-### 整合结果
-✅ **MCTS代码统一**: 只保留learning_mcts_complete.py，重命名为mcts.py
-✅ **Detection模块统一**: enhanced_card.py→card.py, enhanced_stage.py→stage.py
-✅ **完全向后兼容**: 所有函数接口保持不变
-✅ **智能降级**: 增强功能失败时自动使用基础功能
-
-**项目已完成最终代码整合，所有功能统一到单一实现版本！**
 
 ---
 
-## 2026-03-03 修复循环导入问题
+## 后续建议
 
-### 问题描述
-发现 `tableturf/manager/detection/stage.py` 存在循环导入问题：
-- 文件试图导入自身（`from tableturf.manager.detection.stage import ...`）
-- 原因为代码重构后，`enhanced_stage.py` 替代原 `stage.py` 时遗留了向后兼容的导入语句
-
-### 修复内容
-✅ **移除循环导入**: 删除文件末尾的自导入语句（第248-252行）
-
-✅ **更新函数实现**:
-- `stage_rois()`: 直接使用 `EnhancedStageDetector` 实现，异常时回退到基础检测
-- `stage()`: 直接使用 `enhanced_stage()` 实现，异常时回退到基础检测
-- `preview()`: 添加 TODO 占位实现，返回 `None`
-- `sp()`: 添加 TODO 占位实现，返回空数组
-
-✅ **简化回退逻辑**: 移除对不存在的 `original_*` 函数的依赖，改用同文件内的基础实现
-
-### 修复后的文件结构
-```
-tableturf/manager/detection/stage.py (单一文件)
-├── EnhancedStageDetector 类（增强版场地检测）
-├── enhanced_stage() 函数（带JSON验证的检测）
-└── 向后兼容函数
-    ├── stage_rois()  # 使用增强版检测器
-    ├── stage()       # 使用增强版检测器
-    ├── preview()     # TODO: 待实现
-    └── sp()          # TODO: 待实现
-```
-
-### 影响范围
-- **无副作用**: 所有函数接口保持不变
-- **依赖项**: 仅依赖 `tableturf.model.DataLoader` 和 `StageFactory`
-- **兼容性**: 完全向后兼容，异常时自动降级到基础图像识别
-
-### 提交信息
-```
-fix(detection): 移除 stage.py 循环导入
-
-- 删除自导入语句（from tableturf.manager.detection.stage import ...）
-- 更新 stage_rois/stage 函数直接使用增强版实现
-- 为 preview/sp 函数添加 TODO 占位实现
-- 异常时回退到基础检测而非不存在的原函数
-```
+1. **检测模块测试**: 继续完善detection模块测试
+2. **Model模块测试**: 完善数据模型测试
+3. **AI模块测试**: 完善AI算法测试
+4. **性能优化**: 添加MCTS并行化，缓存优化
+5. **学习增强**: 添加更多特征，优化学习算法
+6. **用户界面**: 在Web界面中添加AI选择和参数调整
+7. **对战分析**: 添加对战记录和策略分析功能
+8. **模型共享**: 创建预训练模型库

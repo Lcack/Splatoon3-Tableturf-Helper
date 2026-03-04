@@ -25,7 +25,6 @@ AutoTableTurf/
 │   ├── esp32_serial.py               # ESP32串口通信
 │   ├── esp32_input.py                # ESP32输入处理
 │   ├── esp32_flasher.py              # ESP32固件烧录工具
-│   ├── test_esp32.py                 # ESP32测试脚本
 │   └── 📁 nxbt_server/               # NXBT服务器（嵌入式）
 │       ├── app.py                    # NXBT服务器入口
 │       ├── requirement.txt           # NXBT依赖
@@ -121,7 +120,7 @@ AutoTableTurf/
 │   │   │
 │   │   └── 📁 mcts/                  # MCTS蒙特卡洛树搜索AI
 │   │       ├── __init__.py           # 导出MCTS AI
-│   │       ├── mcts.py               # MCTS实现（带线性学习）
+│   │       ├── mcts.py               # MCTS实现（整合增强版+线性学习）
 │   │       └── tableturf_rule.md     # Tableturf游戏规则文档
 │   │
 │   └── 📁 manager/                   # 管理层 - 游戏流程控制
@@ -145,10 +144,10 @@ AutoTableTurf/
 │       │   ├── stats_closer.py       # 统计结束检测
 │       │   └── union_closer.py       # 组合结束检测
 │       │
-│       └── 📁 detection/             # 图像检测模块
+│       └── 📁 detection/             # 图像检测模块（已整合增强版功能）
 │           ├── __init__.py           # 导出检测函数
-│           ├── card.py               # 卡牌检测（图像+JSON验证）
-│           ├── stage.py              # 场地检测
+│           ├── card.py               # 卡牌检测（图像+JSON验证，已整合增强版）
+│           ├── stage.py              # 场地检测（已整合增强版）
 │           ├── deck.py               # 卡组检测
 │           ├── ui.py                 # UI状态检测
 │           ├── util.py               # 检测工具
@@ -159,11 +158,25 @@ AutoTableTurf/
 │
 ├── 📁 tests/                         # 测试目录
 │   ├── __init__.py
-│   ├── 📁 test_capture/              # 捕获测试
+│   ├── AUTOTABLETURF_QUICK_GUIDE.md  # 快速使用指南
+│   ├── 📁 test_capture/              # 捕获模块测试（2026-03-04新增）
 │   │   ├── __init__.py
-│   │   └── test_video_capture.py
+│   │   ├── test_capture_module.py    # 整体模块测试
+│   │   ├── test_file_loader.py       # FileLoader测试 ✅通过
+│   │   ├── test_video_capture.py     # 视频捕获测试
+│   │   ├── test_video_capture_original.py  # 原始项目测试
+│   │   └── 📁 test_images/           # 测试图片资源
+│   │       ├── battle1.jpg
+│   │       ├── battle2.jpg
+│   │       ├── chooseDeck.jpg
+│   │       ├── chooseDifficulty.jpg
+│   │       ├── chooseNPC.jpg
+│   │       ├── greeting.jpg
+│   │       ├── redraw.jpg
+│   │       └── square.jpg
 │   ├── 📁 test_controller/           # 控制器测试
 │   │   ├── __init__.py
+│   │   ├── test_esp32.py             # ESP32测试（已移动至此）
 │   │   ├── test_nxbt.py
 │   │   └── test_interface.py
 │   └── 📁 test_tableturf/            # 核心逻辑测试
@@ -176,7 +189,7 @@ AutoTableTurf/
 │       ├── 📁 test_ai/               # AI测试
 │       │   ├── __init__.py
 │       │   ├── test_alpha.py
-│       │   └── test_mcts.py
+│       │   └── test_mcts.py          # MCTS测试（2026-02-23新增）
 │       └── 📁 test_detection/        # 检测测试
 │           ├── __init__.py
 │           ├── test_card.py
@@ -197,8 +210,8 @@ AutoTableTurf/
 ├── 📄 README.md                      # 项目说明文档
 ├── 📄 .gitignore                     # Git忽略规则
 │
+├── 📄 Test_Document.md               # 测试文档（2026-03-04新增）
 ├── 📄 PROJECT_DEVELOPMENT_SUMMARY.md # 开发总结文档
-├── 📄 AUTOTABLETURF_QUICK_GUIDE.md   # 快速使用指南
 └── 📄 PROJECT_STRUCTURE.md           # 本文件 - 项目结构说明
 ```
 
@@ -224,6 +237,18 @@ AutoTableTurf/
 
 ---
 
+## 测试命令
+
+| 测试类型 | 命令 |
+|---------|------|
+| 运行所有测试 | `python -m pytest tests/ -v --tb=short` |
+| 捕获模块测试 | `python -m pytest tests/test_capture/ -v` |
+| 控制器测试 | `python -m pytest tests/test_controller/ -v` |
+| 核心逻辑测试 | `python -m pytest tests/test_tableturf/ -v` |
+| AI测试 | `python -m pytest tests/test_tableturf/test_ai/ -v` |
+
+---
+
 ## 技术栈
 
 - **图像处理**: OpenCV, NumPy
@@ -234,4 +259,19 @@ AutoTableTurf/
 
 ---
 
-*生成时间: 2026-02-26*
+## 模块整合说明
+
+### 检测模块整合（2026-02-23）
+- `enhanced_card.py` → 整合到 `tableturf/manager/detection/card.py`
+- `enhanced_stage.py` → 整合到 `tableturf/manager/detection/stage.py`
+- 所有增强功能（JSON数据验证）现在内置于单一文件
+- `hands()` 函数自动使用增强检测，失败时回退到基础检测
+
+### MCTS模块整合（2026-02-23）
+- `fixed_mcts.py` / `learning_mcts_complete.py` → 整合到 `tableturf/ai/mcts/mcts.py`
+- 单一文件包含：基础MCTS + 增强版 + 线性学习功能
+- 通过参数控制学习开关：`learning_enabled=True/False`
+
+---
+
+*更新时间: 2026-03-04*
