@@ -120,5 +120,5 @@
 ai部分需要修改，enhanced alpha需要改进之后替换alpha；mcts部分代码加上集成json的代码
 
 ## 5.controller模块(包括manager/action)
-
+需要检查AutoSplatoon如何实现esp32烧录
 ## 6.ui模块(qt/portal)
