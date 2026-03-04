@@ -5,14 +5,16 @@
    视频源       图像识别   数据结构  决策算法   流程控制           界面设计
  ``` 
 
-# 分阶段测试
-## 1.capture
+---
+
+# 分阶段测试：
+## 1.capture模块
 ### capture测试方案
  ```
    capture/
    ├── __init__.py         # 不用单独运行，只是导出
    ├── interface.py        # 抽象基类，不用单独运行
-   ├── file_loader.py      # 离线测试用（推荐先测这个）
+   ├── file_loader.py      # 离线测试用（先测这个）
    └── video_capture.py    # 需要采集卡（后测这个）
  ```
  在tests/test_capture下建立了
@@ -26,17 +28,17 @@
    └── test_images							# 储存test_file_loader以及其他地方需要的测试图
  ```
 ### 测试情况
-- test_file_loader.py
-测试通过，测试结果：第 1 帧: shape=(1080, 1920, 3), dtype=uint8
+- test_file_loader.py  
+  测试通过，测试输出示例：第 1 帧: shape=(1080, 1920, 3), dtype=uint8
 
 - test_video_capture.py
 
-## 2.detection(manager)
+## 2.detection模块(manager)
 
-## 3.model
+## 3.model模块
 
-## 4.ai
+## 4.ai模块
 
-## 5.controller(+manager/action)
+## 5.controller模块(包括manager/action)
 
-## 6.ui(qt/portal)
+## 6.ui模块(qt/portal)
