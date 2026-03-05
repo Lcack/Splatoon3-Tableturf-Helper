@@ -45,6 +45,8 @@
    └── util.py      # 其他功能  
  ```
 
+**util.py是否需要测试？**
+
 创建了以下4个测试文件：
  test_card.py - 卡牌检测测试
  - test_hands_detection_basic - 基础手牌检测
