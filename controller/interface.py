@@ -54,7 +54,7 @@ class Controller(ABC):
                 if len(inputs) == 1:
                     continue
                 down_time = float(inputs[-1][:-1])
-                up_time = 0 if i + 1 >= len(parsed) or len(parsed[i + 1]) != 1 else parsed[i + 1][0][:-1]
+                up_time = 0.0 if i + 1 >= len(parsed) or len(parsed[i + 1]) != 1 else float(parsed[i + 1][0][:-1])
                 buttons = [self.Button(b) for b in inputs[:-1] if not b.startswith('R_STICK@') and not b.startswith('L_STICK@')]
                 sticks = [b for b in inputs[:-1] if b.startswith('R_STICK@') or b.startswith('L_STICK@')]
                 t_buttons = threading.Thread(target=self.press_buttons, args=(buttons, down_time, up_time, True))

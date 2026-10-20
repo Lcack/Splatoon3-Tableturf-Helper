@@ -305,12 +305,158 @@ def stage(img: np.ndarray, rois: np.ndarray, roi_width, roi_height,
         detector = EnhancedStageDetector(None, None)
         return detector.stage(img, rois, roi_width, roi_height, last_stage, debug)
 
-def preview(img: np.ndarray, debug: Optional[Debugger] = None) -> Optional[Pattern]:
-    """预览函数（TODO: 需要实现）"""
-    logger.warning("preview函数尚未实现，返回None")
-    return None
+def preview(img: np.ndarray, stage: Optional[Stage] = None, rois: Optional[np.ndarray] = None,
+            roi_width: int = 0, roi_height: int = 0,
+            debug: Optional[Debugger] = None) -> Tuple[Optional[Pattern], int]:
+    """检测卡牌预览图案
 
-def sp(img: np.ndarray, debug: Optional[Debugger] = None) -> Tuple[np.ndarray, np.ndarray]:
-    """特殊点检测函数（TODO: 需要实现）"""
-    logger.warning("sp函数尚未实现，返回空数组")
-    return np.array([]), np.array([])
+    Args:
+        img: 游戏截图
+        stage: 当前场地状态
+        rois: ROI区域数组
+        roi_width: ROI宽度
+        roi_height: ROI高度
+        debug: 调试器
+
+    Returns:
+        (预览图案, 当前光标索引)
+    """
+    if rois is None or roi_width == 0 or roi_height == 0:
+        logger.warning("preview: rois/roi_width/roi_height 参数缺失")
+        return None, -1
+
+    try:
+        # 对每个ROI检测是否为预览覆盖区域
+        # 预览覆盖区域的颜色与空地和已涂墨不同
+        preview_cells = []
+        preview_origin = None
+
+        for i, roi in enumerate(rois):
+            y, x = roi
+            if y + roi_height > img.shape[0] or x + roi_width > img.shape[1]:
+                continue
+            cell = img[y:y + roi_height, x:x + roi_width]
+            hsv = cv2.cvtColor(cell, cv2.COLOR_BGR2HSV)
+
+            # 检测预览覆盖（亮度较高、饱和度较低的白色/半透明区域）
+            lower_preview = np.array([0, 0, 180])
+            upper_preview = np.array([180, 30, 255])
+            preview_mask = cv2.inRange(hsv, lower_preview, upper_preview)
+            preview_ratio = np.sum(preview_mask == 255) / (roi_width * roi_height)
+
+            # 检查是否为预热（高亮）区域
+            lower_highlight = np.array([20, 100, 180])
+            upper_highlight = np.array([40, 255, 255])
+            highlight_mask = cv2.inRange(hsv, lower_highlight, upper_highlight)
+            highlight_ratio = np.sum(highlight_mask == 255) / (roi_width * roi_height)
+
+            if preview_ratio > 0.4 or highlight_ratio > 0.3:
+                if preview_origin is None:
+                    preview_origin = np.array([y, x])
+                preview_cells.append(np.array([y, x]))
+
+        if not preview_cells:
+            logger.debug("preview: 未检测到预览图案")
+            return None, -1
+
+        # 构建Pattern对象
+        cells = np.array(preview_cells)
+        if preview_origin is not None:
+            relative_positions = cells - preview_origin
+            # 转换为基于ROI的网格坐标
+            grid_cells = np.round(relative_positions / np.array([roi_height, roi_width])).astype(int)
+
+            # 计算偏移量
+            min_grid = grid_cells.min(axis=0)
+            offset = grid_cells - min_grid
+
+            # 构建网格
+            grid_h = offset[:, 0].max() + 1
+            grid_w = offset[:, 1].max() + 1
+            grid = np.zeros((grid_h, grid_w), dtype=int)
+            for pos in grid_cells:
+                gpos = pos - min_grid
+                if 0 <= gpos[0] < grid_h and 0 <= gpos[1] < grid_w:
+                    grid[gpos[0], gpos[1]] = 1
+
+            pattern = Pattern(grid)
+        else:
+            pattern = Pattern(np.zeros((1, 1), dtype=int))
+
+        # 计算当前光标索引（基于预览图案中心位置在ROI列表中的索引）
+        if preview_origin is not None:
+            distances = np.linalg.norm(rois - preview_origin, axis=1)
+            current_index = int(np.argmin(distances))
+        else:
+            current_index = -1
+
+        if debug:
+            debug_img = img.copy()
+            for cell in preview_cells:
+                cv2.rectangle(debug_img,
+                            (cell[1], cell[0]),
+                            (cell[1] + roi_width, cell[0] + roi_height),
+                            (0, 255, 0), 1)
+            debug.show('preview.detection', debug_img)
+
+        logger.debug(f'preview: detected pattern with {len(preview_cells)} cells, index={current_index}')
+        return pattern, current_index
+
+    except Exception as e:
+        logger.error(f"preview检测异常: {e}")
+        return None, -1
+
+
+def sp(img: np.ndarray, debug: Optional[Debugger] = None) -> Tuple[int, int]:
+    """检测双方SP点数
+
+    SP点数通常显示在游戏界面上方的计数器区域。
+    当前实现基于场地特殊点数量进行估算，
+    实际应通过OCR或颜色检测读取UI上的SP数值。
+
+    Args:
+        img: 游戏截图
+        debug: 调试器
+
+    Returns:
+        (我方SP点数, 对方SP点数)
+    """
+    try:
+        # SP计数器通常在画面顶部HUD区域
+        # 典型的SP图标颜色为亮黄/橙色
+        h, w = img.shape[:2]
+        # SP计数器大概在画面顶部中间偏左右的位置
+        # 我方SP: 左下区域
+        my_sp_area = img[int(h * 0.88):int(h * 0.95), int(w * 0.35):int(w * 0.48)]
+        # 对方SP: 右上区域
+        his_sp_area = img[int(h * 0.02):int(h * 0.08), int(w * 0.55):int(w * 0.68)]
+
+        # 检测SP图标（亮黄/橙色像素比例）
+        def count_sp_indicators(area):
+            if area.size == 0:
+                return 0
+            hsv = cv2.cvtColor(area, cv2.COLOR_BGR2HSV)
+            lower_sp = np.array([15, 150, 200])
+            upper_sp = np.array([35, 255, 255])
+            mask = cv2.inRange(hsv, lower_sp, upper_sp)
+
+            # 通过连通组件分析计数SP图标
+            num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(mask, connectivity=8)
+            # 过滤掉太小的组件，剩下的每个连通区域代表一个SP点
+            sp_count = 0
+            for i in range(1, num_labels):
+                area = stats[i, cv2.CC_STAT_AREA]
+                if 20 < area < 500:  # SP图标的大致像素面积范围
+                    sp_count += 1
+
+            return sp_count
+
+        my_sp = count_sp_indicators(my_sp_area)
+        his_sp = count_sp_indicators(his_sp_area)
+
+        logger.debug(f'sp: my_sp={my_sp}, his_sp={his_sp}')
+        return my_sp, his_sp
+
+    except Exception as e:
+        logger.error(f"sp检测异常: {e}")
+        return 0, 0

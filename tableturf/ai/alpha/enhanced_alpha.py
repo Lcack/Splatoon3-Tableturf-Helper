@@ -226,7 +226,7 @@ class EnhancedAlpha(Alpha):
         # 获取所有放置步骤
         steps = status.get_possible_steps(action=Step.Action.Place)
         if not steps:
-            return self.next_step(status)  # 回退到默认策略
+            return super().next_step(status)  # 回退到父类Alpha的默认策略（而非self.next_step避免无限递归）
         
         # 使用Alpha的扩张评分
         current_score = self._Alpha__score_current_stage(status)

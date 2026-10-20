@@ -241,6 +241,7 @@ class MCTSAI(AI):
             
             # 选择 -> 扩展 -> 模拟 -> 回溯
             node = self._select(root_node)
+            node = self._expand(node)
             reward = self._simulate(node['state'])
             self._backpropagate(node, reward, root_node)
         
@@ -273,15 +274,16 @@ class MCTSAI(AI):
         return best_child['action']
     
     def _select(self, node):
-        """选择节点"""
-        # 简单实现：如果还有未尝试的行动，选择扩展
+        """选择节点 — 递归遍历到叶节点"""
         if node['untried_actions']:
             return node
-        # 否则选择UCT值最高的子节点
         if node['children']:
-            return max(node['children'], key=lambda c: 
-                       (c['value'] / max(1, c['visits'])) + 
-                       self.exploration_weight * math.sqrt(math.log(node['visits']) / max(1, c['visits'])))
+            # 递归选择UCT值最高的子节点
+            return self._select(
+                max(node['children'], key=lambda c:
+                    (c['value'] / max(1, c['visits'])) +
+                    self.exploration_weight * math.sqrt(math.log(max(1, node['visits'])) / max(1, c['visits'])))
+            )
         return node
     
     def _expand(self, node):
@@ -385,15 +387,15 @@ class MCTSAI(AI):
             return 0.5
     
     def _backpropagate(self, node, reward, root_node):
-        """回溯更新"""
-        while node is not None and node != root_node:
+        """回溯更新 — 从当前节点向上更新到根节点（含根节点）"""
+        while node is not None:
             node['visits'] += 1
             node['value'] += reward
-            
+
             # 收集学习数据
             if self.learning_enabled and 'features' in node:
                 self._collect_training_data(node['features'], reward)
-            
+
             if 'parent' in node:
                 node = node['parent']
             else:

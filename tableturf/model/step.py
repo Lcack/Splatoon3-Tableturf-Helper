@@ -41,7 +41,10 @@ class Step:
         return self.__action
 
     def __hash__(self):
-        return hash((self.card, self.__action))
+        rotate = 0 if self.__rotate is None else self.__rotate
+        # Convert numpy array to tuple for hashability
+        pos_tuple = tuple(self.__pos.flatten()) if self.__pos is not None else ()
+        return hash((self.card, self.__action, rotate, pos_tuple))
 
     def __eq__(self, other):
         if isinstance(other, Step):

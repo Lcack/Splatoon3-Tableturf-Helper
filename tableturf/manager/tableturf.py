@@ -85,7 +85,7 @@ class TableTurfManager:
                         if closer is not None:
                             task_closer = UnionCloser(closer, task_closer)
                         self.run_once(task.deck, closer=task_closer, debug=debug)
-                        if closer.close(self.job_stats):
+                        if closer is not None and closer.close(self.job_stats):
                             return
                         self.__switch_level()
                 current_level += 1
@@ -97,7 +97,7 @@ class TableTurfManager:
                     if closer is not None:
                         task_closer = UnionCloser(closer, task_closer)
                     self.run_once(task.deck, closer=task_closer, debug=debug)
-                    if closer.close(self.job_stats):
+                    if closer is not None and closer.close(self.job_stats):
                         return
             self.__switch_npc()
             self.job_stats.task_id += 1

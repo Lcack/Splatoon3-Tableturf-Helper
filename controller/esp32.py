@@ -214,12 +214,13 @@ class ESP32Controller(Controller):
         y_norm = max(-1.0, min(1.0, y / 32767.0))
         
         # 计算角度（0-359度，0=右，90=上，180=左，270=下）
+        import math
         angle = 0
-        if x_norm == 0 and y_norm == 0:
-            angle = 0
-        else:
-            angle = (180 / 3.14159) * (3.14159 - (3.14159 if y_norm >= 0 else -3.14159) - 
-                    (0 if x_norm == 0 else (3.14159/2 if x_norm > 0 else -3.14159/2)))
+        if not (x_norm == 0 and y_norm == 0):
+            # atan2(y, x): 0=右, pi/2=上, pi/-pi=左, -pi/2=下
+            angle_rad = math.atan2(y_norm, x_norm)
+            angle = math.degrees(angle_rad)
+            # 标准化到0-359范围
             angle = (angle + 360) % 360
         
         # 计算强度（0-255）

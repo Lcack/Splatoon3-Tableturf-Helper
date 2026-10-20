@@ -21,8 +21,13 @@ class Alpha(AI):
         deck_quantile = 8  # [0, 14]
         cards = sorted([card for card in hands], key=lambda c: c.size)
         if my_deck is None:
+            if len(cards) <= hand_quantile:
+                return -1
             return 1 if cards[hand_quantile].size >= 10 else -1
         deck = sorted([card for card in hands + my_deck], key=lambda c: c.size)
+
+        if len(cards) <= hand_quantile or len(deck) <= deck_quantile:
+            return -1
 
         if logger.isEnabledFor(logging.DEBUG):
             hand_sizes = [card.size for card in cards]
@@ -92,7 +97,13 @@ class Alpha(AI):
                     result[step] = np.max(np.sum(_scores, axis=1))
             logger.debug(f'tableturf.ai.alpha.next_step.round_2: result={result}, case=round_2')
             if len(result) == 0:
-                return status.get_possible_steps()[0]
+                steps = status.get_possible_steps()
+                if steps:
+                    return steps[0]
+                # 完全无合法走法，强制跳过
+                if status.hands:
+                    return Step(Step.Action.Skip, status.hands[0], None, None)
+                return Step(Step.Action.Skip, None, None, None)
             return max(result, key=result.get)
 
         elif status.round == 1:
@@ -102,7 +113,12 @@ class Alpha(AI):
             return steps[np.argmax(np.sum(scores, axis=1))]
 
         logger.error(f'tableturf.ai.alpha.next_step: unexpected behavior')
-        return status.get_possible_steps()[0]  # should not be here
+        steps = status.get_possible_steps()
+        if steps:
+            return steps[0]
+        if status.hands:
+            return Step(Step.Action.Skip, status.hands[0], None, None)
+        return Step(Step.Action.Skip, None, None, None)  # should not be here
 
     @staticmethod
     def __score_current_stage(status: Status):

@@ -159,18 +159,19 @@ class ESP32InputEmulator:
         rstick_y = (rstick_value >> 24) & 0xFF if rstick_value else 0x80    # 中心值
         
         # HAT（方向键）值转换
+        # dpad是16-19位的nibble值(0x00-0x0F)
+        # 映射到HID HAT switch值
         hat_map = {
-            DPad.CENTER: 0x08,
-            DPad.UP: 0x00,
-            DPad.UP_RIGHT: 0x01,
-            DPad.RIGHT: 0x02,
-            DPad.DOWN_RIGHT: 0x03,
-            DPad.DOWN: 0x04,
-            DPad.DOWN_LEFT: 0x05,
-            DPad.LEFT: 0x06,
-            DPad.UP_LEFT: 0x07,
+            0x00: 0x00,  # UP
+            0x01: 0x01,  # UP_RIGHT
+            0x02: 0x02,  # RIGHT
+            0x03: 0x03,  # DOWN_RIGHT
+            0x04: 0x04,  # DOWN
+            0x05: 0x05,  # DOWN_LEFT
+            0x06: 0x06,  # LEFT
+            0x07: 0x07,  # UP_LEFT
         }
-        hat = hat_map.get(dpad, 0x08)
+        hat = hat_map.get(dpad, 0x08)  # 0x08 = CENTER
         
         # 构建数据包
         packet = bytearray([
