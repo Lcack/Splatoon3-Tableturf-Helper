@@ -1,0 +1,1193 @@
+{
+  "format_version": 1,
+  "card_source": "E:\\Splatoon\\splat3\\images\\minigame\\card",
+  "sleeve_source": "E:\\Splatoon\\splat3\\images\\minigame\\sleeve",
+  "cards": {
+    "MiniGame_Ajio": {
+      "name": "Ajio",
+      "file": "Ajio.png"
+    },
+    "MiniGame_Anaaki": {
+      "name": "Anaaki",
+      "file": "Anaaki.png"
+    },
+    "MiniGame_Anemo": {
+      "name": "Anemo",
+      "file": "Anemo.png"
+    },
+    "MiniGame_Aori": {
+      "name": "Aori",
+      "file": "Aori.png"
+    },
+    "MiniGame_Arome": {
+      "name": "Arome",
+      "file": "Arome.png"
+    },
+    "MiniGame_Atarime": {
+      "name": "Atarime",
+      "file": "Atarime.png"
+    },
+    "MiniGame_BaiTakoTrooper": {
+      "name": "BaiTakoTrooper",
+      "file": "BaiTakoTrooper.png"
+    },
+    "MiniGame_Bakudan": {
+      "name": "Bakudan",
+      "file": "Bakudan.png"
+    },
+    "MiniGame_Barazushi": {
+      "name": "Barazushi",
+      "file": "Barazushi.png"
+    },
+    "MiniGame_BarrierTakopter": {
+      "name": "BarrierTakopter",
+      "file": "BarrierTakopter.png"
+    },
+    "MiniGame_Batoroika": {
+      "name": "Batoroika",
+      "file": "Batoroika.png"
+    },
+    "MiniGame_Beacon": {
+      "name": "Beacon",
+      "file": "Beacon.png"
+    },
+    "MiniGame_Bizen": {
+      "name": "Bizen",
+      "file": "Bizen.png"
+    },
+    "MiniGame_BlasterLight00": {
+      "name": "BlasterLight00",
+      "file": "BlasterLight00.png"
+    },
+    "MiniGame_BlasterLight01": {
+      "name": "BlasterLight01",
+      "file": "BlasterLight01.png"
+    },
+    "MiniGame_BlasterLightLong00": {
+      "name": "BlasterLightLong00",
+      "file": "BlasterLightLong00.png"
+    },
+    "MiniGame_BlasterLightLong01": {
+      "name": "BlasterLightLong01",
+      "file": "BlasterLightLong01.png"
+    },
+    "MiniGame_BlasterLightShort00": {
+      "name": "BlasterLightShort00",
+      "file": "BlasterLightShort00.png"
+    },
+    "MiniGame_BlasterLightShort01": {
+      "name": "BlasterLightShort01",
+      "file": "BlasterLightShort01.png"
+    },
+    "MiniGame_BlasterLong00": {
+      "name": "BlasterLong00",
+      "file": "BlasterLong00.png"
+    },
+    "MiniGame_BlasterLong01": {
+      "name": "BlasterLong01",
+      "file": "BlasterLong01.png"
+    },
+    "MiniGame_BlasterMiddle00": {
+      "name": "BlasterMiddle00",
+      "file": "BlasterMiddle00.png"
+    },
+    "MiniGame_BlasterMiddle01": {
+      "name": "BlasterMiddle01",
+      "file": "BlasterMiddle01.png"
+    },
+    "MiniGame_BlasterPrecision00": {
+      "name": "BlasterPrecision00",
+      "file": "BlasterPrecision00.png"
+    },
+    "MiniGame_BlasterPrecision01": {
+      "name": "BlasterPrecision01",
+      "file": "BlasterPrecision01.png"
+    },
+    "MiniGame_BlasterShort00": {
+      "name": "BlasterShort00",
+      "file": "BlasterShort00.png"
+    },
+    "MiniGame_BlasterShort01": {
+      "name": "BlasterShort01",
+      "file": "BlasterShort01.png"
+    },
+    "MiniGame_BombCurling": {
+      "name": "BombCurling",
+      "file": "BombCurling.png"
+    },
+    "MiniGame_BombFizzy": {
+      "name": "BombFizzy",
+      "file": "BombFizzy.png"
+    },
+    "MiniGame_BombQuick": {
+      "name": "BombQuick",
+      "file": "BombQuick.png"
+    },
+    "MiniGame_BombRobot": {
+      "name": "BombRobot",
+      "file": "BombRobot.png"
+    },
+    "MiniGame_BombSplash": {
+      "name": "BombSplash",
+      "file": "BombSplash.png"
+    },
+    "MiniGame_BombSuction": {
+      "name": "BombSuction",
+      "file": "BombSuction.png"
+    },
+    "MiniGame_BombTako": {
+      "name": "BombTako",
+      "file": "BombTako.png"
+    },
+    "MiniGame_BombTakopter": {
+      "name": "BombTakopter",
+      "file": "BombTakopter.png"
+    },
+    "MiniGame_BrushHeavy00": {
+      "name": "BrushHeavy00",
+      "file": "BrushHeavy00.png"
+    },
+    "MiniGame_BrushHeavy01": {
+      "name": "BrushHeavy01",
+      "file": "BrushHeavy01.png"
+    },
+    "MiniGame_BrushMini00": {
+      "name": "BrushMini00",
+      "file": "BrushMini00.png"
+    },
+    "MiniGame_BrushMini01": {
+      "name": "BrushMini01",
+      "file": "BrushMini01.png"
+    },
+    "MiniGame_BrushNormal00": {
+      "name": "BrushNormal00",
+      "file": "BrushNormal00.png"
+    },
+    "MiniGame_BrushNormal01": {
+      "name": "BrushNormal01",
+      "file": "BrushNormal01.png"
+    },
+    "MiniGame_Bukichi": {
+      "name": "Bukichi",
+      "file": "Bukichi.png"
+    },
+    "MiniGame_Buranko": {
+      "name": "Buranko",
+      "file": "Buranko.png"
+    },
+    "MiniGame_ChargerKeeper00": {
+      "name": "ChargerKeeper00",
+      "file": "ChargerKeeper00.png"
+    },
+    "MiniGame_ChargerKeeper01": {
+      "name": "ChargerKeeper01",
+      "file": "ChargerKeeper01.png"
+    },
+    "MiniGame_ChargerLight00": {
+      "name": "ChargerLight00",
+      "file": "ChargerLight00.png"
+    },
+    "MiniGame_ChargerLight01": {
+      "name": "ChargerLight01",
+      "file": "ChargerLight01.png"
+    },
+    "MiniGame_ChargerLong00": {
+      "name": "ChargerLong00",
+      "file": "ChargerLong00.png"
+    },
+    "MiniGame_ChargerLong01": {
+      "name": "ChargerLong01",
+      "file": "ChargerLong01.png"
+    },
+    "MiniGame_ChargerLongScope00": {
+      "name": "ChargerLongScope00",
+      "file": "ChargerLongScope00.png"
+    },
+    "MiniGame_ChargerLongScope01": {
+      "name": "ChargerLongScope01",
+      "file": "ChargerLongScope01.png"
+    },
+    "MiniGame_ChargerNormal00": {
+      "name": "ChargerNormal00",
+      "file": "ChargerNormal00.png"
+    },
+    "MiniGame_ChargerNormal01": {
+      "name": "ChargerNormal01",
+      "file": "ChargerNormal01.png"
+    },
+    "MiniGame_ChargerNormalScope00": {
+      "name": "ChargerNormalScope00",
+      "file": "ChargerNormalScope00.png"
+    },
+    "MiniGame_ChargerNormalScope01": {
+      "name": "ChargerNormalScope01",
+      "file": "ChargerNormalScope01.png"
+    },
+    "MiniGame_ChargerPencil00": {
+      "name": "ChargerPencil00",
+      "file": "ChargerPencil00.png"
+    },
+    "MiniGame_ChargerPencil01": {
+      "name": "ChargerPencil01",
+      "file": "ChargerPencil01.png"
+    },
+    "MiniGame_ChargerQuick00": {
+      "name": "ChargerQuick00",
+      "file": "ChargerQuick00.png"
+    },
+    "MiniGame_ChargerQuick01": {
+      "name": "ChargerQuick01",
+      "file": "ChargerQuick01.png"
+    },
+    "MiniGame_Chidori": {
+      "name": "Chidori",
+      "file": "Chidori.png"
+    },
+    "MiniGame_Daunii": {
+      "name": "Daunii",
+      "file": "Daunii.png"
+    },
+    "MiniGame_Denchinamazu": {
+      "name": "Denchinamazu",
+      "file": "Denchinamazu.png"
+    },
+    "MiniGame_Dosukoi": {
+      "name": "Dosukoi",
+      "file": "Dosukoi.png"
+    },
+    "MiniGame_Echizen": {
+      "name": "Echizen",
+      "file": "Echizen.png"
+    },
+    "MiniGame_EnergyStand": {
+      "name": "EnergyStand",
+      "file": "EnergyStand.png"
+    },
+    "MiniGame_Enperii": {
+      "name": "Enperii",
+      "file": "Enperii.png"
+    },
+    "MiniGame_Ezokko": {
+      "name": "Ezokko",
+      "file": "Ezokko.png"
+    },
+    "MiniGame_Ezokkorii": {
+      "name": "Ezokkorii",
+      "file": "Ezokkorii.png"
+    },
+    "MiniGame_Forima": {
+      "name": "Forima",
+      "file": "Forima.png"
+    },
+    "MiniGame_Fuka": {
+      "name": "Fuka",
+      "file": "Fuka.png"
+    },
+    "MiniGame_Fuka1": {
+      "name": "Fuka1",
+      "file": "Fuka1.png"
+    },
+    "MiniGame_GachiAsari": {
+      "name": "GachiAsari",
+      "file": "GachiAsari.png"
+    },
+    "MiniGame_GachiHoko": {
+      "name": "GachiHoko",
+      "file": "GachiHoko.png"
+    },
+    "MiniGame_GachiYagura": {
+      "name": "GachiYagura",
+      "file": "GachiYagura.png"
+    },
+    "MiniGame_Grill": {
+      "name": "Grill",
+      "file": "Grill.png"
+    },
+    "MiniGame_Hakobiya": {
+      "name": "Hakobiya",
+      "file": "Hakobiya.png"
+    },
+    "MiniGame_Hanagasa": {
+      "name": "Hanagasa",
+      "file": "Hanagasa.png"
+    },
+    "MiniGame_Hebi": {
+      "name": "Hebi",
+      "file": "Hebi.png"
+    },
+    "MiniGame_HeroShooter": {
+      "name": "HeroShooter",
+      "file": "HeroShooter.png"
+    },
+    "MiniGame_Hime": {
+      "name": "Hime",
+      "file": "Hime.png"
+    },
+    "MiniGame_HimeDrone": {
+      "name": "HimeDrone",
+      "file": "HimeDrone.png"
+    },
+    "MiniGame_Hokkorii": {
+      "name": "Hokkorii",
+      "file": "Hokkorii.png"
+    },
+    "MiniGame_Hotakkusu": {
+      "name": "Hotakkusu",
+      "file": "Hotakkusu.png"
+    },
+    "MiniGame_Hotaru": {
+      "name": "Hotaru",
+      "file": "Hotaru.png"
+    },
+    "MiniGame_Iida": {
+      "name": "Iida",
+      "file": "Iida.png"
+    },
+    "MiniGame_Incleaner": {
+      "name": "Incleaner",
+      "file": "Incleaner.png"
+    },
+    "MiniGame_Ironic": {
+      "name": "Ironic",
+      "file": "Ironic.png"
+    },
+    "MiniGame_Iruka": {
+      "name": "Iruka",
+      "file": "Iruka.png"
+    },
+    "MiniGame_Jaw": {
+      "name": "Jaw",
+      "file": "Jaw.png"
+    },
+    "MiniGame_Jetpack": {
+      "name": "Jetpack",
+      "file": "Jetpack.png"
+    },
+    "MiniGame_Jimon": {
+      "name": "Jimon",
+      "file": "Jimon.png"
+    },
+    "MiniGame_Judgekun": {
+      "name": "Judgekun",
+      "file": "Judgekun.png"
+    },
+    "MiniGame_Kanitank": {
+      "name": "Kanitank",
+      "file": "Kanitank.png"
+    },
+    "MiniGame_Katapaddo": {
+      "name": "Katapaddo",
+      "file": "Katapaddo.png"
+    },
+    "MiniGame_Kinshake": {
+      "name": "Kinshake",
+      "file": "Kinshake.png"
+    },
+    "MiniGame_KoJudgekun": {
+      "name": "KoJudgekun",
+      "file": "KoJudgekun.png"
+    },
+    "MiniGame_Kojake": {
+      "name": "Kojake",
+      "file": "Kojake.png"
+    },
+    "MiniGame_Koumori": {
+      "name": "Koumori",
+      "file": "Koumori.png"
+    },
+    "MiniGame_Kumasan": {
+      "name": "Kumasan",
+      "file": "Kumasan.png"
+    },
+    "MiniGame_Kumasan1": {
+      "name": "Kumasan1",
+      "file": "Kumasan1.png"
+    },
+    "MiniGame_Kuraagesu": {
+      "name": "Kuraagesu",
+      "file": "Kuraagesu.png"
+    },
+    "MiniGame_Kyuinki": {
+      "name": "Kyuinki",
+      "file": "Kyuinki.png"
+    },
+    "MiniGame_LineMarker": {
+      "name": "LineMarker",
+      "file": "LineMarker.png"
+    },
+    "MiniGame_MametsubuBukichi": {
+      "name": "MametsubuBukichi",
+      "file": "MametsubuBukichi.png"
+    },
+    "MiniGame_ManeuverDual00": {
+      "name": "ManeuverDual00",
+      "file": "ManeuverDual00.png"
+    },
+    "MiniGame_ManeuverDual01": {
+      "name": "ManeuverDual01",
+      "file": "ManeuverDual01.png"
+    },
+    "MiniGame_ManeuverGallon00": {
+      "name": "ManeuverGallon00",
+      "file": "ManeuverGallon00.png"
+    },
+    "MiniGame_ManeuverGallon01": {
+      "name": "ManeuverGallon01",
+      "file": "ManeuverGallon01.png"
+    },
+    "MiniGame_ManeuverLong00": {
+      "name": "ManeuverLong00",
+      "file": "ManeuverLong00.png"
+    },
+    "MiniGame_ManeuverLong01": {
+      "name": "ManeuverLong01",
+      "file": "ManeuverLong01.png"
+    },
+    "MiniGame_ManeuverNormal00": {
+      "name": "ManeuverNormal00",
+      "file": "ManeuverNormal00.png"
+    },
+    "MiniGame_ManeuverNormal01": {
+      "name": "ManeuverNormal01",
+      "file": "ManeuverNormal01.png"
+    },
+    "MiniGame_ManeuverSdodr": {
+      "name": "ManeuverSdodr",
+      "file": "ManeuverSdodr.png"
+    },
+    "MiniGame_ManeuverShort00": {
+      "name": "ManeuverShort00",
+      "file": "ManeuverShort00.png"
+    },
+    "MiniGame_ManeuverShort01": {
+      "name": "ManeuverShort01",
+      "file": "ManeuverShort01.png"
+    },
+    "MiniGame_ManeuverStepper00": {
+      "name": "ManeuverStepper00",
+      "file": "ManeuverStepper00.png"
+    },
+    "MiniGame_ManeuverStepper01": {
+      "name": "ManeuverStepper01",
+      "file": "ManeuverStepper01.png"
+    },
+    "MiniGame_Mantaro": {
+      "name": "Mantaro",
+      "file": "Mantaro.png"
+    },
+    "MiniGame_Mantaro1": {
+      "name": "Mantaro1",
+      "file": "Mantaro1.png"
+    },
+    "MiniGame_Miura": {
+      "name": "Miura",
+      "file": "Miura.png"
+    },
+    "MiniGame_Mizuta": {
+      "name": "Mizuta",
+      "file": "Mizuta.png"
+    },
+    "MiniGame_Mogura": {
+      "name": "Mogura",
+      "file": "Mogura.png"
+    },
+    "MiniGame_Mother": {
+      "name": "Mother",
+      "file": "Mother.png"
+    },
+    "MiniGame_Nabebuta": {
+      "name": "Nabebuta",
+      "file": "Nabebuta.png"
+    },
+    "MiniGame_Odako": {
+      "name": "Odako",
+      "file": "Odako.png"
+    },
+    "MiniGame_Omura": {
+      "name": "Omura",
+      "file": "Omura.png"
+    },
+    "MiniGame_Paruko": {
+      "name": "Paruko",
+      "file": "Paruko.png"
+    },
+    "MiniGame_PointSensor": {
+      "name": "PointSensor",
+      "file": "PointSensor.png"
+    },
+    "MiniGame_PoisonMist": {
+      "name": "PoisonMist",
+      "file": "PoisonMist.png"
+    },
+    "MiniGame_Robu": {
+      "name": "Robu",
+      "file": "Robu.png"
+    },
+    "MiniGame_Rokkenberugu": {
+      "name": "Rokkenberugu",
+      "file": "Rokkenberugu.png"
+    },
+    "MiniGame_RollerCompact00": {
+      "name": "RollerCompact00",
+      "file": "RollerCompact00.png"
+    },
+    "MiniGame_RollerCompact01": {
+      "name": "RollerCompact01",
+      "file": "RollerCompact01.png"
+    },
+    "MiniGame_RollerHeavy00": {
+      "name": "RollerHeavy00",
+      "file": "RollerHeavy00.png"
+    },
+    "MiniGame_RollerHeavy01": {
+      "name": "RollerHeavy01",
+      "file": "RollerHeavy01.png"
+    },
+    "MiniGame_RollerHunter00": {
+      "name": "RollerHunter00",
+      "file": "RollerHunter00.png"
+    },
+    "MiniGame_RollerHunter01": {
+      "name": "RollerHunter01",
+      "file": "RollerHunter01.png"
+    },
+    "MiniGame_RollerNormal00": {
+      "name": "RollerNormal00",
+      "file": "RollerNormal00.png"
+    },
+    "MiniGame_RollerNormal01": {
+      "name": "RollerNormal01",
+      "file": "RollerNormal01.png"
+    },
+    "MiniGame_RollerWide00": {
+      "name": "RollerWide00",
+      "file": "RollerWide00.png"
+    },
+    "MiniGame_RollerWide01": {
+      "name": "RollerWide01",
+      "file": "RollerWide01.png"
+    },
+    "MiniGame_SaberHeavy00": {
+      "name": "SaberHeavy00",
+      "file": "SaberHeavy00.png"
+    },
+    "MiniGame_SaberHeavy01": {
+      "name": "SaberHeavy01",
+      "file": "SaberHeavy01.png"
+    },
+    "MiniGame_SaberLight00": {
+      "name": "SaberLight00",
+      "file": "SaberLight00.png"
+    },
+    "MiniGame_SaberLight01": {
+      "name": "SaberLight01",
+      "file": "SaberLight01.png"
+    },
+    "MiniGame_SaberNormal00": {
+      "name": "SaberNormal00",
+      "file": "SaberNormal00.png"
+    },
+    "MiniGame_SaberNormal01": {
+      "name": "SaberNormal01",
+      "file": "SaberNormal01.png"
+    },
+    "MiniGame_Shake": {
+      "name": "Shake",
+      "file": "Shake.png"
+    },
+    "MiniGame_ShelterCompact00": {
+      "name": "ShelterCompact00",
+      "file": "ShelterCompact00.png"
+    },
+    "MiniGame_ShelterCompact01": {
+      "name": "ShelterCompact01",
+      "file": "ShelterCompact01.png"
+    },
+    "MiniGame_ShelterFocus00": {
+      "name": "ShelterFocus00",
+      "file": "ShelterFocus00.png"
+    },
+    "MiniGame_ShelterFocus01": {
+      "name": "ShelterFocus01",
+      "file": "ShelterFocus01.png"
+    },
+    "MiniGame_ShelterNormal00": {
+      "name": "ShelterNormal00",
+      "file": "ShelterNormal00.png"
+    },
+    "MiniGame_ShelterNormal01": {
+      "name": "ShelterNormal01",
+      "file": "ShelterNormal01.png"
+    },
+    "MiniGame_ShelterWide00": {
+      "name": "ShelterWide00",
+      "file": "ShelterWide00.png"
+    },
+    "MiniGame_ShelterWide01": {
+      "name": "ShelterWide01",
+      "file": "ShelterWide01.png"
+    },
+    "MiniGame_Shichirin": {
+      "name": "Shichirin",
+      "file": "Shichirin.png"
+    },
+    "MiniGame_Shield": {
+      "name": "Shield",
+      "file": "Shield.png"
+    },
+    "MiniGame_Shiganii": {
+      "name": "Shiganii",
+      "file": "Shiganii.png"
+    },
+    "MiniGame_Shigureni": {
+      "name": "Shigureni",
+      "file": "Shigureni.png"
+    },
+    "MiniGame_Shirei": {
+      "name": "Shirei",
+      "file": "Shirei.png"
+    },
+    "MiniGame_ShockSonar": {
+      "name": "ShockSonar",
+      "file": "ShockSonar.png"
+    },
+    "MiniGame_ShooterBlaze00": {
+      "name": "ShooterBlaze00",
+      "file": "ShooterBlaze00.png"
+    },
+    "MiniGame_ShooterBlaze01": {
+      "name": "ShooterBlaze01",
+      "file": "ShooterBlaze01.png"
+    },
+    "MiniGame_ShooterExpert00": {
+      "name": "ShooterExpert00",
+      "file": "ShooterExpert00.png"
+    },
+    "MiniGame_ShooterExpert01": {
+      "name": "ShooterExpert01",
+      "file": "ShooterExpert01.png"
+    },
+    "MiniGame_ShooterFirst00": {
+      "name": "ShooterFirst00",
+      "file": "ShooterFirst00.png"
+    },
+    "MiniGame_ShooterFirst01": {
+      "name": "ShooterFirst01",
+      "file": "ShooterFirst01.png"
+    },
+    "MiniGame_ShooterFlash00": {
+      "name": "ShooterFlash00",
+      "file": "ShooterFlash00.png"
+    },
+    "MiniGame_ShooterFlash01": {
+      "name": "ShooterFlash01",
+      "file": "ShooterFlash01.png"
+    },
+    "MiniGame_ShooterGravity00": {
+      "name": "ShooterGravity00",
+      "file": "ShooterGravity00.png"
+    },
+    "MiniGame_ShooterGravity01": {
+      "name": "ShooterGravity01",
+      "file": "ShooterGravity01.png"
+    },
+    "MiniGame_ShooterHeavy00": {
+      "name": "ShooterHeavy00",
+      "file": "ShooterHeavy00.png"
+    },
+    "MiniGame_ShooterHeavy01": {
+      "name": "ShooterHeavy01",
+      "file": "ShooterHeavy01.png"
+    },
+    "MiniGame_ShooterLong00": {
+      "name": "ShooterLong00",
+      "file": "ShooterLong00.png"
+    },
+    "MiniGame_ShooterLong01": {
+      "name": "ShooterLong01",
+      "file": "ShooterLong01.png"
+    },
+    "MiniGame_ShooterNormal00": {
+      "name": "ShooterNormal00",
+      "file": "ShooterNormal00.png"
+    },
+    "MiniGame_ShooterNormal01": {
+      "name": "ShooterNormal01",
+      "file": "ShooterNormal01.png"
+    },
+    "MiniGame_ShooterPrecision00": {
+      "name": "ShooterPrecision00",
+      "file": "ShooterPrecision00.png"
+    },
+    "MiniGame_ShooterPrecision01": {
+      "name": "ShooterPrecision01",
+      "file": "ShooterPrecision01.png"
+    },
+    "MiniGame_ShooterQuickLong00": {
+      "name": "ShooterQuickLong00",
+      "file": "ShooterQuickLong00.png"
+    },
+    "MiniGame_ShooterQuickLong01": {
+      "name": "ShooterQuickLong01",
+      "file": "ShooterQuickLong01.png"
+    },
+    "MiniGame_ShooterQuickMiddle00": {
+      "name": "ShooterQuickMiddle00",
+      "file": "ShooterQuickMiddle00.png"
+    },
+    "MiniGame_ShooterQuickMiddle01": {
+      "name": "ShooterQuickMiddle01",
+      "file": "ShooterQuickMiddle01.png"
+    },
+    "MiniGame_ShooterShort00": {
+      "name": "ShooterShort00",
+      "file": "ShooterShort00.png"
+    },
+    "MiniGame_ShooterShort01": {
+      "name": "ShooterShort01",
+      "file": "ShooterShort01.png"
+    },
+    "MiniGame_ShooterTripleMiddle00": {
+      "name": "ShooterTripleMiddle00",
+      "file": "ShooterTripleMiddle00.png"
+    },
+    "MiniGame_ShooterTripleMiddle01": {
+      "name": "ShooterTripleMiddle01",
+      "file": "ShooterTripleMiddle01.png"
+    },
+    "MiniGame_ShooterTripleQuick00": {
+      "name": "ShooterTripleQuick00",
+      "file": "ShooterTripleQuick00.png"
+    },
+    "MiniGame_ShooterTripleQuick01": {
+      "name": "ShooterTripleQuick01",
+      "file": "ShooterTripleQuick01.png"
+    },
+    "MiniGame_SlosherBathtub00": {
+      "name": "SlosherBathtub00",
+      "file": "SlosherBathtub00.png"
+    },
+    "MiniGame_SlosherBathtub01": {
+      "name": "SlosherBathtub01",
+      "file": "SlosherBathtub01.png"
+    },
+    "MiniGame_SlosherDiffusion00": {
+      "name": "SlosherDiffusion00",
+      "file": "SlosherDiffusion00.png"
+    },
+    "MiniGame_SlosherDiffusion01": {
+      "name": "SlosherDiffusion01",
+      "file": "SlosherDiffusion01.png"
+    },
+    "MiniGame_SlosherDouble00": {
+      "name": "SlosherDouble00",
+      "file": "SlosherDouble00.png"
+    },
+    "MiniGame_SlosherDouble01": {
+      "name": "SlosherDouble01",
+      "file": "SlosherDouble01.png"
+    },
+    "MiniGame_SlosherLauncher00": {
+      "name": "SlosherLauncher00",
+      "file": "SlosherLauncher00.png"
+    },
+    "MiniGame_SlosherLauncher01": {
+      "name": "SlosherLauncher01",
+      "file": "SlosherLauncher01.png"
+    },
+    "MiniGame_SlosherStrong00": {
+      "name": "SlosherStrong00",
+      "file": "SlosherStrong00.png"
+    },
+    "MiniGame_SlosherStrong01": {
+      "name": "SlosherStrong01",
+      "file": "SlosherStrong01.png"
+    },
+    "MiniGame_SlosherWashtub00": {
+      "name": "SlosherWashtub00",
+      "file": "SlosherWashtub00.png"
+    },
+    "MiniGame_SlosherWashtub01": {
+      "name": "SlosherWashtub01",
+      "file": "SlosherWashtub01.png"
+    },
+    "MiniGame_SpCastle": {
+      "name": "SpCastle",
+      "file": "SpCastle.png"
+    },
+    "MiniGame_SpChimney": {
+      "name": "SpChimney",
+      "file": "SpChimney.png"
+    },
+    "MiniGame_SpFirework": {
+      "name": "SpFirework",
+      "file": "SpFirework.png"
+    },
+    "MiniGame_SpGreatBarrier": {
+      "name": "SpGreatBarrier",
+      "file": "SpGreatBarrier.png"
+    },
+    "MiniGame_SpInkStorm": {
+      "name": "SpInkStorm",
+      "file": "SpInkStorm.png"
+    },
+    "MiniGame_SpMegaphoneLaser51": {
+      "name": "SpMegaphoneLaser51",
+      "file": "SpMegaphoneLaser51.png"
+    },
+    "MiniGame_SpMultiMissile": {
+      "name": "SpMultiMissile",
+      "file": "SpMultiMissile.png"
+    },
+    "MiniGame_SpNiceBall": {
+      "name": "SpNiceBall",
+      "file": "SpNiceBall.png"
+    },
+    "MiniGame_SpPogo": {
+      "name": "SpPogo",
+      "file": "SpPogo.png"
+    },
+    "MiniGame_SpSuperHook": {
+      "name": "SpSuperHook",
+      "file": "SpSuperHook.png"
+    },
+    "MiniGame_SpUltraShot": {
+      "name": "SpUltraShot",
+      "file": "SpUltraShot.png"
+    },
+    "MiniGame_SpUltraStamp": {
+      "name": "SpUltraStamp",
+      "file": "SpUltraStamp.png"
+    },
+    "MiniGame_Spiky": {
+      "name": "Spiky",
+      "file": "Spiky.png"
+    },
+    "MiniGame_SpinnerDownpour00": {
+      "name": "SpinnerDownpour00",
+      "file": "SpinnerDownpour00.png"
+    },
+    "MiniGame_SpinnerDownpour01": {
+      "name": "SpinnerDownpour01",
+      "file": "SpinnerDownpour01.png"
+    },
+    "MiniGame_SpinnerHyper00": {
+      "name": "SpinnerHyper00",
+      "file": "SpinnerHyper00.png"
+    },
+    "MiniGame_SpinnerHyper01": {
+      "name": "SpinnerHyper01",
+      "file": "SpinnerHyper01.png"
+    },
+    "MiniGame_SpinnerHyperShort00": {
+      "name": "SpinnerHyperShort00",
+      "file": "SpinnerHyperShort00.png"
+    },
+    "MiniGame_SpinnerHyperShort01": {
+      "name": "SpinnerHyperShort01",
+      "file": "SpinnerHyperShort01.png"
+    },
+    "MiniGame_SpinnerQuick00": {
+      "name": "SpinnerQuick00",
+      "file": "SpinnerQuick00.png"
+    },
+    "MiniGame_SpinnerQuick01": {
+      "name": "SpinnerQuick01",
+      "file": "SpinnerQuick01.png"
+    },
+    "MiniGame_SpinnerSerein00": {
+      "name": "SpinnerSerein00",
+      "file": "SpinnerSerein00.png"
+    },
+    "MiniGame_SpinnerSerein01": {
+      "name": "SpinnerSerein01",
+      "file": "SpinnerSerein01.png"
+    },
+    "MiniGame_SpinnerStandard00": {
+      "name": "SpinnerStandard00",
+      "file": "SpinnerStandard00.png"
+    },
+    "MiniGame_SpinnerStandard01": {
+      "name": "SpinnerStandard01",
+      "file": "SpinnerStandard01.png"
+    },
+    "MiniGame_Sprinkler": {
+      "name": "Sprinkler",
+      "file": "Sprinkler.png"
+    },
+    "MiniGame_StampWave": {
+      "name": "StampWave",
+      "file": "StampWave.png"
+    },
+    "MiniGame_StringerExplosion00": {
+      "name": "StringerExplosion00",
+      "file": "StringerExplosion00.png"
+    },
+    "MiniGame_StringerExplosion01": {
+      "name": "StringerExplosion01",
+      "file": "StringerExplosion01.png"
+    },
+    "MiniGame_StringerNormal00": {
+      "name": "StringerNormal00",
+      "file": "StringerNormal00.png"
+    },
+    "MiniGame_StringerNormal01": {
+      "name": "StringerNormal01",
+      "file": "StringerNormal01.png"
+    },
+    "MiniGame_StringerShort00": {
+      "name": "StringerShort00",
+      "file": "StringerShort00.png"
+    },
+    "MiniGame_StringerShort01": {
+      "name": "StringerShort01",
+      "file": "StringerShort01.png"
+    },
+    "MiniGame_Sutakoraa": {
+      "name": "Sutakoraa",
+      "file": "Sutakoraa.png"
+    },
+    "MiniGame_Taihou": {
+      "name": "Taihou",
+      "file": "Taihou.png"
+    },
+    "MiniGame_TakoCommander": {
+      "name": "TakoCommander",
+      "file": "TakoCommander.png"
+    },
+    "MiniGame_TakoDozer": {
+      "name": "TakoDozer",
+      "file": "TakoDozer.png"
+    },
+    "MiniGame_TakoHopper": {
+      "name": "TakoHopper",
+      "file": "TakoHopper.png"
+    },
+    "MiniGame_TakoMissile": {
+      "name": "TakoMissile",
+      "file": "TakoMissile.png"
+    },
+    "MiniGame_TakoPod": {
+      "name": "TakoPod",
+      "file": "TakoPod.png"
+    },
+    "MiniGame_TakoSniper": {
+      "name": "TakoSniper",
+      "file": "TakoSniper.png"
+    },
+    "MiniGame_TakoStamp": {
+      "name": "TakoStamp",
+      "file": "TakoStamp.png"
+    },
+    "MiniGame_TakoStrike": {
+      "name": "TakoStrike",
+      "file": "TakoStrike.png"
+    },
+    "MiniGame_TakoTrooper": {
+      "name": "TakoTrooper",
+      "file": "TakoTrooper.png"
+    },
+    "MiniGame_TakoZonesu": {
+      "name": "TakoZonesu",
+      "file": "TakoZonesu.png"
+    },
+    "MiniGame_TakopodDEV": {
+      "name": "TakopodDEV",
+      "file": "TakopodDEV.png"
+    },
+    "MiniGame_TakopperinGo": {
+      "name": "TakopperinGo",
+      "file": "TakopperinGo.png"
+    },
+    "MiniGame_Takopter": {
+      "name": "Takopter",
+      "file": "Takopter.png"
+    },
+    "MiniGame_TakowasaShogun": {
+      "name": "TakowasaShogun",
+      "file": "TakowasaShogun.png"
+    },
+    "MiniGame_Tamahiroi": {
+      "name": "Tamahiroi",
+      "file": "Tamahiroi.png"
+    },
+    "MiniGame_Tamaire": {
+      "name": "Tamaire",
+      "file": "Tamaire.png"
+    },
+    "MiniGame_Tatakikensaki": {
+      "name": "Tatakikensaki",
+      "file": "Tatakikensaki.png"
+    },
+    "MiniGame_TateTakoTrooper": {
+      "name": "TateTakoTrooper",
+      "file": "TateTakoTrooper.png"
+    },
+    "MiniGame_Tatsu": {
+      "name": "Tatsu",
+      "file": "Tatsu.png"
+    },
+    "MiniGame_Teppan": {
+      "name": "Teppan",
+      "file": "Teppan.png"
+    },
+    "MiniGame_Tower": {
+      "name": "Tower",
+      "file": "Tower.png"
+    },
+    "MiniGame_Trap": {
+      "name": "Trap",
+      "file": "Trap.png"
+    },
+    "MiniGame_TripleTornado": {
+      "name": "TripleTornado",
+      "file": "TripleTornado.png"
+    },
+    "MiniGame_Utsuho": {
+      "name": "Utsuho",
+      "file": "Utsuho.png"
+    },
+    "MiniGame_Utsuho1": {
+      "name": "Utsuho1",
+      "file": "Utsuho1.png"
+    },
+    "MiniGame_Yako": {
+      "name": "Yako",
+      "file": "Yako.png"
+    },
+    "MiniGame_Yashiganisan": {
+      "name": "Yashiganisan",
+      "file": "Yashiganisan.png"
+    },
+    "MiniGame_Yokozuna": {
+      "name": "Yokozuna",
+      "file": "Yokozuna.png"
+    },
+    "MiniGame_Yumeebi": {
+      "name": "Yumeebi",
+      "file": "Yumeebi.png"
+    }
+  },
+  "sleeves": {
+    "MiniGame_Aori": {
+      "sleeve_id": "MngCardSleeve_Aori",
+      "file": "MngCardSleeve_Aori.png"
+    },
+    "MiniGame_Atarime": {
+      "sleeve_id": "MngCardSleeve_Atarime",
+      "file": "MngCardSleeve_Atarime.png"
+    },
+    "MiniGame_GearShopClothes": {
+      "sleeve_id": "MngCardSleeve_GearShopClothes",
+      "file": "MngCardSleeve_GearShopClothes.png"
+    },
+    "MiniGame_GearShopClothes_Fsodr": {
+      "sleeve_id": "MngCardSleeve_GearShopClothes_Fsodr",
+      "file": "MngCardSleeve_GearShopClothes_Fsodr.png"
+    },
+    "MiniGame_GearShopClothes_Sdodr": {
+      "sleeve_id": "MngCardSleeve_GearShopClothes_Sdodr",
+      "file": "MngCardSleeve_GearShopClothes_Sdodr.png"
+    },
+    "MiniGame_GearShopHead": {
+      "sleeve_id": "MngCardSleeve_GearShopHead",
+      "file": "MngCardSleeve_GearShopHead.png"
+    },
+    "MiniGame_GearShopHead_Fsodr": {
+      "sleeve_id": "MngCardSleeve_GearShopHead_Fsodr",
+      "file": "MngCardSleeve_GearShopHead_Fsodr.png"
+    },
+    "MiniGame_GearShopHead_Sdodr": {
+      "sleeve_id": "MngCardSleeve_GearShopHead_Sdodr",
+      "file": "MngCardSleeve_GearShopHead_Sdodr.png"
+    },
+    "MiniGame_GearShopShoes": {
+      "sleeve_id": "MngCardSleeve_GearShopShoes",
+      "file": "MngCardSleeve_GearShopShoes.png"
+    },
+    "MiniGame_GearShopShoes_Fsodr": {
+      "sleeve_id": "MngCardSleeve_GearShopShoes_Fsodr",
+      "file": "MngCardSleeve_GearShopShoes_Fsodr.png"
+    },
+    "MiniGame_GearShopShoes_Sdodr": {
+      "sleeve_id": "MngCardSleeve_GearShopShoes_Sdodr",
+      "file": "MngCardSleeve_GearShopShoes_Sdodr.png"
+    },
+    "MiniGame_GoodsShop": {
+      "sleeve_id": "MngCardSleeve_GoodsShop",
+      "file": "MngCardSleeve_GoodsShop.png"
+    },
+    "MiniGame_Hime": {
+      "sleeve_id": "MngCardSleeve_Hime",
+      "file": "MngCardSleeve_Hime.png"
+    },
+    "MiniGame_Hotaru": {
+      "sleeve_id": "MngCardSleeve_Hotaru",
+      "file": "MngCardSleeve_Hotaru.png"
+    },
+    "MiniGame_IdolA": {
+      "sleeve_id": "MngCardSleeve_IdolA",
+      "file": "MngCardSleeve_IdolA.png"
+    },
+    "MiniGame_IdolB": {
+      "sleeve_id": "MngCardSleeve_IdolB",
+      "file": "MngCardSleeve_IdolB.png"
+    },
+    "MiniGame_IdolC": {
+      "sleeve_id": "MngCardSleeve_IdolC",
+      "file": "MngCardSleeve_IdolC.png"
+    },
+    "MiniGame_Iida": {
+      "sleeve_id": "MngCardSleeve_Iida",
+      "file": "MngCardSleeve_Iida.png"
+    },
+    "MiniGame_Judge": {
+      "sleeve_id": "MngCardSleeve_Judge",
+      "file": "MngCardSleeve_Judge.png"
+    },
+    "MiniGame_JudgeJr": {
+      "sleeve_id": "MngCardSleeve_JudgeJr",
+      "file": "MngCardSleeve_JudgeJr.png"
+    },
+    "MiniGame_MiniGameKurage0": {
+      "sleeve_id": "MngCardSleeve_Default",
+      "file": "MngCardSleeve_Default.png"
+    },
+    "MiniGame_MiniGameKurage1": {
+      "sleeve_id": "MngCardSleeve_Default",
+      "file": "MngCardSleeve_Default.png"
+    },
+    "MiniGame_MiniGameKurage2": {
+      "sleeve_id": "MngCardSleeve_Default",
+      "file": "MngCardSleeve_Default.png"
+    },
+    "MiniGame_MiniGameKurage3": {
+      "sleeve_id": "MngCardSleeve_Default",
+      "file": "MngCardSleeve_Default.png"
+    },
+    "MiniGame_Mizuta_Sdodr": {
+      "sleeve_id": "MngCardSleeve_Mizuta_Sdodr",
+      "file": "MngCardSleeve_Mizuta_Sdodr.png"
+    },
+    "MiniGame_Mother": {
+      "sleeve_id": "MngCardSleeve_Mother",
+      "file": "MngCardSleeve_Mother.png"
+    },
+    "MiniGame_Vendor": {
+      "sleeve_id": "MngCardSleeve_Vendor",
+      "file": "MngCardSleeve_Vendor.png"
+    },
+    "MiniGame_Vendor_Fsodr": {
+      "sleeve_id": "MngCardSleeve_Vendor_Fsodr",
+      "file": "MngCardSleeve_Vendor_Fsodr.png"
+    },
+    "MiniGame_WeaponShop": {
+      "sleeve_id": "MngCardSleeve_WeaponShop",
+      "file": "MngCardSleeve_WeaponShop.png"
+    },
+    "MiniGame_WeaponShop_Fsodr": {
+      "sleeve_id": "MngCardSleeve_WeaponShop_Fsodr",
+      "file": "MngCardSleeve_WeaponShop_Fsodr.png"
+    }
+  }
+}

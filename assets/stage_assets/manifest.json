@@ -1,0 +1,65 @@
+{
+  "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\assets\\reference\\stage",
+  "stages": {
+    "CenterHole": {
+      "name_zh": "轻飘湖",
+      "file": "CenterHole.png"
+    },
+    "Cross": {
+      "name_zh": "罚分花园",
+      "file": "Cross.png"
+    },
+    "Divide": {
+      "name_zh": "酷似大道",
+      "file": "Divide.png"
+    },
+    "Face": {
+      "name_zh": "面具屋",
+      "file": "Face.png"
+    },
+    "IShape": {
+      "name_zh": "钢骨建筑",
+      "file": "IShape.png"
+    },
+    "ManyHole": {
+      "name_zh": "漆黑深林",
+      "file": "ManyHole.png"
+    },
+    "ManySp": {
+      "name_zh": "加速高速公路",
+      "file": "ManySp.png"
+    },
+    "Painted": {
+      "name_zh": "间隔墙",
+      "file": "Painted.png"
+    },
+    "Rectangle": {
+      "name_zh": "正直大道",
+      "file": "Rectangle.png"
+    },
+    "SShape": {
+      "name_zh": "扭转河",
+      "file": "SShape.png"
+    },
+    "SmallSquare": {
+      "name_zh": "小巧竞技场",
+      "file": "SmallSquare.png"
+    },
+    "Square": {
+      "name_zh": "正方广场",
+      "file": "Square.png"
+    },
+    "Stairs": {
+      "name_zh": "清脆饼干",
+      "file": "Stairs.png"
+    },
+    "WDiamond": {
+      "name_zh": "双子岛",
+      "file": "WDiamond.png"
+    },
+    "Zigzag": {
+      "name_zh": "雷霆车站",
+      "file": "Zigzag.png"
+    }
+  }
+}

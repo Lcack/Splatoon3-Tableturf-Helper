@@ -1,0 +1,33 @@
+{
+  "profile_id": "对战场地-正直大道",
+  "source_width": 1920,
+  "source_height": 1080,
+  "stage_id": "Rectangle",
+  "regions": [
+    {
+      "name": "对战场地：正直大道",
+      "kind": "quad",
+      "points": [
+        [
+          0.5081686711829072,
+          0.011661642261353094
+        ],
+        [
+          0.6917650943199576,
+          0.010495478035217784
+        ],
+        [
+          0.6970107064095876,
+          0.9702486361445772
+        ],
+        [
+          0.5075129696717035,
+          0.9737471288229833
+        ]
+      ],
+      "grid_rows": 26,
+      "grid_cols": 9
+    }
+  ],
+  "notes": "source=E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\008_video_state.png"
+}

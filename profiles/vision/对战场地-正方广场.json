@@ -1,0 +1,34 @@
+{
+  "profile_id": "对战场地-正方广场",
+  "source_width": 1920,
+  "source_height": 1080,
+  "stage_id": "Square",
+  "regions": [
+    {
+      "name": "board",
+      "kind": "quad",
+      "points": [
+        [
+          0.44500210808241597,
+          0.20974749829395709
+        ],
+        [
+          0.7556242671964565,
+          0.21005867011465332
+        ],
+        [
+          0.759234914933722,
+          0.7646094066771896
+        ],
+        [
+          0.44421199065064815,
+          0.765850813108202
+        ]
+      ],
+      "grid_rows": 15,
+      "grid_cols": 15
+    }
+  ],
+  "notes": "source=E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261023-101741\\015_state.png",
+  "cell_overrides": []
+}

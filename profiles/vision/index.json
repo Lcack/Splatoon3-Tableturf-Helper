@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "state_profiles": {
+    "NPC_ROSTER": [
+      "npc选择.json"
+    ],
+    "MATCH_SETUP": [
+      "难度选择.json"
+    ],
+    "DECK_SELECT": [
+      "卡组选择.json"
+    ],
+    "TURN_SELECT": [
+      "battle_select.json",
+      "battle_select11.json",
+      "battle_select12.json",
+      "battle_select21.json"
+    ],
+    "REDRAW": [
+      "battle_select_clean.json"
+    ],
+    "SKIP_DISCARD": [
+      "battle_select_22.json"
+    ],
+    "TURN_REVEAL": [
+      "结算阶段开牌.json"
+    ]
+  },
+  "selection_geometry": {
+    "idle": "battle_select_clean.json",
+    "focus_1_1": "battle_select11.json",
+    "focus_1_2": "battle_select12.json",
+    "focus_2_1": "battle_select21.json",
+    "focus_2_2": "battle_select_22.json"
+  },
+  "board_profiles": {
+    "CenterHole": "对战场地-轻飘湖.json",
+    "Cross": "对战场地-罚分花园.json",
+    "Divide": "对战场地-酷似大道.json",
+    "Face": "对战场地-面具屋.json",
+    "IShape": "对战场地-钢骨建筑.json",
+    "ManyHole": "对战场地-漆黑森林.json",
+    "ManySp": "对战场地-加速高速公路.json",
+    "Painted": "对战场地-间隔墙.json",
+    "Rectangle": "对战场地-正直大道.json",
+    "SmallSquare": "对战场地-小巧竞技场.json",
+    "Square": "对战场地-正方广场.json",
+    "SShape": "对战场地-扭转河.json",
+    "Stairs": "对战场地-清脆饼干.json",
+    "WDiamond": "对战场地-双子岛.json",
+    "Zigzag": "对战场地-雷霆车站.json"
+  },
+  "result_profiles": {
+    "MATCH_RESULT": "比赛结果.json"
+  },
+  "score_profiles": {
+    "BATTLE": "比分情况.json"
+  }
+}

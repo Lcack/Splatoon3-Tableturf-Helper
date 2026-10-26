@@ -1,0 +1,40 @@
+{
+  "profile_id": "比分情况",
+  "source_width": 1920,
+  "source_height": 1080,
+  "regions": [
+    {
+      "name": "对方分数",
+      "kind": "rect",
+      "points": [
+        [
+          0.3056943097295955,
+          0.39786858333272995
+        ],
+        [
+          0.3906093954390288,
+          0.49733570270378424
+        ]
+      ],
+      "grid_rows": 0,
+      "grid_cols": 0
+    },
+    {
+      "name": "我方分数",
+      "kind": "rect",
+      "points": [
+        [
+          0.29470531078290607,
+          0.5452930501172137
+        ],
+        [
+          0.37962038445001783,
+          0.635879177680351
+        ]
+      ],
+      "grid_rows": 0,
+      "grid_cols": 0
+    }
+  ],
+  "notes": "source=E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\045_video_state.png"
+}

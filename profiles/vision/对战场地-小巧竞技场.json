@@ -1,0 +1,34 @@
+{
+  "profile_id": "对战场地-小巧竞技场",
+  "source_width": 1920,
+  "source_height": 1080,
+  "stage_id": "SmallSquare",
+  "regions": [
+    {
+      "name": "board",
+      "kind": "quad",
+      "points": [
+        [
+          0.49681066976416527,
+          0.3017696664903037
+        ],
+        [
+          0.7042134549855068,
+          0.30137361344416125
+        ],
+        [
+          0.7070285783204143,
+          0.6706867659942656
+        ],
+        [
+          0.49641832726395585,
+          0.671928172425278
+        ]
+      ],
+      "grid_rows": 10,
+      "grid_cols": 10
+    }
+  ],
+  "notes": "source=E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261023-101741\\014_state.png",
+  "cell_overrides": []
+}

@@ -1,0 +1,326 @@
+[
+  {
+    "state": "NPC_ROSTER",
+    "image": "NPC_ROSTER/run-20261021-110258-001.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-110258\\001_state.png",
+    "sequence": 1
+  },
+  {
+    "state": "MATCH_SETUP",
+    "image": "MATCH_SETUP/run-20261021-110258-002.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-110258\\002_state.png",
+    "sequence": 2
+  },
+  {
+    "state": "MATCH_SETUP",
+    "image": "MATCH_SETUP/run-20261021-110258-003.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-110258\\003_state.png",
+    "sequence": 3
+  },
+  {
+    "state": "DECK_SELECT",
+    "image": "DECK_SELECT/run-20261021-110258-004.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-110258\\004_state.png",
+    "sequence": 4
+  },
+  {
+    "state": "REDRAW",
+    "image": "REDRAW/run-20261021-110258-005.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-110258\\005_state.png",
+    "sequence": 5
+  },
+  {
+    "state": "TURN_SELECT",
+    "image": "TURN_SELECT/run-20261021-110258-006.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-110258\\006_state.png",
+    "sequence": 6
+  },
+  {
+    "state": "TARGET_PLACEMENT",
+    "image": "TARGET_PLACEMENT/run-20261021-110258-007.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-110258\\007_state.png",
+    "sequence": 7
+  },
+  {
+    "state": "TARGET_PLACEMENT",
+    "image": "TARGET_PLACEMENT/run-20261021-110258-008.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-110258\\008_state.png",
+    "sequence": 8
+  },
+  {
+    "state": "TURN_REVEAL",
+    "image": "TURN_REVEAL/run-20261021-110258-009.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-110258\\009_state.png",
+    "sequence": 9
+  },
+  {
+    "state": "SKIP_DISCARD",
+    "image": "SKIP_DISCARD/run-20261021-110258-010.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-110258\\010_state.png",
+    "sequence": 10
+  },
+  {
+    "state": "SPECIAL_SELECT",
+    "image": "SPECIAL_SELECT/run-20261021-110258-011.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-110258\\011_state.png",
+    "sequence": 11
+  },
+  {
+    "state": "SPECIAL_PLACEMENT",
+    "image": "SPECIAL_PLACEMENT/run-20261021-110258-012.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-110258\\012_state.png",
+    "sequence": 12
+  },
+  {
+    "state": "REPLAY_CHOICE",
+    "image": "REPLAY_CHOICE/run-20261021-110258-013.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-110258\\013_state.png",
+    "sequence": 13
+  },
+  {
+    "state": "NPC_ROSTER",
+    "image": "NPC_ROSTER/session-20261021-222704_annotations-001.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\001_video_state.png",
+    "sequence": 1
+  },
+  {
+    "state": "NPC_DIALOGUE",
+    "image": "NPC_DIALOGUE/session-20261021-222704_annotations-002.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\002_video_state.png",
+    "sequence": 2
+  },
+  {
+    "state": "NPC_DIALOGUE",
+    "image": "NPC_DIALOGUE/session-20261021-222704_annotations-003.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\003_video_state.png",
+    "sequence": 3
+  },
+  {
+    "state": "NPC_ROSTER",
+    "image": "NPC_ROSTER/session-20261021-222704_annotations-004.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\004_video_state.png",
+    "sequence": 4
+  },
+  {
+    "state": "NPC_ROSTER",
+    "image": "NPC_ROSTER/session-20261021-222704_annotations-005.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\005_video_state.png",
+    "sequence": 5
+  },
+  {
+    "state": "NPC_DIALOGUE",
+    "image": "NPC_DIALOGUE/session-20261021-222704_annotations-006.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\006_video_state.png",
+    "sequence": 6
+  },
+  {
+    "state": "MATCH_SETUP",
+    "image": "MATCH_SETUP/session-20261021-222704_annotations-007.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\007_video_state.png",
+    "sequence": 7
+  },
+  {
+    "state": "MATCH_SETUP",
+    "image": "MATCH_SETUP/session-20261021-222704_annotations-008.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\008_video_state.png",
+    "sequence": 8
+  },
+  {
+    "state": "MATCH_SETUP",
+    "image": "MATCH_SETUP/session-20261021-222704_annotations-009.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\009_video_state.png",
+    "sequence": 9
+  },
+  {
+    "state": "DECK_SELECT",
+    "image": "DECK_SELECT/session-20261021-222704_annotations-010.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\010_video_state.png",
+    "sequence": 10
+  },
+  {
+    "state": "DECK_SELECT",
+    "image": "DECK_SELECT/session-20261021-222704_annotations-011.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\011_video_state.png",
+    "sequence": 11
+  },
+  {
+    "state": "DECK_SELECT",
+    "image": "DECK_SELECT/session-20261021-222704_annotations-012.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\012_video_state.png",
+    "sequence": 12
+  },
+  {
+    "state": "DECK_SELECT",
+    "image": "DECK_SELECT/session-20261021-222704_annotations-013.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\013_video_state.png",
+    "sequence": 13
+  },
+  {
+    "state": "BATTLE_INTRO",
+    "image": "BATTLE_INTRO/session-20261021-222704_annotations-014.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\014_video_state.png",
+    "sequence": 14
+  },
+  {
+    "state": "BATTLE_INTRO",
+    "image": "BATTLE_INTRO/session-20261021-222704_annotations-015.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\015_video_state.png",
+    "sequence": 15
+  },
+  {
+    "state": "REDRAW",
+    "image": "REDRAW/session-20261021-222704_annotations-016.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\016_video_state.png",
+    "sequence": 16
+  },
+  {
+    "state": "TARGET_PLACEMENT",
+    "image": "TARGET_PLACEMENT/session-20261021-222704_annotations-017.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\017_video_state.png",
+    "sequence": 17
+  },
+  {
+    "state": "TURN_REVEAL",
+    "image": "TURN_REVEAL/session-20261021-222704_annotations-018.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\018_video_state.png",
+    "sequence": 18
+  },
+  {
+    "state": "TURN_RESOLVE",
+    "image": "TURN_RESOLVE/session-20261021-222704_annotations-019.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\019_video_state.png",
+    "sequence": 19
+  },
+  {
+    "state": "TURN_RESOLVE",
+    "image": "TURN_RESOLVE/session-20261021-222704_annotations-020.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\020_video_state.png",
+    "sequence": 20
+  },
+  {
+    "state": "TURN_RESOLVE",
+    "image": "TURN_RESOLVE/session-20261021-222704_annotations-021.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\021_video_state.png",
+    "sequence": 21
+  },
+  {
+    "state": "TURN_RESOLVE",
+    "image": "TURN_RESOLVE/session-20261021-222704_annotations-022.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\022_video_state.png",
+    "sequence": 22
+  },
+  {
+    "state": "SKIP_DISCARD",
+    "image": "SKIP_DISCARD/session-20261021-222704_annotations-023.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\023_video_state.png",
+    "sequence": 23
+  },
+  {
+    "state": "SPECIAL_SELECT",
+    "image": "SPECIAL_SELECT/session-20261021-222704_annotations-024.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\024_video_state.png",
+    "sequence": 24
+  },
+  {
+    "state": "SKIP_DISCARD",
+    "image": "SKIP_DISCARD/session-20261021-222704_annotations-025.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\025_video_state.png",
+    "sequence": 25
+  },
+  {
+    "state": "SPECIAL_SELECT",
+    "image": "SPECIAL_SELECT/session-20261021-222704_annotations-026.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\026_video_state.png",
+    "sequence": 26
+  },
+  {
+    "state": "SPECIAL_PLACEMENT",
+    "image": "SPECIAL_PLACEMENT/session-20261021-222704_annotations-027.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\027_video_state.png",
+    "sequence": 27
+  },
+  {
+    "state": "FINISHING",
+    "image": "FINISHING/session-20261021-222704_annotations-028.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\028_video_state.png",
+    "sequence": 28
+  },
+  {
+    "state": "FINISHING",
+    "image": "FINISHING/session-20261021-222704_annotations-029.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\029_video_state.png",
+    "sequence": 29
+  },
+  {
+    "state": "MATCH_RESULT",
+    "image": "MATCH_RESULT/session-20261021-222704_annotations-030.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\030_video_state.png",
+    "sequence": 30
+  },
+  {
+    "state": "MATCH_REWARD",
+    "image": "MATCH_REWARD/session-20261021-222704_annotations-031.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\031_video_state.png",
+    "sequence": 31
+  },
+  {
+    "state": "REPLAY_CHOICE",
+    "image": "REPLAY_CHOICE/session-20261021-222704_annotations-032.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\032_video_state.png",
+    "sequence": 32
+  },
+  {
+    "state": "REDRAW",
+    "image": "REDRAW/session-20261021-222704_annotations-033.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\033_video_state.png",
+    "sequence": 33
+  },
+  {
+    "state": "TURN_RESOLVE",
+    "image": "TURN_RESOLVE/session-20261021-222704_annotations-034.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\034_video_state.png",
+    "sequence": 34
+  },
+  {
+    "state": "TURN_RESOLVE",
+    "image": "TURN_RESOLVE/session-20261021-222704_annotations-035.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\035_video_state.png",
+    "sequence": 35
+  },
+  {
+    "state": "TURN_RESOLVE",
+    "image": "TURN_RESOLVE/session-20261021-222704_annotations-036.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\036_video_state.png",
+    "sequence": 36
+  },
+  {
+    "state": "FINISHING",
+    "image": "FINISHING/session-20261021-222704_annotations-037.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\037_video_state.png",
+    "sequence": 37
+  },
+  {
+    "state": "MATCH_RESULT",
+    "image": "MATCH_RESULT/session-20261021-222704_annotations-038.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\038_video_state.png",
+    "sequence": 38
+  },
+  {
+    "state": "REPLAY_CHOICE",
+    "image": "REPLAY_CHOICE/session-20261021-222704_annotations-039.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\039_video_state.png",
+    "sequence": 39
+  },
+  {
+    "state": "MATCH_SETUP",
+    "image": "MATCH_SETUP/session-20261021-222704_annotations-040.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\040_video_state.png",
+    "sequence": 40
+  },
+  {
+    "state": "NPC_ROSTER",
+    "image": "NPC_ROSTER/session-20261021-222704_annotations-041.jpg",
+    "source": "E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\041_video_state.png",
+    "sequence": 41
+  }
+]

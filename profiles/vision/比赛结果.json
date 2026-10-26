@@ -1,0 +1,40 @@
+{
+  "profile_id": "比赛结果",
+  "source_width": 1920,
+  "source_height": 1080,
+  "regions": [
+    {
+      "name": "对方结果",
+      "kind": "rect",
+      "points": [
+        [
+          0.04777777777777778,
+          0.08102766798418973
+        ],
+        [
+          0.21444444444444444,
+          0.16600790513833993
+        ]
+      ],
+      "grid_rows": 0,
+      "grid_cols": 0
+    },
+    {
+      "name": "我方结果",
+      "kind": "rect",
+      "points": [
+        [
+          0.04555555555555556,
+          0.567193675889328
+        ],
+        [
+          0.2222222222222222,
+          0.650197628458498
+        ]
+      ],
+      "grid_rows": 0,
+      "grid_cols": 0
+    }
+  ],
+  "notes": "source=E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261021-221749\\session-20261021-222704_annotations\\011_video_state.png"
+}

@@ -1,0 +1,45 @@
+{
+  "reference_source": "E:\\Splatoon\\tableturf\\recognation_preparation\\stage",
+  "pieces": {
+    "AreaPiece_00.png": {
+      "role": "SELF_INK",
+      "median_bgr": [0, 248, 236],
+      "median_hsv": [32, 255, 248]
+    },
+    "AreaPiece_01.png": {
+      "role": "OPPONENT_INK",
+      "median_bgr": [255, 92, 76],
+      "median_hsv": [117, 179, 255]
+    },
+    "AreaPiece_02.png": {
+      "role": "SELF_SPECIAL",
+      "median_bgr": [2, 163, 255],
+      "median_hsv": [19, 253, 255]
+    },
+    "AreaPiece_03.png": {
+      "role": "OPPONENT_SPECIAL",
+      "median_bgr": [255, 239, 8],
+      "median_hsv": [92, 246, 255]
+    },
+    "AreaPiece_04.png": {
+      "role": "INVALID",
+      "median_bgr": [197, 197, 197],
+      "median_hsv": [0, 0, 197]
+    },
+    "我方激活特殊攻击点.png": {
+      "role": "SELF_SPECIAL_ACTIVE",
+      "median_bgr": [12, 210, 240],
+      "median_hsv": [26, 242, 240]
+    },
+    "敌方激活特殊攻击点.png": {
+      "role": "OPPONENT_SPECIAL_ACTIVE",
+      "median_bgr": [244, 252, 165],
+      "median_hsv": [89, 126, 251]
+    },
+    "Mng_Point_02.png": {
+      "role": "EMPTY",
+      "median_bgr": [0, 0, 0],
+      "median_hsv": [0, 0, 0]
+    }
+  }
+}

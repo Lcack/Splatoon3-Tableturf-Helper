@@ -1,0 +1,34 @@
+{
+  "profile_id": "对战场地-间隔墙",
+  "source_width": 1920,
+  "source_height": 1080,
+  "stage_id": "Painted",
+  "regions": [
+    {
+      "name": "board",
+      "kind": "quad",
+      "points": [
+        [
+          0.48657807474310477,
+          0.08352450304958829
+        ],
+        [
+          0.7128997214328752,
+          0.08256284697835814
+        ],
+        [
+          0.718578312780908,
+          0.89831107407394
+        ],
+        [
+          0.48682206766626496,
+          0.8950276202466114
+        ]
+      ],
+      "grid_rows": 22,
+      "grid_cols": 11
+    }
+  ],
+  "notes": "source=E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261023-101741\\013_state.png",
+  "cell_overrides": []
+}

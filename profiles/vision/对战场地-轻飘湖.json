@@ -1,0 +1,115 @@
+{
+  "profile_id": "对战场地-轻飘湖",
+  "source_width": 1920,
+  "source_height": 1080,
+  "stage_id": "CenterHole",
+  "regions": [
+    {
+      "name": "board",
+      "kind": "quad",
+      "points": [
+        [
+          0.4354220003688157,
+          0.19204546271363282
+        ],
+        [
+          0.7659847171565306,
+          0.19090910010574935
+        ],
+        [
+          0.7704603529653828,
+          0.7840909188018077
+        ],
+        [
+          0.4335038298433955,
+          0.7852272814096911
+        ]
+      ],
+      "grid_rows": 16,
+      "grid_cols": 16
+    }
+  ],
+  "notes": "source=E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261023-101741\\006_state.png",
+  "cell_overrides": [
+    {
+      "row": 6,
+      "col": 6,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 8,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 9,
+      "cell": 32
+    },
+    {
+      "row": 7,
+      "col": 6,
+      "cell": 32
+    },
+    {
+      "row": 7,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 7,
+      "col": 8,
+      "cell": 32
+    },
+    {
+      "row": 7,
+      "col": 9,
+      "cell": 32
+    },
+    {
+      "row": 8,
+      "col": 6,
+      "cell": 32
+    },
+    {
+      "row": 8,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 8,
+      "col": 8,
+      "cell": 32
+    },
+    {
+      "row": 8,
+      "col": 9,
+      "cell": 32
+    },
+    {
+      "row": 9,
+      "col": 6,
+      "cell": 32
+    },
+    {
+      "row": 9,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 9,
+      "col": 8,
+      "cell": 32
+    },
+    {
+      "row": 9,
+      "col": 9,
+      "cell": 32
+    }
+  ]
+}

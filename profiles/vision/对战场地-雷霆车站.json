@@ -1,0 +1,595 @@
+{
+  "profile_id": "对战场地-雷霆车站",
+  "source_width": 1920,
+  "source_height": 1080,
+  "stage_id": "Zigzag",
+  "regions": [
+    {
+      "name": "board",
+      "kind": "quad",
+      "points": [
+        [
+          0.4358109259990555,
+          0.08164772267027846
+        ],
+        [
+          0.7641575100475196,
+          0.08420454159774479
+        ],
+        [
+          0.7698173105499283,
+          0.8978977433170181
+        ],
+        [
+          0.4331892131827286,
+          0.8989772566829819
+        ]
+      ],
+      "grid_rows": 22,
+      "grid_cols": 16
+    }
+  ],
+  "notes": "source=E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261023-101741\\019_state.png",
+  "cell_overrides": [
+    {
+      "row": 0,
+      "col": 0,
+      "cell": 32
+    },
+    {
+      "row": 0,
+      "col": 1,
+      "cell": 32
+    },
+    {
+      "row": 0,
+      "col": 2,
+      "cell": 32
+    },
+    {
+      "row": 0,
+      "col": 3,
+      "cell": 32
+    },
+    {
+      "row": 0,
+      "col": 4,
+      "cell": 32
+    },
+    {
+      "row": 0,
+      "col": 5,
+      "cell": 32
+    },
+    {
+      "row": 0,
+      "col": 6,
+      "cell": 32
+    },
+    {
+      "row": 0,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 1,
+      "col": 0,
+      "cell": 32
+    },
+    {
+      "row": 1,
+      "col": 1,
+      "cell": 32
+    },
+    {
+      "row": 1,
+      "col": 2,
+      "cell": 32
+    },
+    {
+      "row": 1,
+      "col": 3,
+      "cell": 32
+    },
+    {
+      "row": 1,
+      "col": 4,
+      "cell": 32
+    },
+    {
+      "row": 1,
+      "col": 5,
+      "cell": 32
+    },
+    {
+      "row": 1,
+      "col": 6,
+      "cell": 32
+    },
+    {
+      "row": 1,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 2,
+      "col": 0,
+      "cell": 32
+    },
+    {
+      "row": 2,
+      "col": 1,
+      "cell": 32
+    },
+    {
+      "row": 2,
+      "col": 2,
+      "cell": 32
+    },
+    {
+      "row": 2,
+      "col": 3,
+      "cell": 32
+    },
+    {
+      "row": 2,
+      "col": 4,
+      "cell": 32
+    },
+    {
+      "row": 2,
+      "col": 5,
+      "cell": 32
+    },
+    {
+      "row": 2,
+      "col": 6,
+      "cell": 32
+    },
+    {
+      "row": 2,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 3,
+      "col": 0,
+      "cell": 32
+    },
+    {
+      "row": 3,
+      "col": 1,
+      "cell": 32
+    },
+    {
+      "row": 3,
+      "col": 2,
+      "cell": 32
+    },
+    {
+      "row": 3,
+      "col": 3,
+      "cell": 32
+    },
+    {
+      "row": 3,
+      "col": 4,
+      "cell": 32
+    },
+    {
+      "row": 3,
+      "col": 5,
+      "cell": 32
+    },
+    {
+      "row": 3,
+      "col": 6,
+      "cell": 32
+    },
+    {
+      "row": 3,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 4,
+      "col": 0,
+      "cell": 32
+    },
+    {
+      "row": 4,
+      "col": 1,
+      "cell": 32
+    },
+    {
+      "row": 4,
+      "col": 2,
+      "cell": 32
+    },
+    {
+      "row": 4,
+      "col": 3,
+      "cell": 32
+    },
+    {
+      "row": 4,
+      "col": 4,
+      "cell": 32
+    },
+    {
+      "row": 4,
+      "col": 5,
+      "cell": 32
+    },
+    {
+      "row": 4,
+      "col": 6,
+      "cell": 32
+    },
+    {
+      "row": 4,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 5,
+      "col": 0,
+      "cell": 32
+    },
+    {
+      "row": 5,
+      "col": 1,
+      "cell": 32
+    },
+    {
+      "row": 5,
+      "col": 2,
+      "cell": 32
+    },
+    {
+      "row": 5,
+      "col": 3,
+      "cell": 32
+    },
+    {
+      "row": 5,
+      "col": 4,
+      "cell": 32
+    },
+    {
+      "row": 5,
+      "col": 5,
+      "cell": 32
+    },
+    {
+      "row": 5,
+      "col": 6,
+      "cell": 32
+    },
+    {
+      "row": 5,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 0,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 1,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 2,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 3,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 4,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 5,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 6,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 15,
+      "col": 8,
+      "cell": 32
+    },
+    {
+      "row": 15,
+      "col": 9,
+      "cell": 32
+    },
+    {
+      "row": 15,
+      "col": 10,
+      "cell": 32
+    },
+    {
+      "row": 15,
+      "col": 11,
+      "cell": 32
+    },
+    {
+      "row": 15,
+      "col": 12,
+      "cell": 32
+    },
+    {
+      "row": 15,
+      "col": 13,
+      "cell": 32
+    },
+    {
+      "row": 15,
+      "col": 14,
+      "cell": 32
+    },
+    {
+      "row": 15,
+      "col": 15,
+      "cell": 32
+    },
+    {
+      "row": 16,
+      "col": 8,
+      "cell": 32
+    },
+    {
+      "row": 16,
+      "col": 9,
+      "cell": 32
+    },
+    {
+      "row": 16,
+      "col": 10,
+      "cell": 32
+    },
+    {
+      "row": 16,
+      "col": 11,
+      "cell": 32
+    },
+    {
+      "row": 16,
+      "col": 12,
+      "cell": 32
+    },
+    {
+      "row": 16,
+      "col": 13,
+      "cell": 32
+    },
+    {
+      "row": 16,
+      "col": 14,
+      "cell": 32
+    },
+    {
+      "row": 16,
+      "col": 15,
+      "cell": 32
+    },
+    {
+      "row": 17,
+      "col": 8,
+      "cell": 32
+    },
+    {
+      "row": 17,
+      "col": 9,
+      "cell": 32
+    },
+    {
+      "row": 17,
+      "col": 10,
+      "cell": 32
+    },
+    {
+      "row": 17,
+      "col": 11,
+      "cell": 32
+    },
+    {
+      "row": 17,
+      "col": 12,
+      "cell": 32
+    },
+    {
+      "row": 17,
+      "col": 13,
+      "cell": 32
+    },
+    {
+      "row": 17,
+      "col": 14,
+      "cell": 32
+    },
+    {
+      "row": 17,
+      "col": 15,
+      "cell": 32
+    },
+    {
+      "row": 18,
+      "col": 8,
+      "cell": 32
+    },
+    {
+      "row": 18,
+      "col": 9,
+      "cell": 32
+    },
+    {
+      "row": 18,
+      "col": 10,
+      "cell": 32
+    },
+    {
+      "row": 18,
+      "col": 11,
+      "cell": 32
+    },
+    {
+      "row": 18,
+      "col": 12,
+      "cell": 32
+    },
+    {
+      "row": 18,
+      "col": 13,
+      "cell": 32
+    },
+    {
+      "row": 18,
+      "col": 14,
+      "cell": 32
+    },
+    {
+      "row": 18,
+      "col": 15,
+      "cell": 32
+    },
+    {
+      "row": 19,
+      "col": 8,
+      "cell": 32
+    },
+    {
+      "row": 19,
+      "col": 9,
+      "cell": 32
+    },
+    {
+      "row": 19,
+      "col": 10,
+      "cell": 32
+    },
+    {
+      "row": 19,
+      "col": 11,
+      "cell": 32
+    },
+    {
+      "row": 19,
+      "col": 12,
+      "cell": 32
+    },
+    {
+      "row": 19,
+      "col": 13,
+      "cell": 32
+    },
+    {
+      "row": 19,
+      "col": 14,
+      "cell": 32
+    },
+    {
+      "row": 19,
+      "col": 15,
+      "cell": 32
+    },
+    {
+      "row": 20,
+      "col": 8,
+      "cell": 32
+    },
+    {
+      "row": 20,
+      "col": 9,
+      "cell": 32
+    },
+    {
+      "row": 20,
+      "col": 10,
+      "cell": 32
+    },
+    {
+      "row": 20,
+      "col": 11,
+      "cell": 32
+    },
+    {
+      "row": 20,
+      "col": 12,
+      "cell": 32
+    },
+    {
+      "row": 20,
+      "col": 13,
+      "cell": 32
+    },
+    {
+      "row": 20,
+      "col": 14,
+      "cell": 32
+    },
+    {
+      "row": 20,
+      "col": 15,
+      "cell": 32
+    },
+    {
+      "row": 21,
+      "col": 8,
+      "cell": 32
+    },
+    {
+      "row": 21,
+      "col": 9,
+      "cell": 32
+    },
+    {
+      "row": 21,
+      "col": 10,
+      "cell": 32
+    },
+    {
+      "row": 21,
+      "col": 11,
+      "cell": 32
+    },
+    {
+      "row": 21,
+      "col": 12,
+      "cell": 32
+    },
+    {
+      "row": 21,
+      "col": 13,
+      "cell": 32
+    },
+    {
+      "row": 21,
+      "col": 14,
+      "cell": 32
+    },
+    {
+      "row": 21,
+      "col": 15,
+      "cell": 32
+    }
+  ]
+}

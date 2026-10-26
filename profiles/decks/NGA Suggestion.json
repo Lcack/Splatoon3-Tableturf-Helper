@@ -1,0 +1,20 @@
+{
+  "name": "NGA Suggestion",
+  "cards": [
+    "MiniGame_TakoPod",
+    "MiniGame_BombCurling",
+    "MiniGame_SaberLight00",
+    "MiniGame_BombRobot",
+    "MiniGame_Tower",
+    "MiniGame_ShooterFlash00",
+    "MiniGame_StringerShort00",
+    "MiniGame_BrushNormal00",
+    "MiniGame_StringerNormal00",
+    "MiniGame_SpGreatBarrier",
+    "MiniGame_TakoCommander",
+    "MiniGame_ShockSonar",
+    "MiniGame_Tamaire",
+    "MiniGame_TakoStrike",
+    "MiniGame_TakoDozer"
+  ]
+}

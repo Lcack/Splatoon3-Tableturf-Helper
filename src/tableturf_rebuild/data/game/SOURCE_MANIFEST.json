@@ -1,0 +1,29 @@
+{
+  "source": "E:\\Splatoon\\tableturf\\recognation_preparation",
+  "generated_by": "tools/sync_game_data.py",
+  "counts": {
+    "MiniGameCardInfo_Matrix_ZH.json": 266,
+    "MiniGamePresetDeck.json": 31,
+    "MiniGameGameNpcData_ZH.json": 30,
+    "MiniGameStage.json": 15
+  },
+  "files": {
+    "MiniGameCardInfo_Matrix_ZH.json": {
+      "source_sha256": "5ce75cc8e0938f3ff0abfbd8f8d82fb97fce7402a93ccb7290829eaefe33943f",
+      "canonical_sha256": "def9008eaa6f9ae585345f424ee849bb67b93868d909fcff5b5bc8323db02699"
+    },
+    "MiniGamePresetDeck.json": {
+      "source_sha256": "cefe84e2be8b43be0df768e779f6418da88e1b27fd38829948a364eb7765d8f9",
+      "canonical_sha256": "78b68f90b6f1003367a6b42f443d5e624e2f9782f99dbdc59e54c95876d93198"
+    },
+    "MiniGameGameNpcData_ZH.json": {
+      "source_sha256": "c9c0584ff1f3b77dee337878e4934f5724001bebc3d818c542592fb03dc40adc",
+      "canonical_sha256": "45cd03031d0daa4b9f09cdd0635af192624f6acb03cbf0846400565d624c4c05"
+    },
+    "MiniGameStage.json": {
+      "source_sha256": "58af4778d88ae2d73302d22c164c6fbc45744414d10b807c0820fc51c24311fe",
+      "canonical_sha256": "b64fad8b52be8efcdb7b5ee8d9c55a6972bf28fb9378e6781f762511ec29907b"
+    }
+  },
+  "stage_image_directory": "assets/reference/stage"
+}

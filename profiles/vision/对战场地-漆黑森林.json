@@ -1,0 +1,275 @@
+{
+  "profile_id": "对战场地-漆黑森林",
+  "source_width": 1920,
+  "source_height": 1080,
+  "stage_id": "ManyHole",
+  "regions": [
+    {
+      "name": "board",
+      "kind": "quad",
+      "points": [
+        [
+          0.4633559743335559,
+          0.02818687233911608
+        ],
+        [
+          0.689700955087285,
+          0.027536431101320848
+        ],
+        [
+          0.6957599427191897,
+          0.9539149098485689
+        ],
+        [
+          0.4633202565219515,
+          0.9541562221530753
+        ]
+      ],
+      "grid_rows": 25,
+      "grid_cols": 11
+    }
+  ],
+  "notes": "source=E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261023-101741\\011_state.png",
+  "cell_overrides": [
+    {
+      "row": 6,
+      "col": 1,
+      "cell": 64
+    },
+    {
+      "row": 6,
+      "col": 5,
+      "cell": 64
+    },
+    {
+      "row": 6,
+      "col": 9,
+      "cell": 64
+    },
+    {
+      "row": 6,
+      "col": 12,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 13,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 14,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 15,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 16,
+      "cell": 32
+    },
+    {
+      "row": 7,
+      "col": 12,
+      "cell": 32
+    },
+    {
+      "row": 7,
+      "col": 13,
+      "cell": 32
+    },
+    {
+      "row": 7,
+      "col": 14,
+      "cell": 32
+    },
+    {
+      "row": 7,
+      "col": 15,
+      "cell": 32
+    },
+    {
+      "row": 7,
+      "col": 16,
+      "cell": 32
+    },
+    {
+      "row": 8,
+      "col": 3,
+      "cell": 64
+    },
+    {
+      "row": 8,
+      "col": 7,
+      "cell": 64
+    },
+    {
+      "row": 8,
+      "col": 12,
+      "cell": 32
+    },
+    {
+      "row": 8,
+      "col": 13,
+      "cell": 32
+    },
+    {
+      "row": 8,
+      "col": 14,
+      "cell": 32
+    },
+    {
+      "row": 8,
+      "col": 15,
+      "cell": 32
+    },
+    {
+      "row": 8,
+      "col": 16,
+      "cell": 32
+    },
+    {
+      "row": 9,
+      "col": 12,
+      "cell": 32
+    },
+    {
+      "row": 9,
+      "col": 13,
+      "cell": 32
+    },
+    {
+      "row": 9,
+      "col": 14,
+      "cell": 32
+    },
+    {
+      "row": 9,
+      "col": 15,
+      "cell": 32
+    },
+    {
+      "row": 9,
+      "col": 16,
+      "cell": 32
+    },
+    {
+      "row": 10,
+      "col": 1,
+      "cell": 64
+    },
+    {
+      "row": 10,
+      "col": 5,
+      "cell": 64
+    },
+    {
+      "row": 10,
+      "col": 9,
+      "cell": 64
+    },
+    {
+      "row": 10,
+      "col": 12,
+      "cell": 32
+    },
+    {
+      "row": 10,
+      "col": 13,
+      "cell": 32
+    },
+    {
+      "row": 10,
+      "col": 14,
+      "cell": 32
+    },
+    {
+      "row": 10,
+      "col": 15,
+      "cell": 32
+    },
+    {
+      "row": 10,
+      "col": 16,
+      "cell": 32
+    },
+    {
+      "row": 11,
+      "col": 12,
+      "cell": 32
+    },
+    {
+      "row": 11,
+      "col": 13,
+      "cell": 32
+    },
+    {
+      "row": 11,
+      "col": 14,
+      "cell": 32
+    },
+    {
+      "row": 11,
+      "col": 15,
+      "cell": 32
+    },
+    {
+      "row": 11,
+      "col": 16,
+      "cell": 32
+    },
+    {
+      "row": 12,
+      "col": 3,
+      "cell": 64
+    },
+    {
+      "row": 12,
+      "col": 7,
+      "cell": 64
+    },
+    {
+      "row": 14,
+      "col": 1,
+      "cell": 64
+    },
+    {
+      "row": 14,
+      "col": 5,
+      "cell": 64
+    },
+    {
+      "row": 14,
+      "col": 9,
+      "cell": 64
+    },
+    {
+      "row": 16,
+      "col": 3,
+      "cell": 64
+    },
+    {
+      "row": 16,
+      "col": 7,
+      "cell": 64
+    },
+    {
+      "row": 18,
+      "col": 1,
+      "cell": 64
+    },
+    {
+      "row": 18,
+      "col": 5,
+      "cell": 64
+    },
+    {
+      "row": 18,
+      "col": 9,
+      "cell": 64
+    }
+  ]
+}

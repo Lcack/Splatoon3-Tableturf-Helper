@@ -1,0 +1,194 @@
+[
+  {
+    "state": "NPC_ROSTER",
+    "image": "manual/NPC_ROSTER/corrected-20261021-232722-458204.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "NPC_ROSTER",
+    "image": "manual/NPC_ROSTER/corrected-20261021-232737-250126.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "NPC_ROSTER",
+    "image": "manual/NPC_ROSTER/corrected-20261021-232745-351294.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "NPC_ROSTER",
+    "image": "manual/NPC_ROSTER/corrected-20261021-232820-680652.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "DECK_SELECT",
+    "image": "manual/DECK_SELECT/corrected-20261021-233228-477502.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "DECK_SELECT",
+    "image": "manual/DECK_SELECT/corrected-20261021-233235-786399.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "DECK_SELECT",
+    "image": "manual/DECK_SELECT/corrected-20261021-233309-787689.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "NPC_ROSTER",
+    "image": "manual/NPC_ROSTER/corrected-20261021-233344-842402.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "NPC_ROSTER",
+    "image": "manual/NPC_ROSTER/corrected-20261021-233351-098681.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "DECK_SELECT",
+    "image": "manual/DECK_SELECT/corrected-20261021-234119-051168.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "DECK_SELECT",
+    "image": "manual/DECK_SELECT/corrected-20261021-234139-711083.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "TURN_SELECT",
+    "image": "manual/TURN_SELECT/corrected-20261021-234311-229661.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "TARGET_PLACEMENT",
+    "image": "manual/TARGET_PLACEMENT/corrected-20261021-234455-626514.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "TARGET_PLACEMENT",
+    "image": "manual/TARGET_PLACEMENT/corrected-20261021-234456-426266.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "TURN_REVEAL",
+    "image": "manual/TURN_REVEAL/corrected-20261021-235109-597944.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "TARGET_PLACEMENT",
+    "image": "manual/TARGET_PLACEMENT/corrected-20261021-235752-742726.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "TARGET_PLACEMENT",
+    "image": "manual/TARGET_PLACEMENT/corrected-20261021-235834-300144.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "SKIP_DISCARD",
+    "image": "manual/SKIP_DISCARD/corrected-20261021-235925-047399.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "NPC_ROSTER",
+    "image": "manual/NPC_ROSTER/corrected-20261022-000936-990777.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "MATCH_SETUP",
+    "image": "manual/MATCH_SETUP/corrected-20261022-000937-037761.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "MATCH_SETUP",
+    "image": "manual/MATCH_SETUP/corrected-20261022-000937-074301.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "TARGET_PLACEMENT",
+    "image": "manual/TARGET_PLACEMENT/corrected-20261022-000937-110006.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "TARGET_PLACEMENT",
+    "image": "manual/TARGET_PLACEMENT/corrected-20261022-000937-148083.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "TURN_REVEAL",
+    "image": "manual/TURN_REVEAL/corrected-20261022-000937-182962.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "TURN_REVEAL",
+    "image": "manual/TURN_REVEAL/corrected-20261022-000937-219528.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "TURN_SELECT",
+    "image": "manual/TURN_SELECT/corrected-20261022-000937-254313.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "SKIP_DISCARD",
+    "image": "manual/SKIP_DISCARD/corrected-20261022-000937-291990.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "SPECIAL_SELECT",
+    "image": "manual/SPECIAL_SELECT/corrected-20261022-000937-327157.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "MATCH_RESULT",
+    "image": "manual/MATCH_RESULT/corrected-20261022-000937-363080.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "NPC_ROSTER",
+    "image": "manual/NPC_ROSTER/corrected-20261022-001604-986144.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "TARGET_PLACEMENT",
+    "image": "manual/TARGET_PLACEMENT/corrected-20261022-002122-369377.jpg",
+    "source": "manual",
+    "sequence": 0
+  },
+  {
+    "state": "SKIP_DISCARD",
+    "image": "manual/SKIP_DISCARD/corrected-20261022-002140-993580.jpg",
+    "source": "manual",
+    "sequence": 0
+  }
+]

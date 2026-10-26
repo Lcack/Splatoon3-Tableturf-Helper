@@ -1,0 +1,145 @@
+{
+  "profile_id": "对战场地-酷似大道",
+  "source_width": 1920,
+  "source_height": 1080,
+  "stage_id": "Divide",
+  "regions": [
+    {
+      "name": "board",
+      "kind": "quad",
+      "points": [
+        [
+          0.444710910155627,
+          0.15636368434223674
+        ],
+        [
+          0.7555804222713122,
+          0.15681820958714665
+        ],
+        [
+          0.7597748956094766,
+          0.8213182507674931
+        ],
+        [
+          0.44343216161105625,
+          0.8204545382551842
+        ]
+      ],
+      "grid_rows": 18,
+      "grid_cols": 15
+    }
+  ],
+  "notes": "source=E:\\Splatoon\\tableturf\\AutoTableTurf-rebuild\\artifacts\\state_capture\\run-20261023-101741\\008_state.png",
+  "cell_overrides": [
+    {
+      "row": 0,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 1,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 2,
+      "col": 3,
+      "cell": 16
+    },
+    {
+      "row": 2,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 2,
+      "col": 11,
+      "cell": 16
+    },
+    {
+      "row": 3,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 4,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 5,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 6,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 7,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 8,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 9,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 10,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 11,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 12,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 13,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 14,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 15,
+      "col": 3,
+      "cell": 4
+    },
+    {
+      "row": 15,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 15,
+      "col": 11,
+      "cell": 4
+    },
+    {
+      "row": 16,
+      "col": 7,
+      "cell": 32
+    },
+    {
+      "row": 17,
+      "col": 7,
+      "cell": 32
+    }
+  ]
+}

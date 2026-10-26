@@ -1,0 +1,2 @@
+"""Canonical game data loading."""
+
