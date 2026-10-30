@@ -396,7 +396,7 @@ def test_runtime_reports_match_loss() -> None:
     assert observation.match_result.outcome.value == "LOSS"
 
 
-def test_finishing_animation_does_not_read_board() -> None:
+def test_finishing_animation_verifies_visible_controls_without_resuming_selection() -> None:
     runtime = BattleVisionRuntime(
         GameCatalog.from_package(),
         VISION_DIR,
@@ -409,7 +409,13 @@ def test_finishing_animation_does_not_read_board() -> None:
 
     observation = runtime.update(frame)
 
-    assert observation.board is None
+    # This animation retains the ordinary toggle label. It permits an early
+    # board/control check to recover a stale state, but there is no active hand
+    # cursor, so the finishing state must remain in force.
+    assert observation.special_mode is False
+    assert observation.hand_visibility.cursor_slot is None
+    assert observation.state.state is GameState.FINISHING
+    assert observation.hand is None
 
 
 def test_runtime_reports_hud_scores_and_active_specials() -> None:

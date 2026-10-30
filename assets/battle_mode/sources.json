@@ -1,0 +1,24 @@
+{
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "text_crop": [
+    344,
+    858,
+    392,
+    885
+  ],
+  "on": [
+    "artifacts/state_capture/run-20261021-221749/session-20261021-222704_annotations/010_video_state.png",
+    "artifacts/state_capture/run-20261021-221749/session-20261021-222704_annotations/024_video_state.png",
+    "artifacts/state_capture/run-20261021-221749/session-20261021-222704_annotations/027_video_state.png"
+  ],
+  "off": [
+    "artifacts/state_capture/run-20261021-221749/session-20261021-222704_annotations/008_video_state.png",
+    "artifacts/state_capture/run-20261021-221749/session-20261021-222704_annotations/042_video_state.png",
+    "artifacts/state_capture/run-20261021-221749/session-20261021-222704_annotations/045_video_state.png",
+    "artifacts/state_capture/run-20261021-221749/session-20261021-222704_annotations/017_video_state.png"
+  ],
+  "note": "Leading button label characters: ON closes Special Attack; OFF opens it. Gray disabled and gray ON placement require label evidence, not the legacy dark HSV mask alone."
+}

@@ -41,11 +41,12 @@ def test_placement_preview_recovers_rotation_and_origin() -> None:
     )
 
     assert preview is not None
+    # The special tile is detected through its animated dot texture.
     assert len(preview.cells) == 15
     assert preview.rotation == 2
     assert preview.origin == (20, 2)
     assert preview.anchor == (20, 4)
-    assert preview.score == 1.0
+    assert preview.score >= 0.90
     assert preview.valid is False
     assert preview.valid_fraction < 0.20
 

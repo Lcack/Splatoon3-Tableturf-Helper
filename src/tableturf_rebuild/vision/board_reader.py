@@ -17,6 +17,7 @@ from tableturf_rebuild.vision.calibration import (
 from tableturf_rebuild.vision.preview_features import (
     PREVIEW_INK_RATIO,
     preview_diagonal_score,
+    preview_dot_score,
 )
 
 
@@ -54,6 +55,7 @@ class BoardCellReading:
     color_change: float
     edge_density: float
     preview_diagonal_score: float = 0.0
+    preview_dot_score: float = 0.0
 
 
 @dataclass(frozen=True, slots=True)
@@ -154,6 +156,79 @@ class ActiveSpecialObservation:
     @property
     def opponent_special_count(self) -> int:
         return len(self.opponent_special_cells)
+
+
+class SpecialCellMemory:
+    """Keep confirmed special positions while their flame animation changes.
+
+    Bright selection screens may add strong evidence. A caller with a verified
+    preview pose may also exclude that card's footprint and its border, allowing
+    other strong special squares to be remembered while a preview is visible.
+    """
+
+    def __init__(self) -> None:
+        self._geometry: tuple[str, int, int] | None = None
+        self._cells: dict[tuple[int, int], Cell] = {}
+
+    def reset(self) -> None:
+        self._geometry = None
+        self._cells.clear()
+
+    def update(
+        self, observation: BoardObservation, *, allow_new: bool,
+        trusted_preview_exclusions: frozenset[tuple[int, int]] | None = None,
+    ) -> BoardObservation:
+        geometry = (observation.stage_id, observation.rows, observation.cols)
+        if geometry != self._geometry:
+            self.reset()
+            self._geometry = geometry
+        uncovered_preview = bool(trusted_preview_exclusions)
+        if (allow_new and not observation.placement_preview_present) or uncovered_preview:
+            for reading in observation.readings:
+                position = (reading.row, reading.col)
+                if (uncovered_preview and trusted_preview_exclusions is not None
+                    and position in trusted_preview_exclusions):
+                    continue
+                if (position not in self._cells and self._reliable_special(reading)
+                    and observation.cells[reading.row][reading.col] is reading.inferred_cell):
+                    self._cells[position] = reading.inferred_cell
+        if not self._cells:
+            return observation
+        cells = [list(row) for row in observation.cells]
+        for (row, col), owner in self._cells.items():
+            cells[row][col] = owner
+        readings = tuple(
+            replace(reading, inferred_cell=self._cells[(reading.row, reading.col)])
+            if (reading.row, reading.col) in self._cells else reading
+            for reading in observation.readings
+        )
+        return replace(observation, cells=tuple(map(tuple, cells)), readings=readings)
+
+    @staticmethod
+    def _reliable_special(reading: BoardCellReading) -> bool:
+        if (reading.stage_cell not in PLAYABLE_CELLS
+            or reading.inferred_cell not in {Cell.SELF_SPECIAL, Cell.OPPONENT_SPECIAL}
+            or reading.preview_diagonal_score > PREVIEW_INK_RATIO
+            or reading.preview_dot_score > .025):
+            return False
+        if reading.stage_cell is reading.inferred_cell:
+            return True
+        if reading.inferred_cell is Cell.SELF_SPECIAL:
+            return (reading.self_fraction >= .80
+                    and (reading.self_special_fraction >= .55
+                         or reading.self_special_pattern_delta >= .18))
+        return (
+            reading.opponent_fraction >= .80
+            and (reading.opponent_special_fraction >= .55
+                 or reading.opponent_special_pattern_delta >= .30)
+        ) or (
+            # Activated cyan specials fade nearly white in the centre, outside
+            # the saturated ink mask. Require their strong tile pattern too.
+            reading.opponent_special_pattern_delta >= .30
+            and 75 <= reading.median_hsv[0] <= 105
+            and reading.median_hsv[1] <= 100 and reading.median_hsv[2] >= 220
+            and reading.center_saturation <= 100
+        )
 
 
 class SpecialActivityTracker:
@@ -512,8 +587,9 @@ class BoardGridReader:
                         color_change=color_change,
                         edge_density=edge_density,
                     preview_diagonal_score=(
-                        preview_diagonal_score(full_patch_gray)
+                        preview_diagonal_score(full_patch)
                     ),
+                        preview_dot_score=preview_dot_score(full_patch),
                     )
                 )
             inferred.append(inferred_row)

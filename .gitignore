@@ -10,4 +10,5 @@ build/
 dist/
 *.egg-info/
 artifacts/
+profiles/task_queue.json
 

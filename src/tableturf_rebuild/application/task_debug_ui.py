@@ -59,6 +59,7 @@ class TaskDebugWindow(tk.Toplevel):
         self.after(50, self._drain_ui_queue)
 
     def _build(self) -> None:
+        self._build_debug_controls()
         capture_row = ttk.LabelFrame(self, text="截图与录制")
         capture_row.pack(fill="x", padx=6, pady=(6, 3))
         ttk.Button(
@@ -181,6 +182,38 @@ class TaskDebugWindow(tk.Toplevel):
         self.log = tk.Text(self, height=6, state="disabled")
         self.log.pack(fill="x", padx=6, pady=(3, 6))
         self.log_message("调试窗已打开，任务自动控制保持暂停")
+
+    def _build_debug_controls(self) -> ttk.LabelFrame:
+        """Share terminal settings, including when upgrading an open window."""
+        current = getattr(self, "ai_controls", None)
+        if current is not None and current.winfo_exists():
+            return current
+        existing = self.winfo_children()
+        panel = self.ai_controls = ttk.LabelFrame(self, text="AI与识别调试")
+        placement = {"before": existing[0]} if existing else {}
+        panel.pack(fill="x", padx=6, pady=(6, 3), **placement)
+        ttk.Label(panel, text="调试地图").pack(side="left", padx=(8, 4), pady=6)
+        self.debug_stage_box = ttk.Combobox(
+            panel,
+            textvariable=self.app.debug_stage_var,
+            values=self.app.debug_stage_ids,
+            state="readonly",
+            width=19,
+        )
+        self.debug_stage_box.pack(side="left", padx=4, pady=6)
+        self.battle_debug_button = ttk.Button(
+            panel,
+            textvariable=self.app._battle_debug_button_text,
+            command=lambda: self.app.toggle_battle_debug(),
+        )
+        self.battle_debug_button.pack(side="left", padx=(10, 4), pady=6)
+        self.reload_core_button = ttk.Button(
+            panel,
+            text="重载核心（暂停）",
+            command=lambda: self.app.reload_analysis_core(),
+        )
+        self.reload_core_button.pack(side="left", padx=4, pady=6)
+        return panel
 
     def _panel(
         self,
@@ -523,7 +556,16 @@ class TaskDebugWindow(tk.Toplevel):
         if analysis is None:
             return
         observation = analysis.state
-        self.state_var.set(f"状态：{observation.state.value}")
+        evidence = ""
+        if analysis.hand_visibility is not None:
+            visibility = analysis.hand_visibility
+            label = {True: "亮色", False: "灰暗", None: "过渡/未知"}[
+                visibility.selection_visible
+            ]
+            evidence += f" | 手牌{label} V={visibility.ink_value:.0f}"
+        if analysis.board is not None:
+            evidence += f" | 斜线预览{'有' if analysis.board.placement_preview_present else '无'}"
+        self.state_var.set(f"状态：{observation.state.value}{evidence}")
         self.confidence_var.set(f"置信度：{observation.confidence:.1%}")
         if analysis.menu is not None:
             wins = "/".join(

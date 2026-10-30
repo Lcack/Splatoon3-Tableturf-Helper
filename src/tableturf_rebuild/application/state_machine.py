@@ -177,6 +177,11 @@ class StateObservation:
 @dataclass(frozen=True, slots=True)
 class StateEvidence:
     placement_preview_present: bool | None = None
+    hand_selection_visible: bool | None = None
+    placement_expected: bool = False
+    hand_cursor_visible: bool = False
+    battle_controls_visible: bool = False
+    discard_mode: bool | None = None
 
 
 class TemplateStateRecognizer:
@@ -359,6 +364,41 @@ class StateMachine:
             else:
                 bonus = -self.transition_bonus
             if evidence is not None:
+                if evidence.discard_mode is True:
+                    if candidate.state is GameState.SKIP_DISCARD:
+                        bonus += 0.65
+                    elif candidate.state in {GameState.TURN_SELECT, GameState.SPECIAL_SELECT}:
+                        bonus -= 0.65
+                elif evidence.discard_mode is False and candidate.state is GameState.SKIP_DISCARD:
+                    bonus -= 0.65
+                if evidence.hand_cursor_visible and evidence.hand_selection_visible is True:
+                    # A bright white hand arrow is direct selection evidence.
+                    # Reveal animations have no active arrow; the dim retained
+                    # arrow during placement is excluded by its color reader.
+                    if candidate.state in {
+                        GameState.TURN_SELECT, GameState.SKIP_DISCARD, GameState.SPECIAL_SELECT,
+                    }:
+                        bonus += 0.35
+                    elif candidate.state in {
+                        GameState.TARGET_PLACEMENT, GameState.SPECIAL_PLACEMENT,
+                        GameState.TURN_REVEAL, GameState.TURN_RESOLVE,
+                    }:
+                        bonus -= 0.45
+                    if evidence.battle_controls_visible:
+                        if candidate.state in {
+                            GameState.TURN_SELECT, GameState.SKIP_DISCARD, GameState.SPECIAL_SELECT,
+                        }:
+                            bonus += 0.65
+                        elif candidate.state in {
+                            GameState.FINISHING, GameState.MATCH_RESULT,
+                            GameState.MATCH_REWARD, GameState.REPLAY_CHOICE,
+                        }:
+                            bonus -= 0.65
+                if evidence.placement_expected and evidence.hand_selection_visible is False:
+                    if candidate.state is GameState.TARGET_PLACEMENT:
+                        bonus += 0.5
+                    elif candidate.state in {GameState.TURN_REVEAL, GameState.TURN_RESOLVE}:
+                        bonus -= 0.45
                 if evidence.placement_preview_present is True:
                     if candidate.state in {
                         GameState.TARGET_PLACEMENT,
@@ -372,12 +412,22 @@ class StateMachine:
                     }:
                         bonus -= 0.12
                 elif evidence.placement_preview_present is False:
-                    if candidate.state is GameState.TURN_SELECT:
+                    if (candidate.state is GameState.TURN_SELECT
+                        and evidence.hand_selection_visible is not False):
                         bonus += 0.18
-                    elif candidate.state is GameState.TARGET_PLACEMENT:
+                    elif (candidate.state is GameState.TARGET_PLACEMENT
+                          and evidence.hand_selection_visible is not False):
                         bonus -= 0.14
                     elif candidate.state is GameState.SPECIAL_PLACEMENT:
                         bonus -= 0.08
+                if evidence.hand_selection_visible is False:
+                    if candidate.state is GameState.TURN_SELECT:
+                        bonus -= 0.45
+                elif evidence.hand_selection_visible is True:
+                    if candidate.state in {
+                        GameState.TARGET_PLACEMENT, GameState.SPECIAL_PLACEMENT,
+                    }:
+                        bonus -= 0.45
             adjusted.append(
                 StateScore(candidate.state, candidate.score + bonus)
             )
@@ -395,6 +445,12 @@ class StateMachine:
                 self.stable_frames,
             ),
         )
+        if (evidence is not None and evidence.hand_cursor_visible
+            and evidence.hand_selection_visible is True
+            and selected in {GameState.TURN_SELECT, GameState.SKIP_DISCARD, GameState.SPECIAL_SELECT}):
+            # Keep two independent observations while bypassing the slower
+            # generic four-frame hysteresis after reveal/resolution.
+            required_frames = min(required_frames, 2)
         if self._pending_count >= required_frames:
             self.current = selected
         state = selected if self._pending_count >= required_frames else self.current

@@ -6,7 +6,8 @@ import time
 from dataclasses import dataclass, field
 from typing import Sequence
 
-from tableturf_rebuild.domain.actions import Action
+from tableturf_rebuild.domain.actions import Action, ActionType
+from tableturf_rebuild.domain.grid import Cell
 from tableturf_rebuild.domain.rules import BattleRules
 from tableturf_rebuild.domain.state import BattleState, Side
 from tableturf_rebuild.planning.context import OpponentContext
@@ -20,6 +21,7 @@ class MCTSConfig:
     exploration_weight: float = math.sqrt(2.0)
     root_action_limit: int = 24
     tree_action_limit: int = 12
+    preserve_strategic_candidates: bool = True
 
 
 @dataclass(frozen=True, slots=True)
@@ -30,6 +32,7 @@ class SearchStats:
     best_value: float
     best_action: Action
     opponent_context: OpponentContext | None = None
+    prior_seconds: float = 0.0
 
 
 @dataclass(slots=True)
@@ -85,6 +88,7 @@ class MCTSDecisionPolicy:
     ) -> Action:
         if not actions:
             raise ValueError("MCTS requires at least one legal action")
+        started = time.perf_counter()
         effective_root_limit = min(
             self.config.root_action_limit,
             max(4, self.config.simulations // 4),
@@ -96,19 +100,20 @@ class MCTSDecisionPolicy:
             actions,
             effective_root_limit,
         )
+        prior_seconds = time.perf_counter() - started
         if len(candidates) == 1:
             action = candidates[0]
             self.last_stats = SearchStats(
                 0,
-                0.0,
+                prior_seconds,
                 0,
                 0.0,
                 action,
                 self.opponent_context,
+                prior_seconds,
             )
             return action
 
-        started = time.perf_counter()
         root = MCTSNode(
             state=state,
             untried_actions=list(candidates),
@@ -148,6 +153,7 @@ class MCTSDecisionPolicy:
                 0.0,
                 action,
                 self.opponent_context,
+                prior_seconds,
             )
             return action
 
@@ -166,6 +172,7 @@ class MCTSDecisionPolicy:
             best_value=best_value,
             best_action=best_action,
             opponent_context=self.opponent_context,
+            prior_seconds=prior_seconds,
         )
         return best_action
 
@@ -276,5 +283,35 @@ class MCTSDecisionPolicy:
     ) -> tuple[Action, ...]:
         if limit <= 0 or len(actions) <= limit:
             return tuple(actions)
-        return self.prior_policy.rank_actions(rules, state, side, actions)[:limit]
+        ranked = self.prior_policy.rank_actions(rules, state, side, actions)
+        if not self.config.preserve_strategic_candidates:
+            return ranked[:limit]
+        retained = list(ranked[:limit])
+        # Small live searches keep only four roots. Reserve room to compare a
+        # real SP-closing move and an enemy-overwriting special attack instead
+        # of filling every slot with near-identical expansion placements.
+        activation = next((action for action in ranked
+                           if state.turns_remaining > 1
+                           and self.prior_policy.activation_features(rules, state, side, action).activated), None)
+        if (activation is not None
+            and self.prior_policy._score_only(rules, state, side, activation)
+            < self.prior_policy._score_only(rules, state, side, ranked[0]) - 2.0):
+            activation = None
+        opponent_ink = ({Cell.OPPONENT_INK, Cell.OPPONENT_SPECIAL} if side is Side.A
+                        else {Cell.SELF_INK, Cell.SELF_SPECIAL})
+        special = next((action for action in ranked
+                        if action.action_type is ActionType.SPECIAL
+                        and any(state.board[row][col] in opponent_ink
+                                for row, col, _ in rules.action_targets(state, action))), None)
+        reserves = {action for action in (activation, special) if action is not None}
+        protected = {ranked[0]}
+        for action in (item for item in ranked if item in reserves):
+            if action not in retained:
+                replace_at = next((i for i in range(len(retained) - 1, -1, -1)
+                                   if retained[i] not in protected), None)
+                if replace_at is None:
+                    break
+                retained[replace_at] = action
+            protected.add(action)
+        return tuple(retained)
 

@@ -61,10 +61,12 @@ following explicit repairs:
 `assets/reference/stage/` contains copies of the extracted stage images:
 
 - `CenterHole.png`, `Cross.png`, ... are the named stage preview maps.
-- `Mng_Point_02.png` is a special/spawn marker image.
-- `AreaPiece_00.png` through `AreaPiece_04.png` are 42x42 UI sprites. Their
-  exact runtime role has not yet been established from code or observation, so
-  they are not used as numeric matrix mappings.
+- `AreaPiece_00.png` through `AreaPiece_04.png` are 42x42 UI sprites. The
+  visual role mapping in `assets/reference/stage/semantic_manifest.json` is
+  SELF_INK, OPPONENT_INK, SELF_SPECIAL, OPPONENT_SPECIAL, and INVALID;
+  `Mng_Point_02.png` is used there as an EMPTY reference.
+- Sprite filename suffixes are not numeric matrix encodings. The visual
+  reference manifest and the canonical data encodings serve different roles.
 
 `Rectangle` is reconstructed rather than visually traced cell-by-cell. Its
 metadata, stage image aspect ratio, spawn points, and `MaxCells=234` agree on a

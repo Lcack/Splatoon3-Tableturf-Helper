@@ -1,0 +1,21 @@
+{
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "text_crop": [
+    130,
+    860,
+    175,
+    896
+  ],
+  "normal": [
+    "artifacts/diagnostics/special-button-stall/analysis.png",
+    "artifacts/diagnostics/skip-button/analysis.png",
+    "artifacts/state_capture/run-20261021-221749/session-20261021-222704_annotations/024_video_state.png"
+  ],
+  "discard": [
+    "artifacts/diagnostics/skip-discard/analysis.png"
+  ],
+  "note": "Actual full Chinese labels: discard=返回, normal=跳过. Capture examples include focused blue, ordinary blue and disabled gray text. Small runtime scale coverage handles the focus enlargement; background color never determines mode. No generated text or manual redrawing."
+}

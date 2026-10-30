@@ -1,8 +1,10 @@
+from dataclasses import replace
 from tableturf_rebuild.application.battle_vision import BattleVisionObservation
 from tableturf_rebuild.application.deck_config import DeckConfig
 from tableturf_rebuild.application.state_machine import (
     GameState,
     StateObservation,
+    StateScore,
 )
 from tableturf_rebuild.application.task_plan import (
     NpcTaskDefinition,
@@ -27,7 +29,7 @@ class FakeRuntime:
 
     def update(self, frame, include_selection=False, force_selection=False):
         del frame, include_selection, force_selection
-        return self.observation
+        return replace(self.observation)
 
     def set_expected_deck(self, name, card_ids):
         self.expected_deck = (name, card_ids)
@@ -41,7 +43,7 @@ def _observation(state: GameState, menu=None) -> BattleVisionObservation:
         state=StateObservation(
             state=state,
             confidence=0.9,
-            candidates=(),
+            candidates=(StateScore(state, .9),),
             actions=(),
             boxes=(),
         ),

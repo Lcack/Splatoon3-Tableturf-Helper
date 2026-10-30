@@ -61,6 +61,13 @@ class NpcWinPlan:
         self,
         level_wins: tuple[int | None, int | None, int | None],
     ) -> "NpcWinPlan":
+        # A stale menu frame must not erase a win already confirmed at the
+        # result screen. Cumulative totals are monotonic within one task.
+        current = {stage.level: stage.current_wins for stage in self.stages}
+        level_wins = tuple(
+            max(int(value or 0), current.get(level, 0))
+            for level, value in enumerate(level_wins, 1)
+        )
         return build_npc_plan(
             self.task,
             level_wins,

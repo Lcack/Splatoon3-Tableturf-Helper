@@ -195,9 +195,13 @@ def warp_region(
     region: VisionRegion,
     output_width: int,
     output_height: int,
+    *,
+    padding: int = 0,
 ) -> np.ndarray:
     if output_width <= 0 or output_height <= 0:
         raise ValueError("warp output dimensions must be positive")
+    if padding < 0:
+        raise ValueError("warp padding cannot be negative")
     if image.ndim not in (2, 3):
         raise ValueError("image must be grayscale or color")
     points = region.pixel_points(image.shape[1], image.shape[0])
@@ -222,11 +226,12 @@ def warp_region(
             [0, output_height - 1],
         ]
     )
+    destination += padding
     transform = cv2.getPerspectiveTransform(corners, destination)
     return cv2.warpPerspective(
         image,
         transform,
-        (output_width, output_height),
+        (output_width + 2 * padding, output_height + 2 * padding),
         flags=cv2.INTER_LINEAR,
         borderMode=cv2.BORDER_REPLICATE,
     )

@@ -157,6 +157,7 @@ class DeckGridReader:
         region: VisionRegion,
         *,
         side: str = "self",
+        minimum_value: int | None = None,
     ) -> np.ndarray:
         if side not in {"self", "opponent"}:
             raise ValueError("card pattern side must be self or opponent")
@@ -166,14 +167,16 @@ class DeckGridReader:
             self.CELL_GRID_SIZE * self.GRID_SAMPLE_SIZE,
             self.CELL_GRID_SIZE * self.GRID_SAMPLE_SIZE,
         )
-        return self._pattern(patch, side=side)
+        return self._pattern(patch, side=side, minimum_value=minimum_value)
 
     def cost_lights_from_region(
         self,
         frame: np.ndarray,
         region: VisionRegion,
+        *,
+        minimum_value: int = 150,
     ) -> int:
-        return self._cost_lights(warp_region(frame, region, 100, 20))
+        return self._cost_lights(warp_region(frame, region, 100, 20), minimum_value=minimum_value)
 
     def match_shape(
         self,
@@ -303,13 +306,16 @@ class DeckGridReader:
         patch: np.ndarray,
         *,
         side: str = "self",
+        minimum_value: int | None = None,
     ) -> np.ndarray:
         if side == "self":
             lower_hue, upper_hue = 15, 55
-            minimum_saturation, minimum_value = 100, 140
+            minimum_saturation, default_value = 100, 140
         else:
             lower_hue, upper_hue = 95, 170
-            minimum_saturation, minimum_value = 110, 130
+            minimum_saturation, default_value = 110, 130
+        if minimum_value is None:
+            minimum_value = default_value
         hsv = cv2.cvtColor(patch, cv2.COLOR_BGR2HSV)
         bits = np.zeros((8, 8), dtype=np.uint8)
         step = self.GRID_SAMPLE_SIZE
@@ -330,10 +336,10 @@ class DeckGridReader:
         return bits
 
     @staticmethod
-    def _cost_lights(patch: np.ndarray) -> int:
+    def _cost_lights(patch: np.ndarray, *, minimum_value: int = 150) -> int:
         value = cv2.cvtColor(patch, cv2.COLOR_BGR2HSV)[:, :, 2]
         return sum(
-            value[:, index * 20 + 5 : (index + 1) * 20 - 5].mean() > 150
+            value[:, index * 20 + 5 : (index + 1) * 20 - 5].mean() > minimum_value
             for index in range(5)
         )
 

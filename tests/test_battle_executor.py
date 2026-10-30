@@ -159,7 +159,7 @@ def test_executor_does_not_confirm_gray_invalid_preview() -> None:
     )
 
 
-def test_executor_moves_when_initial_preview_cannot_be_read() -> None:
+def test_executor_does_not_guess_cursor_when_preview_cannot_be_read() -> None:
     catalog = GameCatalog.from_package()
     board_reader, profile, region, reference = BoardGridReader.from_profile(
         catalog,
@@ -202,16 +202,12 @@ def test_executor_moves_when_initial_preview_cannot_be_read() -> None:
     executor.step(observation, reference)
     executor.step(observation, reference)
 
-    assert any(
-        state.buttons
-        in {
-            frozenset({Button.DPAD_RIGHT}),
-            frozenset({Button.DPAD_DOWN}),
-            frozenset({Button.DPAD_LEFT}),
-            frozenset({Button.DPAD_UP}),
-        }
-        for state in backend.history
-    )
+    assert not any(state.buttons for state in backend.history)
+    for _ in range(9):
+        executor.step(observation, reference)
+    assert [state.buttons for state in backend.history if state.buttons] == [
+        frozenset({Button.B})
+    ]
 
 
 def test_executor_returns_with_b_when_placement_has_no_action() -> None:
@@ -333,7 +329,7 @@ def test_executor_rejects_low_confidence_selection_hand() -> None:
 
     assert executor.phase is BattleExecutorPhase.WAITING
     assert executor._selected_action is None
-    assert "手牌置信度=0.20" in executor.message
+    assert "手牌匹配分数=0.20" in executor.message
 
 
 def test_executor_completes_select_rotate_move_and_place_cycle() -> None:
@@ -447,6 +443,8 @@ def test_executor_completes_select_rotate_move_and_place_cycle() -> None:
             executor._preview_response_at = 0.0
         if Button.Y in new_buttons:
             rotation = (rotation + 1) % 4
+        elif Button.X in new_buttons:
+            rotation = (rotation - 1) % 4
         elif Button.DPAD_UP in new_buttons:
             origin = (origin[0] - 1, origin[1])
         elif Button.DPAD_DOWN in new_buttons:
@@ -461,7 +459,7 @@ def test_executor_completes_select_rotate_move_and_place_cycle() -> None:
     assert origin == target.origin
     assert executor.phase is BattleExecutorPhase.PLACING
     assert any(
-        Button.Y in state.buttons
+        bool({Button.X, Button.Y} & state.buttons)
         for state in backend.history
     )
     assert any(
@@ -661,6 +659,10 @@ def _preview_board(
         (origin[0] + row - top, origin[1] + col - left)
         for row, col in shape.occupied
     }
+    special_cells = {
+        (origin[0] + row - top, origin[1] + col - left)
+        for row, col in shape.occupied if int(shape.cells[row][col]) == 2
+    }
     readings = []
     for row in range(rows):
         for col in range(cols):
@@ -686,6 +688,8 @@ def _preview_board(
                     special_active=False,
                     color_change=0.8 if is_preview else 0.0,
                     edge_density=0.3 if is_preview else 0.0,
+                    preview_diagonal_score=0.5 if is_preview else 0.0,
+                    preview_dot_score=1.0 if (row, col) in special_cells else 0.0,
                 )
             )
     return BoardObservation(
@@ -731,5 +735,11 @@ def test_debug_executor_can_play_without_npc_context() -> None:
     )
 
     executor.step(observation, frame)
+
+    # The first HUD observation is deliberately unpublished until an
+    # independent update confirms the balance; do not freeze a false zero.
+    if executor._selected_action is None:
+        observation = runtime.update(frame, include_selection=True)
+        executor.step(observation, frame)
 
     assert executor._selected_action is not None
